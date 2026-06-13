@@ -110,11 +110,10 @@ export const plans: Record<Lang, Plan[]> = {
       recommended: false,
       features: [
         'Everything in Growth',
-        'Brand world & creative direction',
         'Multi-location account & MEO management',
         'Paid ads (Meta / Google — ad spend billed separately)',
         'Campaign planning & landing pages',
-        'Priority support & strategy meetings',
+        'Monthly analytics report & review meeting',
       ],
     },
   ],
