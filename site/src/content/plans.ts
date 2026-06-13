@@ -18,8 +18,8 @@ export const plans: Record<Lang, Plan[]> = {
   ja: [
     {
       id: 'ume',
-      name: '梅・立ち上げ',
-      position: '土台を作る',
+      name: 'Launch',
+      position: 'まずは見つけてもらう',
       target: '開業直後／まず存在を知ってもらいたい方',
       setup: '¥50,000',
       monthly: '¥40,000',
@@ -34,14 +34,14 @@ export const plans: Record<Lang, Plan[]> = {
     },
     {
       id: 'take',
-      name: '竹・集客',
-      position: '集客のエンジンを回す',
+      name: 'Growth',
+      position: '集客エンジンをフル回転させる',
       target: '新規もリピートも本格的に増やしたい方',
       setup: '¥100,000',
       monthly: '¥80,000',
       recommended: true,
       features: [
-        '梅プランのすべて',
+        'Launchプランのすべて',
         'Instagram運用代行（フィード・リール・ストーリー）',
         'レビュー獲得の仕組みづくり（Google / Fresha）',
         '再来導線の設計（SMS・メール・Fresha自動通知）',
@@ -51,14 +51,14 @@ export const plans: Record<Lang, Plan[]> = {
     },
     {
       id: 'matsu',
-      name: '松・ブランド成長',
-      position: '世界観の確立とスケール',
+      name: 'Elevate',
+      position: 'ブランドを確立してスケールへ',
       target: '多店舗展開・ブランド強化を目指す方',
       setup: '¥150,000〜',
       monthly: '¥150,000',
       recommended: false,
       features: [
-        '竹プランのすべて',
+        'Growthプランのすべて',
         'ブランド世界観の設計・クリエイティブ強化',
         '多店舗のアカウント・MEO横断管理',
         '広告運用（Meta / Google ※広告費実費）',
