@@ -1,0 +1,67 @@
+---
+// 料金プランカード（§6.1 S8 / §8.5）。竹（recommended）は2pxアクセント枠＋推奨バッジ。
+import type { Plan } from '../content/plans';
+import CTAButton from './CTAButton.astro';
+
+interface Props {
+  plan: Plan;
+}
+
+const { plan } = Astro.props;
+---
+
+<div
+  class={`reveal relative flex flex-col rounded-lg bg-surface p-7 ${
+    plan.recommended ? 'border-2 border-accent' : 'border border-line'
+  }`}
+  data-plan={plan.id}
+>
+  {
+    plan.recommended && (
+      <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-accent px-4 py-1 text-xs font-medium tracking-wider text-white">
+        推奨プラン
+      </span>
+    )
+  }
+
+  <p class="text-sm font-medium tracking-widest text-brand">{plan.position}</p>
+  <h3 class="mt-2 text-2xl">{plan.name}</h3>
+  <p class="mt-2 text-sm text-ink-muted">{plan.target}</p>
+
+  <div class="mt-6 border-t border-line pt-6">
+    <p class="text-sm text-ink-muted">月額</p>
+    <p class="font-display text-4xl text-ink">
+      {plan.monthly}<span class="ml-1 text-base text-ink-muted">/月</span>
+    </p>
+    <p class="mt-2 text-sm text-ink-muted">初期構築 {plan.setup}（一回）</p>
+  </div>
+
+  <ul class="mt-6 flex-1 space-y-3">
+    {
+      plan.features.map((f) => (
+        <li class="flex items-start gap-2.5 text-sm">
+          <svg
+            class="mt-1 h-4 w-4 shrink-0 text-success"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path d="m5 13 4 4L19 7" />
+          </svg>
+          <span>{f}</span>
+        </li>
+      ))
+    }
+  </ul>
+
+  <CTAButton
+    href={`/contact?plan=${plan.id}`}
+    variant={plan.recommended ? 'primary' : 'secondary'}
+    ctaLocation={`plan-${plan.id}`}
+    class="mt-8 w-full"
+  >
+    このプランで相談する
+  </CTAButton>
+</div>

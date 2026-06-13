@@ -1,0 +1,106 @@
+---
+// サービス詳細（§5.1）：トップS7の深掘り
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import LoopFigure from '../components/LoopFigure.astro';
+import DiscoveryFigure from '../components/DiscoveryFigure.astro';
+import CTABand from '../components/CTABand.astro';
+import { services, finalCta } from '../content/copy.ja';
+import { site } from '../content/site';
+
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'サロン集客の成長パートナーサービス',
+  provider: { '@type': 'Organization', name: site.brandName },
+  areaServed: ['Gold Coast', 'Brisbane'],
+  description:
+    'Web制作・Instagram運用・Google/MEO・予約導線・再来導線・レビュー獲得・月次の分析改善を一貫提供する、サロン向け集客パートナーサービス。',
+};
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: site.siteUrl },
+    { '@type': 'ListItem', position: 2, name: 'サービス', item: `${site.siteUrl}/service` },
+  ],
+};
+---
+
+<BaseLayout
+  title={`サービス内容｜${site.brandName}`}
+  description="集客の輪（認知→検討・予約→来店→リピート→紹介・レビュー）の各段で私たちが何をするか。Web・Instagram・Google/MEO・予約導線・レビュー獲得・月次改善まで、作業範囲を具体的にご説明します。"
+  jsonLd={[serviceLd, breadcrumbLd]}
+>
+  <section class="px-5 pb-16 pt-32 md:pt-40 lg:px-8">
+    <div class="mx-auto max-w-[1200px]">
+      <SectionHeading
+        label="Service"
+        heading="点（投稿）ではなく、輪（仕組み）を回す。"
+        lead="単発のSNS代行やWeb制作ではありません。サロンの集客の輪全体を、外部パートナーとして継続的に回し続けるサービスです。"
+      />
+    </div>
+  </section>
+
+  <section class="px-5 pb-20 lg:px-8">
+    <div class="mx-auto max-w-[1200px] space-y-12">
+      <div class="reveal">
+        <DiscoveryFigure />
+      </div>
+      <div class="reveal">
+        <LoopFigure />
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-surface px-5 py-20 md:py-28 lg:px-8">
+    <div class="mx-auto max-w-[1200px]">
+      <SectionHeading
+        label="Scope"
+        heading="輪の各段で、私たちがやること。"
+        lead="ステージごとに担当範囲・主な施策を明確にしています。"
+      />
+      <div class="mt-12 space-y-6">
+        {
+          services.stages.map((stage) => (
+            <div class="reveal grid gap-4 rounded-lg border border-line bg-canvas p-7 md:grid-cols-[200px_1fr]">
+              <div>
+                <p class="text-sm font-medium tracking-widest text-brand">{stage.stage}</p>
+                <h2 class="mt-1 font-sans text-lg font-semibold">{stage.summary}</h2>
+              </div>
+              <ul class="space-y-2">
+                {stage.items.map((item) => (
+                  <li class="flex items-start gap-2.5 text-[15px] text-ink-muted">
+                    <svg
+                      class="mt-1.5 h-4 w-4 shrink-0 text-brand"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      aria-hidden="true"
+                    >
+                      <path d="m5 13 4 4L19 7" />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+      <p class="reveal mt-8 rounded-lg bg-surface-cream px-6 py-5 text-sm text-ink-muted">
+        {services.note}
+      </p>
+    </div>
+  </section>
+
+  <CTABand
+    heading={finalCta.heading}
+    sub={finalCta.sub}
+    ctaLabel={finalCta.cta.label}
+    ctaHref={finalCta.cta.href}
+    ctaLocation="service-band"
+  />
+</BaseLayout>

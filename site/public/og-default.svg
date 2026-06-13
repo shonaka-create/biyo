@@ -1,0 +1,8 @@
+<!-- TODO: OGP共有画像のプレースホルダー（og-default / 1200×630）。実画像（PNG/JPG）に差し替え（§8.7） -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#FAF8F4"/>
+  <rect x="40" y="40" width="1120" height="550" rx="24" fill="none" stroke="#E4DECF" stroke-width="2"/>
+  <circle cx="600" cy="240" r="70" fill="none" stroke="#2F5D4F" stroke-width="10" stroke-dasharray="330 110" stroke-linecap="round"/>
+  <text x="600" y="400" text-anchor="middle" font-family="serif" font-size="44" fill="#26251F">日本品質の集客を、オーストラリアで信頼できる形で。</text>
+  <text x="600" y="460" text-anchor="middle" font-family="sans-serif" font-size="24" fill="#6A6760">[ブランド名] — Gold Coast / Brisbane</text>
+</svg>

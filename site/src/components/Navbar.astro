@@ -1,0 +1,99 @@
+---
+// ヘッダー（§7.1）：初期透過 → スクロールで背景＋境界線＋縮小。モバイルはフルスクリーンメニュー。
+import { nav, site } from '../content/site';
+import CTAButton from './CTAButton.astro';
+---
+
+<header
+  id="site-header"
+  class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
+>
+  <div
+    class="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between px-5 transition-all duration-300 lg:px-8"
+    id="header-inner"
+  >
+    <a href="/" class="font-display text-xl tracking-wide text-ink">
+      {site.brandName}
+    </a>
+
+    <nav class="hidden items-center gap-8 lg:flex" aria-label="グローバルナビゲーション">
+      {
+        nav.links.map((link) => (
+          <a
+            href={link.href}
+            class="text-[15px] text-ink transition hover:text-brand"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <CTAButton href={nav.cta.href} variant="primary" ctaLocation="header" class="h-11 px-5 text-[15px]">
+        {nav.cta.label}
+      </CTAButton>
+    </nav>
+
+    <button
+      id="menu-toggle"
+      class="flex h-11 w-11 items-center justify-center lg:hidden"
+      aria-label="メニューを開く"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg class="h-6 w-6 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path id="menu-icon-open" d="M4 7h16M4 12h16M4 17h16" />
+        <path id="menu-icon-close" class="hidden" d="M6 6l12 12M18 6L6 18" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- モバイル フルスクリーンメニュー -->
+  <div
+    id="mobile-menu"
+    class="fixed inset-0 top-[64px] z-40 hidden flex-col gap-2 bg-canvas px-6 pt-8 lg:hidden"
+  >
+    {
+      nav.links.map((link) => (
+        <a
+          href={link.href}
+          class="border-b border-line py-4 text-lg text-ink"
+        >
+          {link.label}
+        </a>
+      ))
+    }
+    <CTAButton href={nav.cta.href} variant="primary" ctaLocation="mobile-menu" class="mt-6 w-full">
+      {nav.cta.label}
+    </CTAButton>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('site-header')!;
+  const inner = document.getElementById('header-inner')!;
+  const onScroll = () => {
+    const scrolled = window.scrollY > 24;
+    header.classList.toggle('bg-canvas/95', scrolled);
+    header.classList.toggle('backdrop-blur', scrolled);
+    header.classList.toggle('border-b', scrolled);
+    header.classList.toggle('border-line', scrolled);
+    inner.classList.toggle('h-[64px]', scrolled);
+    inner.classList.toggle('h-[72px]', !scrolled);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const toggle = document.getElementById('menu-toggle')!;
+  const menu = document.getElementById('mobile-menu')!;
+  const iconOpen = document.getElementById('menu-icon-open')!;
+  const iconClose = document.getElementById('menu-icon-close')!;
+  toggle.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'メニューを開く' : 'メニューを閉じる');
+    menu.classList.toggle('hidden', isOpen);
+    menu.classList.toggle('flex', !isOpen);
+    iconOpen.classList.toggle('hidden', !isOpen);
+    iconClose.classList.toggle('hidden', isOpen);
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  });
+</script>

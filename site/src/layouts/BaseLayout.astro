@@ -1,0 +1,146 @@
+---
+// 全ページ共通レイアウト：SEOメタ・OGP・JSON-LD・フォント・ヘッダー/フッター・計測フック
+import { site } from '../content/site';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import StickyMobileCTA from '../components/StickyMobileCTA.astro';
+import CookieConsent from '../components/CookieConsent.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  /** 追加のJSON-LD（ページ固有の構造化データ） */
+  jsonLd?: object[];
+}
+
+const { title, description, jsonLd = [] } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.siteUrl).href;
+
+const organizationLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.brandName, // TODO: ブランド名確定後に更新
+  url: site.siteUrl,
+  email: site.email,
+  areaServed: ['Gold Coast', 'Brisbane', 'Queensland'],
+  description: site.tagline,
+};
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- OGP / Twitter Card（§12） -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL('/og-default.svg', site.siteUrl).href} />
+    <!-- TODO: og-default は 1200×630 の実画像（PNG/JPG）に差し替え（§8.7） -->
+    <meta property="og:site_name" content={site.brandName} />
+    <meta property="og:locale" content="ja_JP" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- フォント（§8.3）：display=swap -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Shippori+Mincho:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 構造化データ（§12） -->
+    <script type="application/ld+json" set:html={JSON.stringify(organizationLd)} />
+    {jsonLd.map((ld) => <script type="application/ld+json" set:html={JSON.stringify(ld)} />)}
+
+    <slot name="head" />
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-surface focus:px-4 focus:py-2"
+    >
+      本文へスキップ
+    </a>
+
+    <Navbar />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <Footer />
+    <StickyMobileCTA />
+    <CookieConsent />
+
+    <script>
+      // スクロールリビール（§8.6）
+      const reveals = document.querySelectorAll('.reveal');
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduced) {
+        reveals.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15 }
+        );
+        reveals.forEach((el) => io.observe(el));
+      }
+
+      // cta_click 計測（§13）
+      document.querySelectorAll<HTMLElement>('[data-cta]').forEach((el) => {
+        el.addEventListener('click', () => {
+          window.gtag?.('event', 'cta_click', {
+            cta_location: el.dataset.cta,
+            cta_label: el.textContent?.trim(),
+          });
+          if (el.dataset.cta?.startsWith('plan-')) {
+            window.gtag?.('event', 'plan_select', { plan: el.dataset.cta.replace('plan-', '') });
+          }
+        });
+      });
+
+      // scroll_depth 計測（25/50/75/100%）
+      const sent = new Set<number>();
+      window.addEventListener(
+        'scroll',
+        () => {
+          const depth =
+            ((window.scrollY + window.innerHeight) /
+              document.documentElement.scrollHeight) *
+            100;
+          [25, 50, 75, 100].forEach((t) => {
+            if (depth >= t && !sent.has(t)) {
+              sent.add(t);
+              window.gtag?.('event', 'scroll_depth', { percent: t });
+            }
+          });
+        },
+        { passive: true }
+      );
+
+      // outbound_click 計測
+      document.querySelectorAll<HTMLAnchorElement>('a[target="_blank"]').forEach((a) => {
+        a.addEventListener('click', () => {
+          window.gtag?.('event', 'outbound_click', { url: a.href });
+        });
+      });
+    </script>
+  </body>
+</html>

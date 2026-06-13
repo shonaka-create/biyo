@@ -1,0 +1,44 @@
+---
+// FAQ用アコーディオン（§8.5）。aria-expanded 対応・キーボード操作可。
+interface Props {
+  items: { q: string; a: string }[];
+  /** GA4 faq_open イベント用の識別プレフィックス */
+  analyticsPrefix?: string;
+}
+
+const { items, analyticsPrefix = 'faq' } = Astro.props;
+---
+
+<div class="divide-y divide-line rounded-lg border border-line bg-surface">
+  {
+    items.map((item, i) => (
+      <details class="group px-6" data-faq-item={`${analyticsPrefix}-${i}`}>
+        <summary class="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 py-5 text-[15px] font-medium [&::-webkit-details-marker]:hidden">
+          <span>{item.q}</span>
+          <svg
+            class="h-5 w-5 shrink-0 text-brand transition-transform duration-300 group-open:rotate-45"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+          >
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+        </summary>
+        <p class="pb-6 text-[15px] text-ink-muted">{item.a}</p>
+      </details>
+    ))
+  }
+</div>
+
+<script>
+  // faq_open 計測（§13）
+  document.querySelectorAll<HTMLDetailsElement>('details[data-faq-item]').forEach((el) => {
+    el.addEventListener('toggle', () => {
+      if (el.open && typeof window.gtag === 'function') {
+        window.gtag('event', 'faq_open', { faq_id: el.dataset.faqItem });
+      }
+    });
+  });
+</script>

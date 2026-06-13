@@ -1,0 +1,179 @@
+---
+// 無料相談フォーム（§4.3 / §7.4）
+// 送信先は FORM_ENDPOINT（Formspree / Basin 等）。未設定の間はデモモードとして成功画面のみ表示。
+// TODO: フォームサービス契約後にエンドポイントを設定し、自動返信メールをサービス側で設定する。
+// TODO: reCAPTCHA v3 のサイトキー取得後、下記コメントの実装を有効化する（§4.3）。
+const FORM_ENDPOINT = ''; // 例: 'https://formspree.io/f/xxxxxxx'
+---
+
+<form
+  id="contact-form"
+  class="space-y-6"
+  method="POST"
+  action={FORM_ENDPOINT || undefined}
+  data-endpoint={FORM_ENDPOINT}
+  novalidate
+>
+  <!-- honeypot（スパム対策・視覚的に隠す） -->
+  <div class="absolute -left-[9999px]" aria-hidden="true">
+    <label for="company-website">このフィールドは空のままにしてください</label>
+    <input type="text" id="company-website" name="company-website" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <div class="grid gap-6 md:grid-cols-2">
+    <div>
+      <label for="name" class="mb-2 block text-sm font-medium">
+        お名前 <span class="text-accent">必須</span>
+      </label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        required
+        autocomplete="name"
+        class="h-12 w-full rounded-md border border-line bg-surface px-4 text-base focus:border-brand"
+      />
+    </div>
+    <div>
+      <label for="shop" class="mb-2 block text-sm font-medium">
+        店舗名 <span class="text-accent">必須</span>
+      </label>
+      <input
+        type="text"
+        id="shop"
+        name="shop"
+        required
+        autocomplete="organization"
+        class="h-12 w-full rounded-md border border-line bg-surface px-4 text-base focus:border-brand"
+      />
+    </div>
+  </div>
+
+  <div>
+    <label for="email" class="mb-2 block text-sm font-medium">
+      メールアドレス <span class="text-accent">必須</span>
+    </label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      required
+      autocomplete="email"
+      class="h-12 w-full rounded-md border border-line bg-surface px-4 text-base focus:border-brand"
+    />
+  </div>
+
+  <div class="grid gap-6 md:grid-cols-2">
+    <div>
+      <label for="location" class="mb-2 block text-sm font-medium">所在地（任意）</label>
+      <select
+        id="location"
+        name="location"
+        class="h-12 w-full rounded-md border border-line bg-surface px-4 text-base focus:border-brand"
+      >
+        <option value="">選択してください</option>
+        <option value="gold-coast">ゴールドコースト</option>
+        <option value="brisbane">ブリスベン</option>
+        <option value="other">その他</option>
+      </select>
+    </div>
+    <div>
+      <label for="plan" class="mb-2 block text-sm font-medium">ご興味のあるプラン（任意）</label>
+      <select
+        id="plan"
+        name="plan"
+        class="h-12 w-full rounded-md border border-line bg-surface px-4 text-base focus:border-brand"
+      >
+        <option value="">未定・相談して決めたい</option>
+        <option value="ume">梅・立ち上げ</option>
+        <option value="take">竹・集客</option>
+        <option value="matsu">松・ブランド成長</option>
+      </select>
+    </div>
+  </div>
+
+  <div>
+    <label for="sns" class="mb-2 block text-sm font-medium">店舗のInstagram / WebサイトURL（任意）</label>
+    <input
+      type="url"
+      id="sns"
+      name="sns"
+      placeholder="https://"
+      class="h-12 w-full rounded-md border border-line bg-surface px-4 text-base focus:border-brand"
+    />
+  </div>
+
+  <div>
+    <label for="message" class="mb-2 block text-sm font-medium">ご相談内容（任意）</label>
+    <textarea
+      id="message"
+      name="message"
+      rows="5"
+      placeholder="現状のお悩みやご希望があればお書きください。空欄のままでも大丈夫です。"
+      class="w-full rounded-md border border-line bg-surface px-4 py-3 text-base focus:border-brand"></textarea>
+  </div>
+
+  <p id="form-error" class="hidden text-sm text-accent-strong" role="alert">
+    送信に失敗しました。お手数ですが時間をおいて再度お試しいただくか、メールで直接ご連絡ください。
+  </p>
+
+  <button
+    type="submit"
+    id="form-submit"
+    class="h-12 w-full rounded-md bg-accent px-6 font-medium text-white transition duration-300 hover:bg-accent-strong disabled:opacity-60 md:w-auto md:px-12"
+    data-cta="contact-form"
+  >
+    無料相談を申し込む
+  </button>
+  <p class="text-xs text-ink-muted">
+    送信いただいた内容は<a href="/privacy" class="underline underline-offset-2">プライバシーポリシー</a>に基づき取り扱います。通常1〜2営業日以内にご返信します。
+  </p>
+</form>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const submitBtn = document.getElementById('form-submit') as HTMLButtonElement;
+  const errorEl = document.getElementById('form-error')!;
+
+  // 料金カードからの遷移（?plan=take 等）でプランを自動選択（§6.1 S8）
+  const planParam = new URLSearchParams(location.search).get('plan');
+  if (planParam) {
+    const select = document.getElementById('plan') as HTMLSelectElement;
+    if ([...select.options].some((o) => o.value === planParam)) select.value = planParam;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorEl.classList.add('hidden');
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    // honeypot：入力があればボットとみなし黙って終了
+    if ((form.elements.namedItem('company-website') as HTMLInputElement).value) return;
+
+    window.gtag?.('event', 'form_submit', { form_id: 'contact' });
+    submitBtn.disabled = true;
+    submitBtn.textContent = '送信中…';
+
+    const endpoint = form.dataset.endpoint;
+    try {
+      if (endpoint) {
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        if (!res.ok) throw new Error(`status ${res.status}`);
+      }
+      // TODO: エンドポイント未設定の間はデモとして成功扱い（本番前に必ず設定）
+      window.gtag?.('event', 'form_success', { form_id: 'contact' });
+      location.href = '/thanks';
+    } catch {
+      errorEl.classList.remove('hidden');
+      submitBtn.disabled = false;
+      submitBtn.textContent = '無料相談を申し込む';
+    }
+  });
+</script>

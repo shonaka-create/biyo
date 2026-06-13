@@ -1,0 +1,31 @@
+---
+// 共通CTAボタン（§7.3 / §8.5）
+// variant: primary = accent塗り（主CTA・1画面に1つ）, secondary = brand枠線, text = 下線リンク
+interface Props {
+  href: string;
+  variant?: 'primary' | 'secondary' | 'text';
+  /** 計測用の設置位置ラベル（§13）。例: "hero", "pricing", "final-band" */
+  ctaLocation?: string;
+  class?: string;
+}
+
+const { href, variant = 'primary', ctaLocation, class: className = '' } = Astro.props;
+
+const base =
+  'inline-flex items-center justify-center gap-2 font-medium transition duration-300 ease-out';
+const variants = {
+  primary:
+    'h-12 rounded-md bg-accent px-6 text-white hover:bg-accent-strong hover:scale-[1.02]',
+  secondary:
+    'h-12 rounded-md border border-brand px-6 text-brand hover:bg-brand-soft',
+  text: 'text-brand underline underline-offset-4 decoration-1 hover:text-brand-strong',
+};
+---
+
+<a
+  href={href}
+  class={`${base} ${variants[variant]} ${className}`}
+  data-cta={ctaLocation}
+>
+  <slot />
+</a>

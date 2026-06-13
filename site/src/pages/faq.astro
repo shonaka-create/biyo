@@ -1,0 +1,68 @@
+---
+// FAQ全文（§6.5）：カテゴリ別アコーディオン + FAQPage構造化データ
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Accordion from '../components/Accordion.astro';
+import CTABand from '../components/CTABand.astro';
+import { faqCategories } from '../content/faq';
+import { finalCta } from '../content/copy.ja';
+import { site } from '../content/site';
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqCategories.flatMap((c) =>
+    c.items.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    }))
+  ),
+};
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: site.siteUrl },
+    { '@type': 'ListItem', position: 2, name: 'よくある質問', item: `${site.siteUrl}/faq` },
+  ],
+};
+---
+
+<BaseLayout
+  title={`よくある質問｜${site.brandName}`}
+  description="料金・契約、作業範囲、オーストラリア特有の事情（Fresha・レビュー・LINE非対応）、進め方、成果の考え方など、よくいただくご質問にお答えします。"
+  jsonLd={[faqLd, breadcrumbLd]}
+>
+  <section class="px-5 pb-16 pt-32 md:pt-40 lg:px-8">
+    <div class="mx-auto max-w-[880px]">
+      <SectionHeading
+        label="FAQ"
+        heading="よくある質問"
+        lead="ここにない疑問は、無料相談で何でもお聞きください。"
+      />
+    </div>
+  </section>
+
+  <section class="px-5 pb-24 lg:px-8">
+    <div class="mx-auto max-w-[880px] space-y-12">
+      {
+        faqCategories.map((cat, i) => (
+          <div class="reveal">
+            <h2 class="mb-5 text-xl">{cat.category}</h2>
+            <Accordion items={cat.items} analyticsPrefix={`faq-cat${i}`} />
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <CTABand
+    heading={finalCta.heading}
+    sub={finalCta.sub}
+    ctaLabel={finalCta.cta.label}
+    ctaHref={finalCta.cta.href}
+    ctaLocation="faq-band"
+  />
+</BaseLayout>
