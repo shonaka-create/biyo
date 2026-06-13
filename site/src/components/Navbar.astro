@@ -1,7 +1,16 @@
 ---
 // ヘッダー（§7.1）：初期透過 → スクロールで背景＋境界線＋縮小。モバイルはフルスクリーンメニュー。
-import { nav, site } from '../content/site';
+import { siteCommon, navText } from '../content/site';
+import { localizePath } from '../i18n/utils';
+import type { Lang } from '../i18n/config';
 import CTAButton from './CTAButton.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const nav = navText[lang];
 ---
 
 <header
@@ -12,22 +21,23 @@ import CTAButton from './CTAButton.astro';
     class="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between px-5 transition-all duration-300 lg:px-8"
     id="header-inner"
   >
-    <a href="/" class="font-display text-xl tracking-wide text-ink">
-      {site.brandName}
+    <a href={localizePath('/', lang)} class="font-display text-xl tracking-wide text-ink">
+      {siteCommon.brandName}
     </a>
 
-    <nav class="hidden items-center gap-8 lg:flex" aria-label="グローバルナビゲーション">
+    <nav class="hidden items-center gap-8 lg:flex" aria-label="Global">
       {
         nav.links.map((link) => (
           <a
-            href={link.href}
+            href={localizePath(link.path, lang)}
             class="text-[15px] text-ink transition hover:text-brand"
           >
             {link.label}
           </a>
         ))
       }
-      <CTAButton href={nav.cta.href} variant="primary" ctaLocation="header" class="h-11 px-5 text-[15px]">
+      <LanguageSwitcher lang={lang} />
+      <CTAButton href={nav.cta.path} lang={lang} variant="primary" ctaLocation="header" class="h-11 px-5 text-[15px]">
         {nav.cta.label}
       </CTAButton>
     </nav>
@@ -35,7 +45,7 @@ import CTAButton from './CTAButton.astro';
     <button
       id="menu-toggle"
       class="flex h-11 w-11 items-center justify-center lg:hidden"
-      aria-label="メニューを開く"
+      aria-label="Menu"
       aria-expanded="false"
       aria-controls="mobile-menu"
     >
@@ -54,16 +64,17 @@ import CTAButton from './CTAButton.astro';
     {
       nav.links.map((link) => (
         <a
-          href={link.href}
+          href={localizePath(link.path, lang)}
           class="border-b border-line py-4 text-lg text-ink"
         >
           {link.label}
         </a>
       ))
     }
-    <CTAButton href={nav.cta.href} variant="primary" ctaLocation="mobile-menu" class="mt-6 w-full">
+    <CTAButton href={nav.cta.path} lang={lang} variant="primary" ctaLocation="mobile-menu" class="mt-6 w-full">
       {nav.cta.label}
     </CTAButton>
+    <LanguageSwitcher lang={lang} variant="stack" class="mt-6" />
   </div>
 </header>
 
@@ -89,7 +100,6 @@ import CTAButton from './CTAButton.astro';
   toggle.addEventListener('click', () => {
     const isOpen = toggle.getAttribute('aria-expanded') === 'true';
     toggle.setAttribute('aria-expanded', String(!isOpen));
-    toggle.setAttribute('aria-label', isOpen ? 'メニューを開く' : 'メニューを閉じる');
     menu.classList.toggle('hidden', isOpen);
     menu.classList.toggle('flex', !isOpen);
     iconOpen.classList.toggle('hidden', !isOpen);

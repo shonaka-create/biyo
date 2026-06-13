@@ -1,0 +1,99 @@
+---
+// 事例詳細本体（§6.3）：課題 → 施策 → 結果のケーススタディ構造
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ImagePlaceholder from '../ImagePlaceholder.astro';
+import CTABand from '../CTABand.astro';
+import { copy } from '../../content/copy';
+import { ui } from '../../content/ui';
+import { siteCommon } from '../../content/site';
+import { localizePath } from '../../i18n/utils';
+import type { Work } from '../../content/works';
+import type { Lang } from '../../i18n/config';
+
+interface Props {
+  lang: Lang;
+  work: Work;
+}
+const { lang, work } = Astro.props;
+const c = copy[lang];
+const u = ui[lang].works;
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: ui[lang].common.breadcrumbHome, item: new URL(localizePath('/', lang), siteCommon.siteUrl).href },
+    { '@type': 'ListItem', position: 2, name: u.navLabel, item: new URL(localizePath('/works', lang), siteCommon.siteUrl).href },
+    { '@type': 'ListItem', position: 3, name: work.name, item: new URL(localizePath(`/works/${work.slug}`, lang), siteCommon.siteUrl).href },
+  ],
+};
+const title = lang === 'ja' ? `${work.name}の事例｜${siteCommon.brandName}` : `${work.name} case study｜${siteCommon.brandName}`;
+---
+
+<BaseLayout lang={lang} title={title} description={work.summary} jsonLd={[breadcrumbLd]}>
+  <article class="px-5 pb-24 pt-32 md:pt-40 lg:px-8">
+    <div class="mx-auto max-w-[880px]">
+      <nav aria-label="Breadcrumb" class="mb-8 text-xs text-ink-muted">
+        <a href={localizePath('/', lang)} class="hover:text-brand">{ui[lang].common.breadcrumbHome}</a>
+        <span class="mx-2" aria-hidden="true">/</span>
+        <a href={localizePath('/works', lang)} class="hover:text-brand">{u.navLabel}</a>
+        <span class="mx-2" aria-hidden="true">/</span>
+        <span aria-current="page">{work.name}</span>
+      </nav>
+
+      <p class="text-sm tracking-widest text-brand">{work.industry}｜{work.area}</p>
+      <h1 class="mt-2 text-[32px] md:text-[40px]">{work.name}</h1>
+      <ul class="mt-5 flex flex-wrap gap-2">
+        {work.services.map((s) => <li class="rounded-full bg-brand-soft px-3 py-1 text-xs text-brand-strong">{s}</li>)}
+      </ul>
+
+      <div class="reveal mt-10">
+        <ImagePlaceholder slot_id={work.thumbSlot} label={u.mainVisual(work.name)} ratio="16/9" />
+      </div>
+
+      <div class="mt-14 space-y-12">
+        <section class="reveal">
+          <h2 class="border-b border-line pb-3 text-2xl">{u.challenge}</h2>
+          <p class="mt-5 text-[15px] leading-loose text-ink-muted">{work.challenge}</p>
+        </section>
+
+        <section class="reveal">
+          <h2 class="border-b border-line pb-3 text-2xl">{u.approach}</h2>
+          <ul class="mt-5 space-y-3">
+            {
+              work.approach.map((a) => (
+                <li class="flex items-start gap-3 text-[15px] text-ink-muted">
+                  <svg class="mt-1.5 h-4 w-4 shrink-0 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="m5 13 4 4L19 7" />
+                  </svg>
+                  {a}
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <section class="reveal">
+          <h2 class="border-b border-line pb-3 text-2xl">{u.result}</h2>
+          <p class="mt-5 text-[15px] leading-loose text-ink-muted">{work.result}</p>
+        </section>
+
+        <section class="reveal">
+          <h2 class="border-b border-line pb-3 text-2xl">{u.deliverables}</h2>
+          <div class="mt-6 grid gap-6 sm:grid-cols-2">
+            {work.detailSlots.map((d) => <ImagePlaceholder slot_id={d.id} label={d.label} ratio={d.ratio.replace(':', '/')} />)}
+          </div>
+        </section>
+      </div>
+    </div>
+  </article>
+
+  <CTABand
+    lang={lang}
+    heading={u.detailBandHeading}
+    sub={c.finalCta.sub}
+    ctaLabel={c.finalCta.cta.label}
+    ctaHref={c.finalCta.cta.href}
+    ctaLocation="work-detail-band"
+  />
+</BaseLayout>

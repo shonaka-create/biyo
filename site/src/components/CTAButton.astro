@@ -1,15 +1,24 @@
 ---
 // 共通CTAボタン（§7.3 / §8.5）
 // variant: primary = accent塗り（主CTA・1画面に1つ）, secondary = brand枠線, text = 下線リンク
+import { localizePath } from '../i18n/utils';
+import type { Lang } from '../i18n/config';
+
 interface Props {
   href: string;
   variant?: 'primary' | 'secondary' | 'text';
   /** 計測用の設置位置ラベル（§13）。例: "hero", "pricing", "final-band" */
   ctaLocation?: string;
+  /** 言語。内部リンク（/始まり）は自動でロケール化する */
+  lang?: Lang;
   class?: string;
 }
 
-const { href, variant = 'primary', ctaLocation, class: className = '' } = Astro.props;
+const { href, variant = 'primary', ctaLocation, lang = 'ja', class: className = '' } = Astro.props;
+
+// 内部の絶対パスのみロケール化（アンカー #、外部URL、mailto等は除外）
+const resolvedHref =
+  href.startsWith('/') ? localizePath(href, lang) : href;
 
 const base =
   'inline-flex items-center justify-center gap-2 font-medium transition duration-300 ease-out';
@@ -23,7 +32,7 @@ const variants = {
 ---
 
 <a
-  href={href}
+  href={resolvedHref}
   class={`${base} ${variants[variant]} ${className}`}
   data-cta={ctaLocation}
 >

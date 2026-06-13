@@ -1,13 +1,17 @@
 ---
 // 料金プランカード（§6.1 S8 / §8.5）。竹（recommended）は2pxアクセント枠＋推奨バッジ。
 import type { Plan } from '../content/plans';
+import { ui } from '../content/ui';
+import type { Lang } from '../i18n/config';
 import CTAButton from './CTAButton.astro';
 
 interface Props {
   plan: Plan;
+  lang: Lang;
 }
 
-const { plan } = Astro.props;
+const { plan, lang } = Astro.props;
+const t = ui[lang].plan;
 ---
 
 <div
@@ -19,7 +23,7 @@ const { plan } = Astro.props;
   {
     plan.recommended && (
       <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-accent px-4 py-1 text-xs font-medium tracking-wider text-white">
-        推奨プラン
+        {t.recommendedBadge}
       </span>
     )
   }
@@ -29,11 +33,11 @@ const { plan } = Astro.props;
   <p class="mt-2 text-sm text-ink-muted">{plan.target}</p>
 
   <div class="mt-6 border-t border-line pt-6">
-    <p class="text-sm text-ink-muted">月額</p>
+    <p class="text-sm text-ink-muted">{t.monthly}</p>
     <p class="font-display text-4xl text-ink">
-      {plan.monthly}<span class="ml-1 text-base text-ink-muted">/月</span>
+      {plan.monthly}<span class="ml-1 text-base text-ink-muted">{t.perMonth}</span>
     </p>
-    <p class="mt-2 text-sm text-ink-muted">初期構築 {plan.setup}（一回）</p>
+    <p class="mt-2 text-sm text-ink-muted">{t.setup(plan.setup)}</p>
   </div>
 
   <ul class="mt-6 flex-1 space-y-3">
@@ -58,10 +62,11 @@ const { plan } = Astro.props;
 
   <CTAButton
     href={`/contact?plan=${plan.id}`}
+    lang={lang}
     variant={plan.recommended ? 'primary' : 'secondary'}
     ctaLocation={`plan-${plan.id}`}
     class="mt-8 w-full"
   >
-    このプランで相談する
+    {t.cta}
   </CTAButton>
 </div>

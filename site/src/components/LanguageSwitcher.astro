@@ -1,0 +1,50 @@
+---
+// 言語切替（§10）。現在ページの対応する他言語URLへ遷移する。
+import { languages, locales, type Lang } from '../i18n/config';
+import { stripLocale, localizePath } from '../i18n/utils';
+import { ui } from '../content/ui';
+
+interface Props {
+  lang: Lang;
+  /** 'inline' = 横並びテキスト（ヘッダー/フッター）, 'stack' = 縦積み（モバイルメニュー） */
+  variant?: 'inline' | 'stack';
+  /** 'light' = 明背景（濃い文字）, 'dark' = 暗背景（淡い文字） */
+  tone?: 'light' | 'dark';
+  class?: string;
+}
+
+const { lang, variant = 'inline', tone = 'light', class: className = '' } = Astro.props;
+const basePath = stripLocale(Astro.url.pathname);
+
+const activeColor = tone === 'dark' ? 'text-canvas' : 'text-ink';
+const inactiveColor = tone === 'dark' ? 'text-canvas/60 hover:text-canvas' : 'text-ink-muted hover:text-brand';
+const sep = tone === 'dark' ? 'text-canvas/30' : 'text-line';
+---
+
+<nav
+  class={`flex items-center gap-1 ${variant === 'stack' ? 'flex-col items-stretch gap-2' : ''} ${className}`}
+  aria-label={ui[lang].common.langLabel}
+>
+  {
+    locales.map((code, i) => (
+      <>
+        {i > 0 && variant === 'inline' && (
+          <span class={sep} aria-hidden="true">
+            /
+          </span>
+        )}
+        <a
+          href={localizePath(basePath, code)}
+          hreflang={code}
+          lang={code}
+          aria-current={code === lang ? 'true' : undefined}
+          class={`text-sm transition ${
+            code === lang ? `font-semibold ${activeColor}` : inactiveColor
+          } ${variant === 'stack' ? 'rounded-md border border-line px-4 py-2.5 text-center' : ''}`}
+        >
+          {languages[code]}
+        </a>
+      </>
+    ))
+  }
+</nav>

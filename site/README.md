@@ -28,12 +28,24 @@ npm run preview  # ビルド結果をローカルで確認
 ## 設計の要点（AI駆動開発ガイド §16 準拠）
 
 - **デザイントークン先行**：色・フォント・角丸・余白は `src/styles/global.css` の `@theme` に集約（§8.2–8.4）。直書き禁止、トークン参照。
-- **コンテンツ分離**：全コピー・料金・FAQ・事例は `src/content/` に集約。ノンエンジニアはここの文字列を書き換えるだけで更新できる。
-  - `site.ts` … ブランド名・連絡先・予約URL等の基本情報
-  - `copy.ja.ts` … トップページ中心の文言
-  - `plans.ts` … 料金プラン（松竹梅）・オプション・料金FAQ
+- **コンテンツ分離**：全コピー・料金・FAQ・事例は `src/content/` に集約。各ファイルは `{ ja: …, en: … }` の言語キー付き辞書で、ノンエンジニアはここの文字列を書き換えるだけで両言語を更新できる。
+  - `site.ts` … ブランド名・連絡先・予約URL等（`siteCommon`）＋ タグライン/ナビ等の言語別テキスト
+  - `copy.ts` … トップページ中心の文言（ja / en）
+  - `ui.ts` … 各ページの見出し・ラベル・フォーム・図解などの固定UI文言（ja / en）
+  - `plans.ts` … 料金プラン（日本語=松竹梅/¥、英語=Starter・Growth・Brand/A$）・オプション・料金FAQ
   - `faq.ts` … FAQ（カテゴリ別。`featured: true` がトップ抜粋に出る）
-  - `works.ts` … 実績・事例（配列に追記すれば `/works/[slug]` が自動生成）
+  - `works.ts` … 実績・事例（slug共通・本文は言語別。両言語の配列に同じslugで追記すれば `/works/[slug]` と `/en/works/[slug]` が自動生成）
+  - `privacy.ts` … プライバシーポリシー本文（ja / en）
+
+### 多言語（日本語 / 英語）（§10）
+
+- 日本語＝デフォルトでプレフィックスなし `/`、英語＝`/en/`（`astro.config.mjs` の `i18n` 設定）。
+- 各ページ本体は `src/components/pages/*Page.astro` に共有コンポーネント化し、`src/pages/*`（ja）と `src/pages/en/*`（en）は `lang` を渡すだけの薄いラッパー。
+- `src/i18n/` … `config.ts`（言語定義・hreflangマップ）と `utils.ts`（URLから言語判定・パスのロケール化）。
+- 言語切替UIは `LanguageSwitcher.astro`（ヘッダー・モバイルメニュー・フッターに設置）。現在ページの対応する他言語URLへ遷移する。
+- 各ページに `hreflang`（ja-JP / en-AU / x-default）と言語別 canonical を自動出力。
+- 文言を追加するときは、必ず `ja` と `en` の両方に同じキーで追記する（型 `Record<Lang, …>` が欠落をビルド時に検出）。
+- 英語の料金は豪ローカル向けに A$ 表記（TODO: 確定レートで要見直し）。
 - **画像はすべてプレースホルダー**：`ImagePlaceholder` コンポーネントで実装し `data-image-slot` を付与（§8.7）。実画像差し替え時はこの属性を目印に置換する。
 - **図解はコード生成**：`DiscoveryFigure`（分散入口→Instagramハブ→予約）／`LoopFigure`（フライホイール）はSVG/HTMLで描画。テーマカラー連動・レスポンシブ・`role="img"`対応。
 - **セクション順序**：トップは §6.1 の S1〜S15 をコンバージョン論理順で厳守。
@@ -43,13 +55,17 @@ npm run preview  # ビルド結果をローカルで確認
 
 ```
 src/
-  components/   Hero相当のセクションは index.astro 内。共通UI（Navbar, Footer, CTAButton,
-                PlanCard, Stepper, Accordion, DiscoveryFigure, LoopFigure, ContactForm, ...）
-  layouts/      BaseLayout.astro（SEO/OGP/JSON-LD/フォント/計測/リビール）
-  pages/        index, service, pricing, works/[slug], about, faq, contact, thanks, privacy
-  content/      site / copy.ja / plans / faq / works
-  styles/       global.css（デザイントークン）
-public/         favicon.svg, og-default.svg, robots.txt（いずれも仮・要差し替え）
+  components/        共通UI（Navbar, Footer, CTAButton, LanguageSwitcher, PlanCard,
+                     Stepper, Accordion, DiscoveryFigure, LoopFigure, ContactForm, ...）
+    pages/           各ページ本体（lang を受ける）HomePage, ServicePage, PricingPage,
+                     WorksPage, WorkDetailPage, AboutPage, FaqPage, ContactPage, ...
+  layouts/           BaseLayout.astro（SEO/OGP/hreflang/JSON-LD/フォント/計測/リビール）
+  pages/             ja ルート（薄いラッパー）：index, service, pricing, works/[slug], ...
+    en/              en ルート（薄いラッパー）：en/index, en/service, en/works/[slug], ...
+  content/           site / copy / ui / plans / faq / works / privacy（すべて ja/en 辞書）
+  i18n/              config.ts（言語・hreflang）/ utils.ts（言語判定・パス変換）
+  styles/            global.css（デザイントークン）
+public/              favicon.svg, og-default.svg, robots.txt（いずれも仮・要差し替え）
 ```
 
 ## 公開前に必ず差し替える項目（TODO）

@@ -1,0 +1,79 @@
+---
+// 実績一覧本体（§6.3）
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeading from '../SectionHeading.astro';
+import ImagePlaceholder from '../ImagePlaceholder.astro';
+import CTABand from '../CTABand.astro';
+import { works } from '../../content/works';
+import { copy } from '../../content/copy';
+import { ui } from '../../content/ui';
+import { siteCommon } from '../../content/site';
+import { localizePath } from '../../i18n/utils';
+import type { Lang } from '../../i18n/config';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = copy[lang];
+const u = ui[lang].works;
+
+const meta = {
+  ja: {
+    title: `実績・事例｜${siteCommon.brandName}`,
+    description:
+      'ゴールドコーストの美容サロン様との実績。Webサイト制作・予約導線・レビュー埋め込み・MEO整備・Instagram運用の事例をご紹介します。',
+  },
+  en: {
+    title: `Work｜${siteCommon.brandName}`,
+    description:
+      'Work with beauty salons on the Gold Coast — website builds, booking flows, embedded reviews, MEO setup and Instagram management.',
+  },
+}[lang];
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: ui[lang].common.breadcrumbHome, item: new URL(localizePath('/', lang), siteCommon.siteUrl).href },
+    { '@type': 'ListItem', position: 2, name: u.navLabel, item: new URL(localizePath('/works', lang), siteCommon.siteUrl).href },
+  ],
+};
+---
+
+<BaseLayout lang={lang} title={meta.title} description={meta.description} jsonLd={[breadcrumbLd]}>
+  <section class="px-5 pb-16 pt-32 md:pt-40 lg:px-8">
+    <div class="mx-auto max-w-[1200px]">
+      <SectionHeading label={ui[lang].home.worksLabel} heading={u.heading} lead={u.lead} />
+    </div>
+  </section>
+
+  <section class="px-5 pb-24 lg:px-8">
+    <div class="mx-auto grid max-w-[1200px] gap-8 md:grid-cols-2">
+      {
+        works[lang].map((work) => (
+          <a href={localizePath(`/works/${work.slug}`, lang)} class="reveal group block rounded-lg border border-line bg-surface p-6 transition hover:border-brand">
+            <ImagePlaceholder slot_id={work.thumbSlot} label={ui[lang].home.thumbLabel(work.name)} ratio="4/3" />
+            <p class="mt-5 text-xs tracking-widest text-ink-muted">{work.industry}｜{work.area}</p>
+            <h2 class="mt-1 font-sans text-lg font-semibold transition group-hover:text-brand">{work.name}</h2>
+            <p class="mt-2 text-sm text-ink-muted">{work.summary}</p>
+            <ul class="mt-4 flex flex-wrap gap-2">
+              {work.services.map((s) => (
+                <li class="rounded-full bg-brand-soft px-3 py-1 text-xs text-brand-strong">{s}</li>
+              ))}
+            </ul>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <CTABand
+    lang={lang}
+    heading={c.finalCta.heading}
+    sub={c.finalCta.sub}
+    ctaLabel={c.finalCta.cta.label}
+    ctaHref={c.finalCta.cta.href}
+    ctaLocation="works-band"
+  />
+</BaseLayout>

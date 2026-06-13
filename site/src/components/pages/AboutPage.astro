@@ -1,0 +1,98 @@
+---
+// 私たちについて本体（§6.4）
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeading from '../SectionHeading.astro';
+import ImagePlaceholder from '../ImagePlaceholder.astro';
+import CTABand from '../CTABand.astro';
+import { copy } from '../../content/copy';
+import { ui } from '../../content/ui';
+import { siteCommon, siteText } from '../../content/site';
+import { localizePath } from '../../i18n/utils';
+import type { Lang } from '../../i18n/config';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = copy[lang];
+const u = ui[lang].about;
+
+const meta = {
+  ja: {
+    title: `私たちについて｜${siteCommon.brandName}`,
+    description:
+      '日本とゴールドコーストにまたがる2人組のチーム。日本品質の制作・運用と、現地7年の信頼関係。私たちが「集客の成長パートナー」を始めた理由をお話しします。',
+  },
+  en: {
+    title: `About｜${siteCommon.brandName}`,
+    description:
+      'A two-person team across Japan and the Gold Coast. Japanese-quality production and operations, plus seven years of local trust. Why we started as a salon growth partner.',
+  },
+}[lang];
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: ui[lang].common.breadcrumbHome, item: new URL(localizePath('/', lang), siteCommon.siteUrl).href },
+    { '@type': 'ListItem', position: 2, name: u.navLabel, item: new URL(localizePath('/about', lang), siteCommon.siteUrl).href },
+  ],
+};
+---
+
+<BaseLayout lang={lang} title={meta.title} description={meta.description} jsonLd={[breadcrumbLd]}>
+  <section class="px-5 pb-16 pt-32 md:pt-40 lg:px-8">
+    <div class="mx-auto max-w-[760px]">
+      <SectionHeading label="About" heading={u.heading} lead={u.lead} />
+      <div class="reveal mt-10 space-y-6 text-[15px] leading-loose text-ink-muted">
+        {u.story.map((p) => <p>{p}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-surface-cream px-5 py-20 md:py-28 lg:px-8">
+    <div class="mx-auto max-w-[1200px]">
+      <SectionHeading label={c.team.label} heading={u.teamHeading} align="center" />
+      <div class="mx-auto mt-12 grid max-w-[880px] gap-8 md:grid-cols-2">
+        {
+          c.team.members.map((member) => (
+            <div class="reveal rounded-lg bg-surface p-7 text-center">
+              <ImagePlaceholder slot_id={member.slot} label={ui[lang].home.portraitLabel(member.role)} ratio="1/1" class="mx-auto w-40 rounded-full" />
+              <h2 class="mt-5 font-sans text-lg font-semibold">{member.name}</h2>
+              <p class="mt-1 text-sm text-brand">{member.role}</p>
+              <p class="mt-1 text-xs text-ink-muted">{member.location}</p>
+              <p class="mt-4 text-sm text-ink-muted">{member.message}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="px-5 py-20 md:py-28 lg:px-8">
+    <div class="mx-auto max-w-[1200px]">
+      <SectionHeading label={u.valuesLabel} heading={u.valuesHeading} align="center" />
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          c.strengths.items.map((item, i) => (
+            <div class="reveal rounded-lg border border-line bg-surface p-7">
+              <span class="font-display text-2xl text-brand" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <h2 class="mt-3 font-sans text-base font-semibold">{item.title}</h2>
+              <p class="mt-3 text-sm text-ink-muted">{item.body}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="reveal mt-10 text-center text-sm text-ink-muted">{u.areasPrefix}{siteText[lang].areas}</p>
+    </div>
+  </section>
+
+  <CTABand
+    lang={lang}
+    heading={c.finalCta.heading}
+    sub={c.finalCta.sub}
+    ctaLabel={c.finalCta.cta.label}
+    ctaHref={c.finalCta.cta.href}
+    ctaLocation="about-band"
+  />
+</BaseLayout>

@@ -1,0 +1,323 @@
+---
+// トップページ本体（§6.1）：S1〜S15。/（ja）と /en/（en）の両ルートから lang を受けて描画。
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTAButton from '../CTAButton.astro';
+import SectionHeading from '../SectionHeading.astro';
+import ImagePlaceholder from '../ImagePlaceholder.astro';
+import DiscoveryFigure from '../DiscoveryFigure.astro';
+import LoopFigure from '../LoopFigure.astro';
+import PlanCard from '../PlanCard.astro';
+import Stepper from '../Stepper.astro';
+import Accordion from '../Accordion.astro';
+import CTABand from '../CTABand.astro';
+import { siteCommon } from '../../content/site';
+import { copy } from '../../content/copy';
+import { plans, planNotes } from '../../content/plans';
+import { faqCategories } from '../../content/faq';
+import { works } from '../../content/works';
+import { ui } from '../../content/ui';
+import { localizePath } from '../../i18n/utils';
+import type { Lang } from '../../i18n/config';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = copy[lang];
+const u = ui[lang].home;
+
+const meta = {
+  ja: {
+    title: `ゴールドコーストの美容サロン集客・Instagram運用｜${siteCommon.brandName}`,
+    description:
+      'ゴールドコーストの日本人オーナー美容サロン（ネイル・まつげ・眉・ヘア・エステ）向けに、Web・Instagram・Google/MEO・レビュー獲得まで集客の仕組みを一貫サポート。日本品質の集客を、現地で信頼される形でお届けします。',
+  },
+  en: {
+    title: `Beauty salon marketing & Instagram on the Gold Coast｜${siteCommon.brandName}`,
+    description:
+      'Japanese-quality marketing, delivered with local trust. For Japanese-owned beauty salons on the Gold Coast — nails, lashes, brows, hair and skin: web, Instagram, Google/MEO and reviews, run as one connected growth system.',
+  },
+}[lang];
+
+const featuredFaq = faqCategories[lang]
+  .flatMap((cat) => cat.items)
+  .filter((i) => i.featured)
+  .slice(0, 6);
+---
+
+<BaseLayout lang={lang} title={meta.title} description={meta.description}>
+  <!-- S1. ヒーロー -->
+  <section class="px-5 pb-16 pt-32 md:pb-24 md:pt-40 lg:px-8">
+    <div class="mx-auto grid max-w-[1200px] items-center gap-10 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <h1 class="whitespace-pre-line text-[34px] leading-[1.3] md:text-[44px]">
+          {c.hero.heading}
+        </h1>
+        <p class="mt-6 max-w-[560px] text-[17px] text-ink-muted">{c.hero.sub}</p>
+        <ul class="mt-5 flex flex-wrap gap-x-5 gap-y-1 text-sm text-brand">
+          {
+            c.hero.micro.map((m) => (
+              <li class="flex items-center gap-1.5">
+                <span class="inline-block h-1 w-1 rounded-full bg-brand" aria-hidden="true" />
+                {m}
+              </li>
+            ))
+          }
+        </ul>
+        <div class="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
+          <CTAButton href={c.hero.ctaPrimary.href} lang={lang} variant="primary" ctaLocation="hero" class="px-8">
+            {c.hero.ctaPrimary.label}
+          </CTAButton>
+          <CTAButton href={c.hero.ctaSecondary.href} lang={lang} variant="text" ctaLocation="hero-secondary">
+            {c.hero.ctaSecondary.label} →
+          </CTAButton>
+        </div>
+      </div>
+      <ImagePlaceholder
+        slot_id="hero-main"
+        label={u.heroImageLabel}
+        ratio="4/5"
+        class="max-h-[560px] w-full lg:order-last"
+      />
+    </div>
+  </section>
+
+  <!-- S2. 信頼バー -->
+  <section class="border-y border-line bg-surface px-5 py-10 lg:px-8">
+    <div class="mx-auto max-w-[1200px]">
+      <dl class="grid gap-6 text-center sm:grid-cols-2 lg:grid-cols-4">
+        {
+          c.trustBar.items.map((item) => (
+            <div>
+              <dt class="text-xs tracking-widest text-ink-muted">{item.label}</dt>
+              <dd class="mt-1 text-[15px] font-medium">{item.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+      <div class="mt-8 grid grid-cols-2 gap-4 opacity-80 sm:grid-cols-4">
+        {
+          [1, 2, 3, 4].map((i) => (
+            <ImagePlaceholder slot_id={`logo-strip-${i}`} label={u.logoLabel(i)} ratio="3/1" class="grayscale" />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- S3. 課題提起 -->
+  <section class="px-5 py-20 md:py-28 lg:px-8">
+    <div class="mx-auto max-w-[1200px]">
+      <SectionHeading label={c.problem.label} heading={c.problem.heading} lead={c.problem.lead} />
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          c.problem.items.map((item) => (
+            <div class="reveal rounded-lg border border-line bg-surface p-6">
+              <h3 class="font-sans text-base font-semibold">{item.title}</h3>
+              <p class="mt-3 text-sm text-ink-muted">{item.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- S4. 豪州での「探され方」 -->
+  <section class="bg-surface-cream px-5 py-20 md:py-28 lg:px-8">
+    <div class="mx-auto max-w-[1200px]">
+      <SectionHeading label={c.discovery.label} heading={c.discovery.heading} lead={c.discovery.lead} />
+      <div class="reveal mt-12">
+        <DiscoveryFigure lang={lang} />
+      </div>
+      <ul class="reveal mx-auto mt-10 max-w-[760px] space-y-3">
+        {
+          c.discovery.points.map((p) => (
+            <li class="flex items-start gap-3 text-[15px] text-ink-muted">
+              <svg class="mt-1.5 h-4 w-4 shrink-0 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="m5 13 4 4L19 7" />
+              </svg>
+              {p}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- S5. 解決策＝「輪」を回す -->
+  <section class="px-5 py-20 md:py-28 lg:px-8">
+    <div class="mx-auto max-w-[1200px]">
+      <SectionHeading label={c.loop.label} heading={c.loop.heading} lead={c.loop.lead} />
+      <div class="reveal mt-12">
+        <LoopFigure lang={lang} />
+      </div>
+      <p class="reveal mx-auto mt-8 max-w-[760px] text-center text-[15px] text-ink-muted">{c.loop.note}</p>
+    </div>
+  </section>
+
+  <!-- S6. 私たちの強み -->
+  <section class="bg-brand-soft px-5 py-20 md:py-28 lg:px-8">
+    <div class="mx-auto max-w-[1200px]">
+      <SectionHeading label={c.strengths.label} heading={c.strengths.heading} align="center" />
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          c.strengths.items.map((item, i) => (
+            <div class="reveal rounded-lg bg-surface p-7">
+              <span class="font-display text-2xl text-brand" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 class="mt-3 font-sans text-base font-semibold">{item.title}</h3>
+              <p class="mt-3 text-sm text-ink-muted">{item.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- S7. サービス内容 -->
+  <section id="service" class="px-5 py-20 md:py-28 lg:px-8">
+    <div class="mx-auto max-w-[1200px]">
+      <SectionHeading label={c.services.label} heading={c.services.heading} lead={c.services.lead} />
+      <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {
+          c.services.stages.map((stage) => (
+            <div class="reveal rounded-lg border border-line bg-surface p-7">
+              <p class="text-sm font-medium tracking-widest text-brand">{stage.stage}</p>
+              <h3 class="mt-1 font-sans text-lg font-semibold">{stage.summary}</h3>
+              <ul class="mt-4 space-y-2">
+                {stage.items.map((item) => (
+                  <li class="flex items-start gap-2 text-sm text-ink-muted">
+                    <span class="mt-2.5 inline-block h-1 w-1 shrink-0 rounded-full bg-brand" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+      <p class="reveal mt-8 rounded-lg bg-surface-cream px-6 py-5 text-sm text-ink-muted">{c.services.note}</p>
+      <div class="reveal mt-8 text-center">
+        <CTAButton href="/service" lang={lang} variant="text" ctaLocation="service-more">{u.serviceMore}</CTAButton>
+      </div>
+    </div>
+  </section>
+
+  <!-- S8. 料金プラン -->
+  <section class="bg-surface-cream px-5 py-20 md:py-28 lg:px-8">
+    <div class="mx-auto max-w-[1200px]">
+      <SectionHeading label={u.pricingLabel} heading={u.pricingHeading} lead={u.pricingLead} align="center" />
+      <div class="mt-14 grid gap-8 lg:grid-cols-3 lg:gap-6">
+        {plans[lang].map((plan) => <PlanCard plan={plan} lang={lang} />)}
+      </div>
+      <div class="reveal mt-8 space-y-1 text-center text-sm text-ink-muted">
+        {planNotes[lang].map((n) => <p>{n}</p>)}
+      </div>
+      <div class="reveal mt-6 text-center">
+        <CTAButton href="/pricing" lang={lang} variant="text" ctaLocation="pricing-more">{u.pricingMore}</CTAButton>
+      </div>
+    </div>
+  </section>
+
+  <!-- S9. 導入の流れ -->
+  <section class="px-5 py-20 md:py-28 lg:px-8">
+    <div class="mx-auto max-w-[1200px]">
+      <SectionHeading label={c.steps.label} heading={c.steps.heading} align="center" />
+      <div class="mt-12">
+        <Stepper items={c.steps.items} />
+      </div>
+    </div>
+  </section>
+
+  <!-- S10. 実績・事例 -->
+  <section class="bg-surface px-5 py-20 md:py-28 lg:px-8">
+    <div class="mx-auto max-w-[1200px]">
+      <SectionHeading label={u.worksLabel} heading={u.worksHeading} lead={u.worksLead} />
+      <div class="mt-12 grid gap-8 md:grid-cols-2">
+        {
+          works[lang].map((work) => (
+            <a href={localizePath(`/works/${work.slug}`, lang)} class="reveal group block rounded-lg border border-line bg-canvas p-6 transition hover:border-brand">
+              <ImagePlaceholder slot_id={work.thumbSlot} label={u.thumbLabel(work.name)} ratio="4/3" />
+              <p class="mt-5 text-xs tracking-widest text-ink-muted">{work.industry}｜{work.area}</p>
+              <h3 class="mt-1 font-sans text-lg font-semibold transition group-hover:text-brand">{work.name}</h3>
+              <p class="mt-2 text-sm text-ink-muted">{work.summary}</p>
+            </a>
+          ))
+        }
+      </div>
+      <div class="reveal mt-10 text-center">
+        <CTAButton href="/works" lang={lang} variant="secondary" ctaLocation="works-more">{u.worksMore}</CTAButton>
+      </div>
+    </div>
+  </section>
+
+  <!-- S11. お客様の声 -->
+  <section class="px-5 py-20 md:py-28 lg:px-8">
+    <div class="mx-auto max-w-[1200px]">
+      <SectionHeading label={c.testimonials.label} heading={c.testimonials.heading} align="center" />
+      <div class="mt-12 grid gap-6 md:grid-cols-2">
+        {
+          c.testimonials.items.map((t, i) => (
+            <figure class="reveal rounded-lg border border-line bg-surface p-7">
+              <blockquote class="text-[15px] text-ink-muted">{t.comment}</blockquote>
+              <figcaption class="mt-5 flex items-center gap-4">
+                <ImagePlaceholder slot_id={`testimonial-avatar-${i + 1}`} label={u.avatarLabel} ratio="1/1" class="w-14 shrink-0 rounded-full" />
+                <div>
+                  <p class="text-sm font-medium">{t.name}</p>
+                  <p class="text-xs text-ink-muted">{t.shop}</p>
+                </div>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- S12. チーム紹介 -->
+  <section class="bg-surface-cream px-5 py-20 md:py-28 lg:px-8">
+    <div class="mx-auto max-w-[1200px]">
+      <SectionHeading label={c.team.label} heading={c.team.heading} lead={c.team.lead} align="center" />
+      <div class="mx-auto mt-12 grid max-w-[880px] gap-8 md:grid-cols-2">
+        {
+          c.team.members.map((member) => (
+            <div class="reveal rounded-lg bg-surface p-7 text-center">
+              <ImagePlaceholder slot_id={member.slot} label={u.portraitLabel(member.role)} ratio="1/1" class="mx-auto w-40 rounded-full" />
+              <h3 class="mt-5 font-sans text-lg font-semibold">{member.name}</h3>
+              <p class="mt-1 text-sm text-brand">{member.role}</p>
+              <p class="mt-1 text-xs text-ink-muted">{member.location}</p>
+              <p class="mt-4 text-sm text-ink-muted">{member.message}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="reveal mt-10 text-center">
+        <CTAButton href="/about" lang={lang} variant="text" ctaLocation="about-more">{u.aboutMore}</CTAButton>
+      </div>
+    </div>
+  </section>
+
+  <!-- S13. FAQ（抜粋） -->
+  <section class="px-5 py-20 md:py-28 lg:px-8">
+    <div class="mx-auto max-w-[880px]">
+      <SectionHeading label={u.faqLabel} heading={u.faqHeading} align="center" />
+      <div class="reveal mt-12">
+        <Accordion items={featuredFaq} analyticsPrefix="top" />
+      </div>
+      <div class="reveal mt-8 text-center">
+        <CTAButton href="/faq" lang={lang} variant="text" ctaLocation="faq-more">{u.faqMore}</CTAButton>
+      </div>
+    </div>
+  </section>
+
+  <!-- S14. 最終CTAバンド -->
+  <CTABand
+    lang={lang}
+    heading={c.finalCta.heading}
+    sub={c.finalCta.sub}
+    ctaLabel={c.finalCta.cta.label}
+    ctaHref={c.finalCta.cta.href}
+    ctaLocation="final-band"
+  />
+</BaseLayout>

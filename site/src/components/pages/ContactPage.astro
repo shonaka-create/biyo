@@ -1,0 +1,92 @@
+---
+// お問い合わせ・無料相談本体（§6.6）
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeading from '../SectionHeading.astro';
+import ContactForm from '../ContactForm.astro';
+import { ui } from '../../content/ui';
+import { siteCommon } from '../../content/site';
+import { siteText } from '../../content/site';
+import { localizePath } from '../../i18n/utils';
+import type { Lang } from '../../i18n/config';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const u = ui[lang].contact;
+
+const meta = {
+  ja: {
+    title: `無料相談のご予約｜${siteCommon.brandName}`,
+    description:
+      '30分の無料相談（オンラインまたは対面）をご予約いただけます。現状のヒアリングと、できることのご提案だけでも歓迎です。無理な営業はいたしません。',
+  },
+  en: {
+    title: `Book a free consult｜${siteCommon.brandName}`,
+    description:
+      'Book a 30-minute free consult (online or in person). Even just a look at where things stand and a few ideas is welcome. No hard sell.',
+  },
+}[lang];
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: ui[lang].common.breadcrumbHome, item: new URL(localizePath('/', lang), siteCommon.siteUrl).href },
+    { '@type': 'ListItem', position: 2, name: u.navLabel, item: new URL(localizePath('/contact', lang), siteCommon.siteUrl).href },
+  ],
+};
+---
+
+<BaseLayout lang={lang} title={meta.title} description={meta.description} jsonLd={[breadcrumbLd]}>
+  <section class="px-5 pb-24 pt-32 md:pt-40 lg:px-8">
+    <div class="mx-auto max-w-[1200px]">
+      <SectionHeading label="Contact" heading={u.heading} lead={u.lead} />
+
+      <div class="mt-12 grid gap-12 lg:grid-cols-[1fr_360px]">
+        <div class="reveal relative rounded-xl border border-line bg-surface p-7 md:p-10">
+          <ContactForm lang={lang} />
+        </div>
+
+        <aside class="space-y-8">
+          <div class="reveal rounded-lg bg-surface-cream p-7">
+            <h2 class="font-sans text-base font-semibold">{u.bookingHeading}</h2>
+            <p class="mt-3 text-sm text-ink-muted">{u.bookingBody}</p>
+            {
+              siteCommon.bookingUrl ? (
+                <a
+                  href={siteCommon.bookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mt-5 inline-flex h-12 w-full items-center justify-center rounded-md border border-brand px-6 font-medium text-brand transition hover:bg-brand-soft"
+                  data-cta="booking-tool"
+                >
+                  {u.bookingButton}
+                </a>
+              ) : (
+                <div class="mt-5 rounded-md border border-dashed border-line bg-canvas p-5 text-center text-xs text-ink-muted">
+                  {/* TODO: Calendly / TimeRex / Spir のURLを site.ts の bookingUrl に設定すると予約ボタンが表示されます */}
+                  {u.bookingPlaceholder}
+                </div>
+              )
+            }
+          </div>
+
+          <div class="reveal rounded-lg border border-line bg-surface p-7">
+            <h2 class="font-sans text-base font-semibold">{u.otherHeading}</h2>
+            <ul class="mt-4 space-y-3 text-sm text-ink-muted">
+              <li>
+                {u.emailPrefix}<a href={`mailto:${siteCommon.email}`} class="text-brand underline underline-offset-2">{siteCommon.email}</a>
+              </li>
+              <li>
+                Instagram DM：<a href={siteCommon.instagramUrl} target="_blank" rel="noopener noreferrer" class="text-brand underline underline-offset-2">@account</a>
+                <!-- TODO: Instagramアカウント名確定後に差し替え -->
+              </li>
+            </ul>
+            <p class="mt-4 text-xs text-ink-muted">{u.areasPrefix}{siteText[lang].areas}</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

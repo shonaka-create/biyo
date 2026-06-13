@@ -1,6 +1,7 @@
 ---
 // 最終CTAバンド（§6.1 S14 / §7.3）。背景は brand-soft のアクセントバンド。
 import CTAButton from './CTAButton.astro';
+import type { Lang } from '../i18n/config';
 
 interface Props {
   heading: string;
@@ -8,16 +9,17 @@ interface Props {
   ctaLabel: string;
   ctaHref: string;
   ctaLocation?: string;
+  lang?: Lang;
 }
 
-const { heading, sub, ctaLabel, ctaHref, ctaLocation = 'cta-band' } = Astro.props;
+const { heading, sub, ctaLabel, ctaHref, ctaLocation = 'cta-band', lang = 'ja' } = Astro.props;
 ---
 
 <section class="bg-brand-soft">
   <div class="reveal mx-auto max-w-[760px] px-5 py-20 text-center md:py-24">
     <h2 class="text-[28px] md:text-[32px]">{heading}</h2>
     {sub && <p class="mt-4 text-ink-muted">{sub}</p>}
-    <CTAButton href={ctaHref} variant="primary" ctaLocation={ctaLocation} class="mt-8 px-10">
+    <CTAButton href={ctaHref} lang={lang} variant="primary" ctaLocation={ctaLocation} class="mt-8 px-10">
       {ctaLabel}
     </CTAButton>
   </div>

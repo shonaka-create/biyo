@@ -1,32 +1,39 @@
 ---
 // Cookie同意バナー（§13 / §15）。同意した場合のみ GA4 を読み込む。
+import { ui } from '../content/ui';
+import { localizePath } from '../i18n/utils';
+import type { Lang } from '../i18n/config';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang].cookie;
+const privacyHref = localizePath('/privacy', lang);
 ---
 
 <div
   id="cookie-banner"
-  class="fixed inset-x-0 bottom-0 z-50 hidden border-t border-line bg-surface p-4 shadow-none"
+  class="fixed inset-x-0 bottom-0 z-50 hidden border-t border-line bg-surface p-4"
   role="region"
-  aria-label="Cookieの利用について"
+  aria-label="Cookie"
 >
   <div class="mx-auto flex max-w-[1200px] flex-col items-start gap-3 md:flex-row md:items-center md:justify-between">
     <p class="text-sm text-ink-muted">
-      当サイトでは、サイト改善のためにCookieを使用したアクセス解析を行っています。詳しくは<a
-        href="/privacy"
-        class="underline underline-offset-2">プライバシーポリシー</a
-      >をご覧ください。
+      {t.text1}<a href={privacyHref} class="underline underline-offset-2">{t.link}</a>{t.text2}
     </p>
     <div class="flex shrink-0 gap-3">
       <button
         id="cookie-decline"
         class="h-11 rounded-md border border-line px-5 text-sm text-ink-muted transition hover:border-ink-muted"
       >
-        同意しない
+        {t.decline}
       </button>
       <button
         id="cookie-accept"
         class="h-11 rounded-md bg-brand px-5 text-sm font-medium text-white transition hover:bg-brand-strong"
       >
-        同意する
+        {t.accept}
       </button>
     </div>
   </div>

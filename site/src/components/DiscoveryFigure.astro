@@ -1,31 +1,31 @@
 ---
 // figure-discovery（§6.1 S4）：分散した入口 → Instagram＝信頼のハブ → 予約
 // 画像ではなくHTML/CSSで描画（テーマカラー連動・レスポンシブ）
-const entries = [
-  'Googleマップ・検索',
-  'Fresha（予約マーケット）',
-  'Instagram（発見）',
-  '口コミ・紹介',
-  '在豪日本人メディア',
-];
-const bookings = ['Instagram DM', 'Fresha 予約リンク'];
+import { ui } from '../content/ui';
+import type { Lang } from '../i18n/config';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang].figures.discovery;
 ---
 
 <figure
   class="rounded-xl border border-line bg-surface p-6 md:p-10"
   role="img"
-  aria-label="オーストラリアでのお店の探され方の図解。Googleマップ・Fresha・Instagram・口コミ・在豪日本人メディアという分散した入口が、信頼のハブであるInstagramに集まり、Instagram DMまたはFreshaでの予約につながる。"
+  aria-label={t.aria}
   data-figure="figure-discovery"
 >
   <div class="grid items-center gap-6 md:grid-cols-[1fr_auto_1fr_auto_1fr] md:gap-4">
     <!-- ① 入口（分散） -->
     <div>
       <p class="mb-3 text-center text-sm font-medium tracking-wider text-brand">
-        ① 探す・認知<span class="block text-xs font-normal text-ink-muted">入口は分散している</span>
+        {t.step1Title}<span class="block text-xs font-normal text-ink-muted">{t.step1Sub}</span>
       </p>
       <ul class="space-y-2">
         {
-          entries.map((e) => (
+          t.entries.map((e) => (
             <li class="rounded-md border border-line bg-canvas px-4 py-2.5 text-center text-sm">
               {e}
             </li>
@@ -44,16 +44,16 @@ const bookings = ['Instagram DM', 'Fresha 予約リンク'];
     <!-- ② Instagram ハブ -->
     <div>
       <p class="mb-3 text-center text-sm font-medium tracking-wider text-brand">
-        ② 確かめる・信頼<span class="block text-xs font-normal text-ink-muted">すべてが1点に集まる</span>
+        {t.step2Title}<span class="block text-xs font-normal text-ink-muted">{t.step2Sub}</span>
       </p>
       <div class="rounded-lg bg-brand px-6 py-8 text-center text-white">
-        <p class="font-display text-xl">Instagram</p>
+        <p class="font-display text-xl">{t.hubName}</p>
         <p class="mt-2 text-xs leading-relaxed opacity-90">
-          施術・雰囲気・人柄を確認する<br />“信頼のハブ”
+          {t.hubDesc1}<br />{t.hubDesc2}
         </p>
       </div>
       <p class="mt-3 text-center text-xs text-ink-muted">
-        Google・Freshaのレビューで1次選別 → Instagramで最終確認
+        {t.hubNote}
       </p>
     </div>
 
@@ -67,11 +67,11 @@ const bookings = ['Instagram DM', 'Fresha 予約リンク'];
     <!-- ③ 予約 -->
     <div>
       <p class="mb-3 text-center text-sm font-medium tracking-wider text-brand">
-        ③ 予約<span class="block text-xs font-normal text-ink-muted">「ここに行きたい」が決まる</span>
+        {t.step3Title}<span class="block text-xs font-normal text-ink-muted">{t.step3Sub}</span>
       </p>
       <ul class="space-y-2">
         {
-          bookings.map((b) => (
+          t.bookings.map((b) => (
             <li class="rounded-md border-2 border-accent bg-surface px-4 py-3 text-center text-sm font-medium">
               {b}
             </li>
@@ -82,6 +82,6 @@ const bookings = ['Instagram DM', 'Fresha 予約リンク'];
   </div>
 
   <figcaption class="mt-6 border-t border-line pt-4 text-center text-xs text-ink-muted">
-    オーストラリアにはホットペッパーのような一強プラットフォームがなく、分散した入口が Instagram という1点に集まって予約が決まります。
+    {t.caption}
   </figcaption>
 </figure>

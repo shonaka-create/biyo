@@ -1,6 +1,9 @@
 ---
-// 全ページ共通レイアウト：SEOメタ・OGP・JSON-LD・フォント・ヘッダー/フッター・計測フック
-import { site } from '../content/site';
+// 全ページ共通レイアウト：SEOメタ・OGP・hreflang・JSON-LD・フォント・ヘッダー/フッター・計測フック
+import { siteCommon, siteText } from '../content/site';
+import { ui } from '../content/ui';
+import { locales, hreflangMap, defaultLang, type Lang } from '../i18n/config';
+import { localizePath, stripLocale } from '../i18n/utils';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import StickyMobileCTA from '../components/StickyMobileCTA.astro';
@@ -8,28 +11,37 @@ import CookieConsent from '../components/CookieConsent.astro';
 import '../styles/global.css';
 
 interface Props {
+  lang: Lang;
   title: string;
   description: string;
   /** 追加のJSON-LD（ページ固有の構造化データ） */
   jsonLd?: object[];
 }
 
-const { title, description, jsonLd = [] } = Astro.props;
-const canonical = new URL(Astro.url.pathname, site.siteUrl).href;
+const { lang, title, description, jsonLd = [] } = Astro.props;
+const basePath = stripLocale(Astro.url.pathname);
+const canonical = new URL(localizePath(basePath, lang), siteCommon.siteUrl).href;
+
+// hreflang 代替URL（§10 / §12）
+const alternates = locales.map((code) => ({
+  code: hreflangMap[code],
+  href: new URL(localizePath(basePath, code), siteCommon.siteUrl).href,
+}));
+const xDefaultHref = new URL(localizePath(basePath, defaultLang), siteCommon.siteUrl).href;
 
 const organizationLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: site.brandName, // TODO: ブランド名確定後に更新
-  url: site.siteUrl,
-  email: site.email,
-  areaServed: ['Gold Coast', 'Brisbane', 'Queensland'],
-  description: site.tagline,
+  name: siteCommon.brandName, // TODO: ブランド名確定後に更新
+  url: siteCommon.siteUrl,
+  email: siteCommon.email,
+  areaServed: ['Gold Coast'],
+  description: siteText[lang].tagline,
 };
 ---
 
 <!doctype html>
-<html lang="ja">
+<html lang={hreflangMap[lang]}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -39,15 +51,19 @@ const organizationLd = {
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="generator" content={Astro.generator} />
 
+    <!-- hreflang（§10 / §12） -->
+    {alternates.map((alt) => <link rel="alternate" hreflang={alt.code} href={alt.href} />)}
+    <link rel="alternate" hreflang="x-default" href={xDefaultHref} />
+
     <!-- OGP / Twitter Card（§12） -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL('/og-default.svg', site.siteUrl).href} />
+    <meta property="og:image" content={new URL('/og-default.svg', siteCommon.siteUrl).href} />
     <!-- TODO: og-default は 1200×630 の実画像（PNG/JPG）に差し替え（§8.7） -->
-    <meta property="og:site_name" content={site.brandName} />
-    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:site_name" content={siteCommon.brandName} />
+    <meta property="og:locale" content={lang === 'ja' ? 'ja_JP' : 'en_AU'} />
     <meta name="twitter:card" content="summary_large_image" />
 
     <!-- フォント（§8.3）：display=swap -->
@@ -69,18 +85,18 @@ const organizationLd = {
       href="#main"
       class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-surface focus:px-4 focus:py-2"
     >
-      本文へスキップ
+      {ui[lang].common.skipToContent}
     </a>
 
-    <Navbar />
+    <Navbar lang={lang} />
 
     <main id="main">
       <slot />
     </main>
 
-    <Footer />
-    <StickyMobileCTA />
-    <CookieConsent />
+    <Footer lang={lang} />
+    <StickyMobileCTA lang={lang} />
+    <CookieConsent lang={lang} />
 
     <script>
       // スクロールリビール（§8.6）
@@ -125,10 +141,10 @@ const organizationLd = {
             ((window.scrollY + window.innerHeight) /
               document.documentElement.scrollHeight) *
             100;
-          [25, 50, 75, 100].forEach((t) => {
-            if (depth >= t && !sent.has(t)) {
-              sent.add(t);
-              window.gtag?.('event', 'scroll_depth', { percent: t });
+          [25, 50, 75, 100].forEach((threshold) => {
+            if (depth >= threshold && !sent.has(threshold)) {
+              sent.add(threshold);
+              window.gtag?.('event', 'scroll_depth', { percent: threshold });
             }
           });
         },

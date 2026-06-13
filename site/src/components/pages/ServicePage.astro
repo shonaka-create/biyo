@@ -1,0 +1,103 @@
+---
+// サービス詳細本体（§5.1）
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeading from '../SectionHeading.astro';
+import LoopFigure from '../LoopFigure.astro';
+import DiscoveryFigure from '../DiscoveryFigure.astro';
+import CTABand from '../CTABand.astro';
+import { copy } from '../../content/copy';
+import { ui } from '../../content/ui';
+import { siteCommon } from '../../content/site';
+import { localizePath } from '../../i18n/utils';
+import type { Lang } from '../../i18n/config';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = copy[lang];
+const u = ui[lang].service;
+
+const meta = {
+  ja: {
+    title: `サービス内容｜${siteCommon.brandName}`,
+    description:
+      '集客の輪（認知→検討・予約→来店→リピート→紹介・レビュー）の各段で私たちが何をするか。Web・Instagram・Google/MEO・予約導線・レビュー獲得・月次改善まで、作業範囲を具体的にご説明します。',
+  },
+  en: {
+    title: `Services｜${siteCommon.brandName}`,
+    description:
+      'What we do at each stage of the growth loop — discovery, consider & book, repeat, referrals & reviews. Web, Instagram, Google/MEO, booking flows, earning reviews and monthly improvement, spelled out.',
+  },
+}[lang];
+
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: lang === 'ja' ? '美容サロン集客の成長パートナーサービス' : 'Beauty salon growth partner service',
+  provider: { '@type': 'Organization', name: siteCommon.brandName },
+  areaServed: ['Gold Coast'],
+  description: c.loop.lead,
+};
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: ui[lang].common.breadcrumbHome, item: new URL(localizePath('/', lang), siteCommon.siteUrl).href },
+    { '@type': 'ListItem', position: 2, name: u.navLabel, item: new URL(localizePath('/service', lang), siteCommon.siteUrl).href },
+  ],
+};
+---
+
+<BaseLayout lang={lang} title={meta.title} description={meta.description} jsonLd={[serviceLd, breadcrumbLd]}>
+  <section class="px-5 pb-16 pt-32 md:pt-40 lg:px-8">
+    <div class="mx-auto max-w-[1200px]">
+      <SectionHeading label={c.services.label} heading={u.heading} lead={u.lead} />
+    </div>
+  </section>
+
+  <section class="px-5 pb-20 lg:px-8">
+    <div class="mx-auto max-w-[1200px] space-y-12">
+      <div class="reveal"><DiscoveryFigure lang={lang} /></div>
+      <div class="reveal"><LoopFigure lang={lang} /></div>
+    </div>
+  </section>
+
+  <section class="bg-surface px-5 py-20 md:py-28 lg:px-8">
+    <div class="mx-auto max-w-[1200px]">
+      <SectionHeading label={u.scopeLabel} heading={u.scopeHeading} lead={u.scopeLead} />
+      <div class="mt-12 space-y-6">
+        {
+          c.services.stages.map((stage) => (
+            <div class="reveal grid gap-4 rounded-lg border border-line bg-canvas p-7 md:grid-cols-[200px_1fr]">
+              <div>
+                <p class="text-sm font-medium tracking-widest text-brand">{stage.stage}</p>
+                <h2 class="mt-1 font-sans text-lg font-semibold">{stage.summary}</h2>
+              </div>
+              <ul class="space-y-2">
+                {stage.items.map((item) => (
+                  <li class="flex items-start gap-2.5 text-[15px] text-ink-muted">
+                    <svg class="mt-1.5 h-4 w-4 shrink-0 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="m5 13 4 4L19 7" />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+      <p class="reveal mt-8 rounded-lg bg-surface-cream px-6 py-5 text-sm text-ink-muted">{c.services.note}</p>
+    </div>
+  </section>
+
+  <CTABand
+    lang={lang}
+    heading={c.finalCta.heading}
+    sub={c.finalCta.sub}
+    ctaLabel={c.finalCta.cta.label}
+    ctaHref={c.finalCta.cta.href}
+    ctaLocation="service-band"
+  />
+</BaseLayout>
