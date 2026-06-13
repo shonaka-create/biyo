@@ -47,7 +47,7 @@ export const navText: Record<Lang, {
       { label: '私たち', path: '/about' },
       { label: 'FAQ', path: '/faq' },
     ],
-    cta: { label: '無料相談を予約する', path: '/contact' },
+    cta: { label: 'Instagramで相談する', path: siteCommon.instagramUrl },
   },
   en: {
     links: [
@@ -57,6 +57,6 @@ export const navText: Record<Lang, {
       { label: 'About', path: '/about' },
       { label: 'FAQ', path: '/faq' },
     ],
-    cta: { label: 'Book a free consult', path: '/contact' },
+    cta: { label: 'Contact us on Instagram', path: siteCommon.instagramUrl },
   },
 };

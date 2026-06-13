@@ -19,6 +19,7 @@ const { href, variant = 'primary', ctaLocation, lang = 'ja', class: className = 
 // 内部の絶対パスのみロケール化（アンカー #、外部URL、mailto等は除外）
 const resolvedHref =
   href.startsWith('/') ? localizePath(href, lang) : href;
+const isExternal = href.startsWith('http://') || href.startsWith('https://');
 
 const base =
   'inline-flex items-center justify-center gap-2 font-medium transition duration-300 ease-out';
@@ -35,6 +36,8 @@ const variants = {
   href={resolvedHref}
   class={`${base} ${variants[variant]} ${className}`}
   data-cta={ctaLocation}
+  target={isExternal ? '_blank' : undefined}
+  rel={isExternal ? 'noopener noreferrer' : undefined}
 >
   <slot />
 </a>

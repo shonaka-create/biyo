@@ -1,6 +1,7 @@
 // トップページを中心とした全コピー（§6.1）。文言の差し替えはこのファイルだけで完結する。
 // 言語別（§10）。英語は直訳ではなく、豪ローカル向けに自然な表現で調整している。
 import type { Lang } from '../i18n/config';
+import { siteCommon } from './site';
 
 type LinkRef = { label: string; href: string };
 
@@ -46,7 +47,7 @@ export const copy: Record<Lang, Copy> = {
       heading: 'ゴールドコーストの美容サロンに、\n日本品質の集客を。',
       sub: 'ゴールドコーストで、ネイル・まつげ・眉・ヘア・エステを手がける日本人オーナーの美容サロンへ。Web・Instagram・Googleレビューまで、集客の“仕組み”を一貫してお任せいただけます。',
       micro: ['日豪2か国体制', '日英対応', '成果は月次でご報告'],
-      ctaPrimary: { label: '無料相談を予約する', href: '/contact' },
+      ctaPrimary: { label: 'Instagramで相談する', href: siteCommon.instagramUrl },
       ctaSecondary: { label: 'サービスを見る', href: '#service' },
     },
     trustBar: {
@@ -121,7 +122,7 @@ export const copy: Record<Lang, Copy> = {
     finalCta: {
       heading: 'まずは30分、無料でお話ししませんか。',
       sub: '現状のヒアリングと、できることのご提案だけでも。無理な営業は一切いたしません。',
-      cta: { label: '無料相談を予約する', href: '/contact' },
+      cta: { label: 'Instagramで相談する', href: siteCommon.instagramUrl },
     },
     testimonials: {
       label: 'Voice',
@@ -148,7 +149,7 @@ export const copy: Record<Lang, Copy> = {
       heading: 'Japanese-quality marketing\nfor Gold Coast beauty salons.',
       sub: 'For Japanese-owned beauty salons on the Gold Coast — nails, lashes, brows, hair and skin. From your website and Instagram to Google reviews, we run the whole growth engine as one connected system.',
       micro: ['Japan + Australia team', 'Bilingual (JP / EN)', 'Monthly results reporting'],
-      ctaPrimary: { label: 'Book a free consult', href: '/contact' },
+      ctaPrimary: { label: 'Contact us on Instagram', href: siteCommon.instagramUrl },
       ctaSecondary: { label: 'See our services', href: '#service' },
     },
     trustBar: {
@@ -223,7 +224,7 @@ export const copy: Record<Lang, Copy> = {
     finalCta: {
       heading: 'Let’s talk for 30 minutes — on us.',
       sub: 'Even just a look at where things stand and a few ideas. No hard sell, ever.',
-      cta: { label: 'Book a free consult', href: '/contact' },
+      cta: { label: 'Contact us on Instagram', href: siteCommon.instagramUrl },
     },
     testimonials: {
       label: 'Voice',

@@ -2,6 +2,7 @@
 // 料金プランカード（§6.1 S8 / §8.5）。竹（recommended）は2pxアクセント枠＋推奨バッジ。
 import type { Plan } from '../content/plans';
 import { ui } from '../content/ui';
+import { siteCommon } from '../content/site';
 import type { Lang } from '../i18n/config';
 import CTAButton from './CTAButton.astro';
 
@@ -61,7 +62,7 @@ const t = ui[lang].plan;
   </ul>
 
   <CTAButton
-    href={`/contact?plan=${plan.id}`}
+    href={siteCommon.instagramUrl}
     lang={lang}
     variant={plan.recommended ? 'primary' : 'secondary'}
     ctaLocation={`plan-${plan.id}`}
