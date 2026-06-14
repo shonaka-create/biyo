@@ -7,9 +7,11 @@ type LinkRef = { label: string; href: string };
 
 export type Copy = {
   hero: {
-    heading: string;
+    eyebrow: string;
+    heading: { lead: string; accent: string };
     sub: string;
     micro: string[];
+    proof: { value: string; label: string }[];
     ctaPrimary: LinkRef;
     ctaSecondary: LinkRef;
   };
@@ -44,9 +46,14 @@ export type Copy = {
 export const copy: Record<Lang, Copy> = {
   ja: {
     hero: {
-      heading: 'ゴールドコーストの美容サロンに、\n日本品質の集客を。',
+      eyebrow: 'ゴールドコースト × 日本品質の集客パートナー',
+      heading: { lead: 'ゴールドコーストの美容サロンに、', accent: '日本品質の集客を。' },
       sub: 'ゴールドコーストで、ネイル・まつげ・眉・ヘア・エステを手がける日本人オーナーの美容サロンへ。Web・Instagram・Googleレビューまで、集客の“仕組み”を一貫してお任せいただけます。',
       micro: ['日豪2か国体制', '日英対応', '成果は月次でご報告'],
+      proof: [
+        { value: 'Instagram起点', label: '集客の“信頼ハブ”を一貫設計' },
+        { value: '月次レポート', label: '成果を数字でご報告' },
+      ],
       ctaPrimary: { label: 'Instagramで相談する', href: siteCommon.instagramUrl },
       ctaSecondary: { label: 'サービスを見る', href: '#service' },
     },
@@ -127,9 +134,9 @@ export const copy: Record<Lang, Copy> = {
       label: 'Voice',
       heading: 'お客様の声',
       items: [
-        // TODO: 掲載許可の取れた実際の声に差し替え（現在はプレースホルダー）
-        { name: '[お名前]', shop: '[店舗名・業種]', comment: '[お客様の声がここに入ります。施術・お人柄・成果について、いただいたコメントを掲載します。]' },
-        { name: '[お名前]', shop: '[店舗名・業種]', comment: '[お客様の声がここに入ります。施術・お人柄・成果について、いただいたコメントを掲載します。]' },
+        // TODO: 掲載許可の取れた実際の声に差し替え（現在はサンプル）
+        { name: 'Mai', shop: 'まつげサロン経営・サザンポート', comment: 'Instagramをお任せしてから、DMでのご予約が目に見えて増えました。投稿の世界観が整い、「写真を見て来ました」というお客様がほとんどです。毎月数字で見せてもらえるので、安心して続けられています。' },
+        { name: 'Mimu', shop: 'ネイルサロン経営・サーファーズパラダイス', comment: '英語での発信に自信がなく後回しにしていましたが、日本人にもローカルのお客様にも届く内容にしてもらえました。Googleのレビューも自然に増え、新規のご予約が安定してきています。' },
       ],
     },
     team: {
@@ -137,17 +144,22 @@ export const copy: Record<Lang, Copy> = {
       heading: '顔の見える、2人のチームです。',
       lead: '信頼が何より大切な市場だからこそ、私たち自身のことをお見せします。',
       members: [
-        { name: '[名前]', role: '営業・現地折衝・顧客成功', location: 'ゴールドコースト在住（7年）', message: '現地で築いてきた信頼関係を大切に、オーナー様の一番近くで伴走します。', slot: 'team-portrait-au' },
-        { name: '[名前]', role: 'Web制作・Instagram運用・分析改善', location: '日本', message: '日本で磨いたマーケティングと制作の品質を、そのままお届けします。', slot: 'team-portrait-jp' },
+        { name: '[お名前]', role: 'ゴールドコースト担当（営業・お客様サポート）', location: 'ゴールドコースト在住7年', message: '現地で築いてきた信頼関係を大切に、オーナー様の一番近くで伴走します。', slot: 'team-portrait-au' },
+        { name: '[お名前]', role: '日本担当（Web制作・Instagram運用・分析改善）', location: '日本', message: '日本で磨いたマーケティングと制作の品質を、そのままお届けします。', slot: 'team-portrait-jp' },
       ],
     },
   },
 
   en: {
     hero: {
-      heading: 'Japanese-quality marketing\nfor Gold Coast beauty salons.',
+      eyebrow: 'Gold Coast × Japanese-quality growth',
+      heading: { lead: 'Japanese-quality marketing', accent: 'for Gold Coast beauty salons.' },
       sub: 'For Japanese-owned beauty salons on the Gold Coast — nails, lashes, brows, hair and skin. From your website and Instagram to Google reviews, we run the whole growth engine as one connected system.',
       micro: ['Japan + Australia team', 'Bilingual (JP / EN)', 'Monthly results reporting'],
+      proof: [
+        { value: 'Instagram-first', label: 'One connected trust hub' },
+        { value: 'Monthly report', label: 'Results, shown in numbers' },
+      ],
       ctaPrimary: { label: 'Contact us on Instagram', href: siteCommon.instagramUrl },
       ctaSecondary: { label: 'See our services', href: '#service' },
     },
@@ -228,9 +240,9 @@ export const copy: Record<Lang, Copy> = {
       label: 'Voice',
       heading: 'What clients say',
       items: [
-        // TODO: 掲載許可の取れた実際の声に差し替え（現在はプレースホルダー）
-        { name: '[Name]', shop: '[Salon · type]', comment: '[A client quote will go here, sharing their experience of the work, the relationship and the results.]' },
-        { name: '[Name]', shop: '[Salon · type]', comment: '[A client quote will go here, sharing their experience of the work, the relationship and the results.]' },
+        // TODO: 掲載許可の取れた実際の声に差し替え（現在はサンプル）
+        { name: 'Mai', shop: 'Lash salon owner · Southport', comment: 'Since handing over our Instagram, DM bookings have clearly gone up. The feed finally looks like us, and most new clients say they came after seeing the photos. Getting the numbers each month makes it easy to keep going.' },
+        { name: 'Mimu', shop: 'Nail salon owner · Surfers Paradise', comment: 'I kept putting off posting in English, but they made content that reaches both Japanese and local clients. Our Google reviews grew naturally and new-client bookings have become much steadier.' },
       ],
     },
     team: {

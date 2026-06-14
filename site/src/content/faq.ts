@@ -25,8 +25,8 @@ export const faqCategories: Record<Lang, FaqCategory[]> = {
       category: 'オーストラリア特有のこと',
       items: [
         { q: '日本のホットペッパーのようなサービスはありますか？', a: '一強のプラットフォームはありません。Googleマップ・Fresha・Instagram・口コミ・在豪日本人メディアと入口が分散しており、だからこそ全体を設計する“仕組み”が重要になります。', featured: true },
-        { q: 'LINEでの再来案内はできますか？', a: 'オーストラリアではLINEはほぼ使われていません。SMS・メール・Freshaの自動通知・Instagram DMを組み合わせた再来導線を設計します。', featured: true },
-        { q: 'Freshaとは何ですか？', a: '豪州で広く使われている美容系の予約プラットフォームです。予約管理・自動リマインド・レビュー機能があり、集客導線の重要な一部として設計に組み込みます。' },
+        { q: 'Freshaとは何ですか？', a: '豪州で広く使われている美容系の予約プラットフォームです。予約管理・自動リマインド・レビュー機能があり、集客導線の重要な一部として設計に組み込みます。', featured: true },
+        { q: '再来のご案内（リマインド）はどう行いますか？', a: 'SMS・メール・Freshaの自動通知・Instagram DMを組み合わせて、再来導線を設計します。豪州の利用実態に合わせた方法でご案内します。' },
       ],
     },
     {
@@ -65,8 +65,8 @@ export const faqCategories: Record<Lang, FaqCategory[]> = {
       category: 'How Australia is different',
       items: [
         { q: 'Is there something like Japan’s Hot Pepper here?', a: 'There’s no single dominant platform. Discovery is scattered across Google Maps, Fresha, Instagram, word of mouth and Japanese-community media — which is exactly why a designed, end-to-end system matters.', featured: true },
-        { q: 'Can you send rebooking reminders over LINE?', a: 'LINE is barely used in Australia. We design rebooking flows using SMS, email, Fresha’s automated notifications and Instagram DM.', featured: true },
-        { q: 'What is Fresha?', a: 'A booking platform widely used by the beauty industry in Australia. It handles bookings, automated reminders and reviews, and we build it into the growth flow as a key piece.' },
+        { q: 'What is Fresha?', a: 'A booking platform widely used by the beauty industry in Australia. It handles bookings, automated reminders and reviews, and we build it into the growth flow as a key piece.', featured: true },
+        { q: 'How do you handle rebooking reminders?', a: 'We design rebooking flows using SMS, email, Fresha’s automated notifications and Instagram DM — the channels that actually work in Australia.' },
       ],
     },
     {
