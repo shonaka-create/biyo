@@ -94,6 +94,7 @@ const nodes = t.nodes.map((n, i) => ({ ...n, place: placements[i] }));
 
   /* 外周ステージ → SPでは全幅カードとして縦積み */
   .loop__node {
+    position: relative;
     width: 100%;
     display: flex;
     flex-direction: column;
