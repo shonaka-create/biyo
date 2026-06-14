@@ -59,7 +59,7 @@ const nav = navText[lang];
   <!-- モバイル フルスクリーンメニュー -->
   <div
     id="mobile-menu"
-    class="fixed inset-0 top-[64px] z-40 hidden flex-col gap-2 bg-canvas px-6 pt-8 lg:hidden"
+    class="fixed inset-0 top-[64px] z-40 hidden flex-col gap-2 bg-canvas px-6 pt-8 shadow-xl lg:hidden"
   >
     {
       nav.links.map((link) => (
@@ -99,11 +99,20 @@ const nav = navText[lang];
   const iconClose = document.getElementById('menu-icon-close')!;
   toggle.addEventListener('click', () => {
     const isOpen = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!isOpen));
-    menu.classList.toggle('hidden', isOpen);
-    menu.classList.toggle('flex', !isOpen);
-    iconOpen.classList.toggle('hidden', !isOpen);
-    iconClose.classList.toggle('hidden', isOpen);
-    document.body.style.overflow = isOpen ? '' : 'hidden';
+    const willOpen = !isOpen;
+    toggle.setAttribute('aria-expanded', String(willOpen));
+    menu.classList.toggle('hidden', !willOpen);
+    menu.classList.toggle('flex', willOpen);
+    iconOpen.classList.toggle('hidden', willOpen);
+    iconClose.classList.toggle('hidden', !willOpen);
+    document.body.style.overflow = willOpen ? 'hidden' : '';
+    // メニュー展開中はヘッダーバーも不透明にして背後を透けさせない
+    if (willOpen) {
+      header.classList.add('bg-canvas');
+      header.classList.remove('bg-canvas/95', 'backdrop-blur');
+    } else {
+      header.classList.remove('bg-canvas');
+      onScroll();
+    }
   });
 </script>
