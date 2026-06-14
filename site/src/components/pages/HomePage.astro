@@ -43,38 +43,72 @@ const featuredFaq = faqCategories[lang]
   .flatMap((cat) => cat.items)
   .filter((i) => i.featured)
   .slice(0, 6);
+
+// S1 ヒーロー背景スライドショー（3枚クロスフェード）：サロン / 美容 / ゴールドコーストの雰囲気
+const heroSlides = [
+  'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1800&q=80&fit=crop',
+  'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1800&q=80&fit=crop',
+  'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1800&q=80&fit=crop',
+];
+
+// 比較表のマーク表示設定
+const markStyles = {
+  yes: { glyph: '●', cls: 'text-brand', sr: c.comparison.legend.yes },
+  partial: { glyph: '△', cls: 'text-accent', sr: c.comparison.legend.partial },
+  no: { glyph: '×', cls: 'text-ink-muted/40', sr: c.comparison.legend.no },
+} as const;
 ---
 
 <BaseLayout lang={lang} title={meta.title} description={meta.description}>
-  <!-- S1. ヒーロー -->
-  <section class="relative overflow-hidden px-5 pb-16 pt-32 md:pb-24 md:pt-40 lg:px-8">
-    <!-- 背景装飾：ブランド/アクセントのソフトグロー -->
-    <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
-      <div class="absolute -top-24 right-[-12%] h-[460px] w-[460px] rounded-full bg-brand-soft opacity-70 blur-3xl"></div>
-      <div class="absolute bottom-[-25%] left-[-10%] h-[380px] w-[380px] rounded-full bg-accent/10 blur-3xl"></div>
+  <!-- S1. ヒーロー（背景3枚クロスフェード＋黒オーバーレイ） -->
+  <section class="hero relative isolate flex min-h-[92vh] items-center overflow-hidden">
+    <!-- 背景スライドショー -->
+    <div class="absolute inset-0 -z-20" aria-hidden="true">
+      {
+        heroSlides.map((src, i) => (
+          <img
+            src={src}
+            alt=""
+            data-hero-slide
+            class:list={[
+              'hero-slide absolute inset-0 h-full w-full object-cover',
+              i === 0 ? 'opacity-100' : 'opacity-0',
+            ]}
+            loading={i === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+            fetchpriority={i === 0 ? 'high' : undefined}
+          />
+        ))
+      }
     </div>
+    <!-- 黒の透明オーバーレイ（文字を浮き上がらせる） -->
+    <div
+      class="absolute inset-0 -z-10 bg-gradient-to-br from-black/75 via-black/55 to-black/30"
+      aria-hidden="true"
+    ></div>
+    <div class="absolute inset-0 -z-10 bg-black/15" aria-hidden="true"></div>
 
-    <div class="mx-auto grid max-w-[1200px] items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-      <div>
-        <span class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-1.5 text-xs font-medium tracking-wide text-brand shadow-sm">
+    <div class="mx-auto w-full max-w-[1200px] px-5 pb-28 pt-36 md:pb-32 md:pt-44 lg:px-8">
+      <div class="max-w-[720px]">
+        <span class="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-medium tracking-wide text-white backdrop-blur">
           <span class="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true"></span>
           {c.hero.eyebrow}
         </span>
 
-        <h1 class="mt-6 text-[34px] leading-[1.25] md:text-[46px] lg:text-[52px]">
-          <span class="block text-ink">{c.hero.heading.lead}</span>
-          <span class="mt-1 block w-fit text-brand underline decoration-accent/50 decoration-[3px] underline-offset-[8px]">
+        <h1 class="mt-6 text-[34px] leading-[1.22] text-white drop-shadow-sm md:text-[48px] lg:text-[56px]">
+          <span class="block">{c.hero.heading.lead}</span>
+          <span class="mt-1 block w-fit underline decoration-accent decoration-[3px] underline-offset-[10px]">
             {c.hero.heading.accent}
           </span>
         </h1>
 
-        <p class="mt-6 max-w-[560px] text-[17px] text-ink-muted">{c.hero.sub}</p>
+        <p class="mt-6 max-w-[560px] text-[17px] leading-relaxed text-white/85">{c.hero.sub}</p>
 
         <ul class="mt-7 flex flex-wrap gap-2.5">
           {
             c.hero.micro.map((m) => (
-              <li class="inline-flex items-center gap-1.5 rounded-full bg-brand-soft px-3.5 py-1.5 text-[13px] font-medium text-brand">
-                <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <li class="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-[13px] font-medium text-white backdrop-blur">
+                <svg class="h-3.5 w-3.5 shrink-0 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
                   <path d="m5 13 4 4L19 7" />
                 </svg>
                 {m}
@@ -87,37 +121,32 @@ const featuredFaq = faqCategories[lang]
           <CTAButton href={c.hero.ctaPrimary.href} lang={lang} variant="primary" ctaLocation="hero" class="px-8">
             {c.hero.ctaPrimary.label}
           </CTAButton>
-          <CTAButton href={c.hero.ctaSecondary.href} lang={lang} variant="text" ctaLocation="hero-secondary">
+          <CTAButton
+            href={c.hero.ctaSecondary.href}
+            lang={lang}
+            variant="text"
+            ctaLocation="hero-secondary"
+            class="!text-white decoration-white/50 hover:!text-white/80"
+          >
             {c.hero.ctaSecondary.label} →
           </CTAButton>
         </div>
       </div>
+    </div>
 
-      <div class="relative lg:order-last">
-        <!-- 背面のオフセットフレームで奥行きを出す -->
-        <div class="absolute -inset-3 -z-10 rounded-[28px] bg-brand-soft/60" aria-hidden="true"></div>
-        <ImagePlaceholder
-          slot_id="hero-main"
-          label={u.heroImageLabel}
-          ratio="4/5"
-          class="max-h-[600px] w-full shadow-[0_30px_60px_-25px_rgba(38,37,31,0.35)] ring-1 ring-black/5"
-        />
-
-        <!-- 浮遊する実績カード（信頼の可視化） -->
-        {
-          c.hero.proof.map((p, i) => (
-            <figure
-              class:list={[
-                'absolute hidden rounded-xl bg-surface/95 px-4 py-3 shadow-lg ring-1 ring-line backdrop-blur md:block',
-                i === 0 ? '-bottom-5 -left-4' : '-right-4 top-8',
-              ]}
-            >
-              <figcaption class="font-display text-lg leading-none text-brand">{p.value}</figcaption>
-              <p class="mt-1.5 text-xs text-ink-muted">{p.label}</p>
-            </figure>
-          ))
-        }
-      </div>
+    <!-- スライドインジケーター -->
+    <div class="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2.5 lg:bottom-8" aria-hidden="true">
+      {
+        heroSlides.map((_, i) => (
+          <span
+            data-hero-dot
+            class:list={[
+              'h-1.5 rounded-full bg-white/40 transition-all duration-500',
+              i === 0 ? 'w-7 bg-white' : 'w-1.5',
+            ]}
+          />
+        ))
+      }
     </div>
   </section>
 
@@ -194,24 +223,86 @@ const featuredFaq = faqCategories[lang]
     </div>
   </section>
 
-  <!-- S6. 私たちの強み -->
+  <!-- S6. 選ばれる理由（比較表） -->
   <section class="bg-brand-soft px-5 py-20 md:py-28 lg:px-8">
     <div class="mx-auto max-w-[1200px]">
-      <SectionHeading label={c.strengths.label} heading={c.strengths.heading} align="center" />
-      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {
-          c.strengths.items.map((item, i) => (
-            <div class="reveal group flex flex-col rounded-xl bg-surface p-7 shadow-sm ring-1 ring-line/70 transition duration-300 hover:-translate-y-1 hover:shadow-lg">
-              <span class="font-display text-[2.75rem] leading-none text-brand/25 transition-colors duration-300 group-hover:text-brand/60" aria-hidden="true">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <span class="mt-4 h-px w-8 bg-brand/40 transition-all duration-300 group-hover:w-12" aria-hidden="true" />
-              <h3 class="mt-4 font-sans text-base font-semibold">{item.title}</h3>
-              <p class="mt-2.5 text-sm leading-relaxed text-ink-muted">{item.body}</p>
-            </div>
-          ))
-        }
+      <SectionHeading
+        label={c.comparison.label}
+        heading={c.comparison.heading}
+        lead={c.comparison.lead}
+        align="center"
+      />
+
+      <!-- 比較表（横スクロール対応） -->
+      <div class="reveal mt-12 overflow-x-auto rounded-2xl ring-1 ring-line/70">
+        <table class="w-full min-w-[680px] border-collapse bg-surface text-left">
+          <thead>
+            <tr class="border-b border-line">
+              <th scope="col" class="sticky left-0 z-10 bg-surface px-5 py-4 text-sm font-semibold text-ink">
+                {c.comparison.label}
+              </th>
+              {
+                c.comparison.conditions.map((cond) => (
+                  <th scope="col" class="px-3 py-4 text-center align-bottom text-xs font-medium leading-snug text-ink-muted">
+                    {cond}
+                  </th>
+                ))
+              }
+            </tr>
+          </thead>
+          <tbody>
+            {
+              c.comparison.rows.map((row) => (
+                <tr
+                  class:list={[
+                    'border-b border-line/70 last:border-0',
+                    row.us ? 'bg-brand text-white' : 'hover:bg-surface-cream/60',
+                  ]}
+                >
+                  <th
+                    scope="row"
+                    class:list={[
+                      'sticky left-0 z-10 px-5 py-4 text-sm font-medium',
+                      row.us ? 'bg-brand text-white' : 'bg-surface text-ink',
+                    ]}
+                  >
+                    {row.us && (
+                      <span class="mr-1.5 inline-block rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold tracking-wide text-white align-middle">
+                        US
+                      </span>
+                    )}
+                    {row.name}
+                  </th>
+                  {
+                    row.marks.map((mark) => {
+                      const m = markStyles[mark];
+                      return (
+                        <td class="px-3 py-4 text-center">
+                          <span class:list={['text-lg leading-none', row.us ? 'text-white' : m.cls]}>
+                            {m.glyph}
+                          </span>
+                          <span class="sr-only">{m.sr}</span>
+                        </td>
+                      );
+                    })
+                  }
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
       </div>
+
+      <!-- 凡例 -->
+      <div class="reveal mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-ink-muted">
+        <span class="inline-flex items-center gap-1.5"><span class="text-brand">●</span>{c.comparison.legend.yes}</span>
+        <span class="inline-flex items-center gap-1.5"><span class="text-accent">△</span>{c.comparison.legend.partial}</span>
+        <span class="inline-flex items-center gap-1.5"><span class="text-ink-muted/40">×</span>{c.comparison.legend.no}</span>
+      </div>
+
+      <p class="reveal mx-auto mt-8 max-w-[760px] text-center text-[15px] leading-relaxed text-ink-muted">
+        {c.comparison.note}
+      </p>
     </div>
   </section>
 
@@ -361,3 +452,45 @@ const featuredFaq = faqCategories[lang]
     ctaLocation="final-band"
   />
 </BaseLayout>
+
+<style>
+  /* ヒーロー背景のクロスフェード */
+  .hero-slide {
+    transition: opacity 1400ms ease-in-out;
+    will-change: opacity;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-slide {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // S1 ヒーロー：背景3枚を一定間隔でクロスフェード
+  function initHeroSlideshow() {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+    const slides = Array.from(hero.querySelectorAll<HTMLElement>('[data-hero-slide]'));
+    const dots = Array.from(hero.querySelectorAll<HTMLElement>('[data-hero-dot]'));
+    if (slides.length < 2) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let current = 0;
+    const INTERVAL = 5500;
+
+    setInterval(() => {
+      const next = (current + 1) % slides.length;
+      slides[current].classList.replace('opacity-100', 'opacity-0');
+      slides[next].classList.replace('opacity-0', 'opacity-100');
+      dots[current]?.classList.remove('w-7', 'bg-white');
+      dots[current]?.classList.add('w-1.5');
+      dots[next]?.classList.remove('w-1.5');
+      dots[next]?.classList.add('w-7', 'bg-white');
+      current = next;
+    }, INTERVAL);
+  }
+
+  initHeroSlideshow();
+  document.addEventListener('astro:page-load', initHeroSlideshow);
+</script>

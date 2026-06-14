@@ -11,11 +11,19 @@ export type Copy = {
     heading: { lead: string; accent: string };
     sub: string;
     micro: string[];
-    proof: { value: string; label: string }[];
     ctaPrimary: LinkRef;
     ctaSecondary: LinkRef;
   };
   trustBar: { items: { label: string; value: string }[] };
+  comparison: {
+    label: string;
+    heading: string;
+    lead: string;
+    conditions: string[];
+    rows: { name: string; us?: boolean; marks: ('yes' | 'partial' | 'no')[] }[];
+    legend: { yes: string; partial: string; no: string };
+    note: string;
+  };
   problem: {
     label: string;
     heading: string;
@@ -50,10 +58,6 @@ export const copy: Record<Lang, Copy> = {
       heading: { lead: 'ゴールドコーストの美容サロンに、', accent: '日本品質の集客を。' },
       sub: 'ゴールドコーストで、ネイル・まつげ・眉・ヘア・エステを手がける日本人オーナーの美容サロンへ。Web・Instagram・Googleレビューまで、集客の“仕組み”を一貫してお任せいただけます。',
       micro: ['日豪2か国体制', '日英対応', '成果は月次でご報告'],
-      proof: [
-        { value: 'Instagram起点', label: '集客の“信頼ハブ”を一貫設計' },
-        { value: '月次レポート', label: '成果を数字でご報告' },
-      ],
       ctaPrimary: { label: 'Instagramで相談する', href: siteCommon.instagramUrl },
       ctaSecondary: { label: 'サービスを見る', href: '#service' },
     },
@@ -64,6 +68,28 @@ export const copy: Record<Lang, Copy> = {
         { label: 'サポート実績', value: '[N]店舗' }, // TODO: 実績件数確定後に差し替え
         { label: '体制', value: '日豪2拠点・日英バイリンガル' },
       ],
+    },
+    comparison: {
+      label: 'Why us',
+      heading: '選ばれる理由は、“ど真ん中の空白”にあります。',
+      lead: '日本語での安心、現地の顔が見える信頼、日本品質の実行、集客の輪の一気通貫、小規模サロンへの専属——この5つを同時に満たせる相手は、実はほとんどいません。',
+      conditions: [
+        '日本語・バイカルチュラル',
+        'QLD現地の“顔が見える”信頼',
+        '日本品質の実行',
+        '集客の輪を一気通貫',
+        '小規模サロンに専属で継続',
+      ],
+      rows: [
+        { name: '現地の英語マーケ代理店', marks: ['no', 'yes', 'partial', 'yes', 'partial'] },
+        { name: '在豪の日本人フリーランス', marks: ['yes', 'yes', 'partial', 'no', 'partial'] },
+        { name: '日系メディア（JAMS等）', marks: ['yes', 'partial', 'yes', 'partial', 'no'] },
+        { name: '日本のリモート代行', marks: ['yes', 'no', 'yes', 'partial', 'partial'] },
+        { name: 'DIY・自力運用', marks: ['yes', 'yes', 'no', 'no', 'no'] },
+        { name: '私たち', us: true, marks: ['yes', 'yes', 'yes', 'yes', 'yes'] },
+      ],
+      legend: { yes: '対応できる', partial: '部分的・条件つき', no: '対応が難しい' },
+      note: '上の誰一人として、5つすべてを同時には満たせていません。その“ど真ん中の空白”に、私たちがいます。',
     },
     problem: {
       label: 'Problem',
@@ -156,10 +182,6 @@ export const copy: Record<Lang, Copy> = {
       heading: { lead: 'Japanese-quality marketing', accent: 'for Gold Coast beauty salons.' },
       sub: 'For Japanese-owned beauty salons on the Gold Coast — nails, lashes, brows, hair and skin. From your website and Instagram to Google reviews, we run the whole growth engine as one connected system.',
       micro: ['Japan + Australia team', 'Bilingual (JP / EN)', 'Monthly results reporting'],
-      proof: [
-        { value: 'Instagram-first', label: 'One connected trust hub' },
-        { value: 'Monthly report', label: 'Results, shown in numbers' },
-      ],
       ctaPrimary: { label: 'Contact us on Instagram', href: siteCommon.instagramUrl },
       ctaSecondary: { label: 'See our services', href: '#service' },
     },
@@ -170,6 +192,28 @@ export const copy: Record<Lang, Copy> = {
         { label: 'Salons supported', value: '[N] salons' }, // TODO: 実績件数確定後に差し替え
         { label: 'Team', value: 'Two countries, fully bilingual' },
       ],
+    },
+    comparison: {
+      label: 'Why us',
+      heading: 'Why salons choose us: the gap in the middle.',
+      lead: 'Japanese-language ease, local face-to-face trust, Japanese-quality execution, the whole growth loop end-to-end, and dedication to a small salon — almost no one covers all five at once.',
+      conditions: [
+        'Japanese & bicultural',
+        'Local, face-to-face QLD trust',
+        'Japanese-quality execution',
+        'The whole loop, end-to-end',
+        'Dedicated to small salons',
+      ],
+      rows: [
+        { name: 'Local English agencies', marks: ['no', 'yes', 'partial', 'yes', 'partial'] },
+        { name: 'Japanese freelancers in AU', marks: ['yes', 'yes', 'partial', 'no', 'partial'] },
+        { name: 'Japanese-community media (e.g. JAMS)', marks: ['yes', 'partial', 'yes', 'partial', 'no'] },
+        { name: 'Remote agencies in Japan', marks: ['yes', 'no', 'yes', 'partial', 'partial'] },
+        { name: 'DIY / self-managed', marks: ['yes', 'yes', 'no', 'no', 'no'] },
+        { name: 'Us', us: true, marks: ['yes', 'yes', 'yes', 'yes', 'yes'] },
+      ],
+      legend: { yes: 'Covered', partial: 'Partial / conditional', no: 'Hard to cover' },
+      note: 'No one above checks all five at once. That gap in the middle is exactly where we sit.',
     },
     problem: {
       label: 'Problem',
