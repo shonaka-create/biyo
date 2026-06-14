@@ -89,6 +89,8 @@ const nav = navText[lang];
     header.classList.toggle('border-line', scrolled);
     inner.classList.toggle('h-[64px]', scrolled);
     inner.classList.toggle('h-[72px]', !scrolled);
+    // 最上部（透過）ではヒーロー画像の上に重なるため文字・アイコンを白に
+    header.classList.toggle('at-top', !scrolled);
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
@@ -109,7 +111,7 @@ const nav = navText[lang];
     // メニュー展開中はヘッダーバーも不透明にして背後を透けさせない
     if (willOpen) {
       header.classList.add('bg-canvas');
-      header.classList.remove('bg-canvas/95', 'backdrop-blur');
+      header.classList.remove('bg-canvas/95', 'backdrop-blur', 'at-top');
     } else {
       header.classList.remove('bg-canvas');
       onScroll();

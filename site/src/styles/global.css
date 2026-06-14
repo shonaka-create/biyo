@@ -61,6 +61,16 @@ h3 {
   border-radius: 4px;
 }
 
+/* 透過ヘッダー（ヒーロー画像の上）：文字・アイコンを白にして可読性を確保 */
+#site-header.at-top a:not([data-cta]),
+#site-header.at-top .text-ink,
+#site-header.at-top svg {
+  color: #fff;
+}
+#site-header.at-top a:not([data-cta]):hover {
+  color: var(--color-accent);
+}
+
 /* スクロールリビール（§8.6）：フェードイン + 微小up */
 .reveal {
   opacity: 0;
