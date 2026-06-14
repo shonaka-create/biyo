@@ -209,20 +209,25 @@ const markStyles = {
               <span aria-hidden="true" class="pointer-events-none absolute -right-1 top-1 select-none font-display text-5xl font-semibold leading-none text-line/80">
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <span class="relative flex h-10 w-10 items-center justify-center rounded-full bg-accent/10 text-accent" aria-hidden="true">
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-                  <path d="M6 6l12 12M18 6 6 18" />
-                </svg>
-              </span>
-              <h3 class="relative mt-5 font-sans text-base font-semibold leading-snug">{item.title}</h3>
+              <h3 class="relative font-sans text-base font-semibold leading-snug">{item.title}</h3>
               <p class="relative mt-2.5 text-sm leading-relaxed text-ink-muted">{item.body}</p>
             </div>
           ))
         }
       </div>
-      <p class="reveal mx-auto mt-10 max-w-[680px] rounded-full bg-brand-soft px-7 py-4 text-center text-[15px] font-medium leading-relaxed text-brand">
-        {c.problem.close}
-      </p>
+      <div class="reveal mt-2 flex flex-col items-center" aria-hidden="true">
+        <span class="block h-10 w-px bg-gradient-to-b from-transparent to-line"></span>
+        <span class="flex h-7 w-7 items-center justify-center rounded-full border border-line bg-surface text-brand shadow-sm">
+          <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14M6 13l6 6 6-6" />
+          </svg>
+        </span>
+      </div>
+      <div class="reveal mx-auto -mt-3.5 max-w-[760px] rounded-2xl bg-brand-soft px-8 py-7 text-center shadow-sm">
+        <p class="text-[15px] font-medium leading-relaxed text-brand md:text-base">
+          {c.problem.close}
+        </p>
+      </div>
     </div>
   </section>
 
