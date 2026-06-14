@@ -95,10 +95,10 @@ const featuredFaq = faqCategories[lang]
           ))
         }
       </dl>
-      <div class="mt-8 grid grid-cols-2 gap-4 opacity-80 sm:grid-cols-4">
+      <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
         {
           [1, 2, 3, 4].map((i) => (
-            <ImagePlaceholder slot_id={`logo-strip-${i}`} label={u.logoLabel(i)} ratio="3/1" class="grayscale" />
+            <ImagePlaceholder slot_id={`logo-strip-${i}`} label={u.logoLabel(i)} ratio="3/1" />
           ))
         }
       </div>
@@ -162,12 +162,13 @@ const featuredFaq = faqCategories[lang]
       <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {
           c.strengths.items.map((item, i) => (
-            <div class="reveal rounded-lg bg-surface p-7">
-              <span class="font-display text-2xl text-brand" aria-hidden="true">
+            <div class="reveal group flex flex-col rounded-xl bg-surface p-7 shadow-sm ring-1 ring-line/70 transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <span class="font-display text-[2.75rem] leading-none text-brand/25 transition-colors duration-300 group-hover:text-brand/60" aria-hidden="true">
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <h3 class="mt-3 font-sans text-base font-semibold">{item.title}</h3>
-              <p class="mt-3 text-sm text-ink-muted">{item.body}</p>
+              <span class="mt-4 h-px w-8 bg-brand/40 transition-all duration-300 group-hover:w-12" aria-hidden="true" />
+              <h3 class="mt-4 font-sans text-base font-semibold">{item.title}</h3>
+              <p class="mt-2.5 text-sm leading-relaxed text-ink-muted">{item.body}</p>
             </div>
           ))
         }

@@ -1,6 +1,8 @@
 ---
 // figure-loop（§6.1 S5）：集客のループ図（フライホイール）
-// 中央＝来店・施術（オーナー様の領分）、外周＝私たちが運用する4ステージ。SVGで描画、テーマカラー連動。
+// 中央＝来店・施術（オーナー様の領分）、外周＝私たちが運用する4ステージ。
+// テキストはHTMLで描画（SVGテキストの拡大ボケ／字形の歪みを回避）し、軌道はCSSで回転。
+// ホバー／フォーカスで各ステージの「伝えたいこと」を開く。
 import { ui } from '../content/ui';
 import type { Lang } from '../i18n/config';
 
@@ -10,105 +12,46 @@ interface Props {
 const { lang } = Astro.props;
 const t = ui[lang].figures.loop;
 
-const positions = [
-  { x: 340, y: 110 },
-  { x: 540, y: 310 },
-  { x: 340, y: 510 },
-  { x: 140, y: 310 },
-];
-const nodes = t.nodes.map((n, i) => ({ ...n, ...positions[i] }));
+// 上・右・下・左の4ステージ（時計回り）
+const placements = ['is-top', 'is-right', 'is-bottom', 'is-left'];
+const nodes = t.nodes.map((n, i) => ({ ...n, place: placements[i] }));
 ---
 
 <figure
   class="rounded-xl border border-line bg-surface p-6 md:p-10"
   data-figure="figure-loop"
 >
-  <svg
-    viewBox="0 0 680 620"
-    class="mx-auto w-full max-w-[560px]"
-    role="img"
-    aria-labelledby="loop-title loop-desc"
-  >
-    <title id="loop-title">{t.title}</title>
-    <desc id="loop-desc">{t.desc}</desc>
+  <p class="sr-only">{t.desc}</p>
 
-    <!-- 循環の軌道 -->
-    <circle
-      cx="340"
-      cy="310"
-      r="200"
-      fill="none"
-      stroke="var(--color-line)"
-      stroke-width="2"
-      stroke-dasharray="6 8"></circle>
+  <div class="loop" role="img" aria-label={t.desc}>
+    <!-- 循環の軌道（CSSで回転） -->
+    <div class="loop__orbit" aria-hidden="true">
+      <span class="loop__arrow loop__arrow--ne"></span>
+      <span class="loop__arrow loop__arrow--se"></span>
+      <span class="loop__arrow loop__arrow--sw"></span>
+      <span class="loop__arrow loop__arrow--nw"></span>
+    </div>
 
-    <!-- 進行方向の矢印（時計回り） -->
-    {
-      [
-        { x: 481.4, y: 168.6, r: 45 },
-        { x: 481.4, y: 451.4, r: 135 },
-        { x: 198.6, y: 451.4, r: 225 },
-        { x: 198.6, y: 168.6, r: 315 },
-      ].map((a) => (
-        <polygon
-          points="-7,-5 9,0 -7,5"
-          fill="var(--color-brand)"
-          transform={`translate(${a.x},${a.y}) rotate(${a.r})`}
-        />
-      ))
-    }
+    <!-- レビュー還流の注記 -->
+    <p class="loop__reflow" aria-hidden="true">{t.reflow}</p>
 
     <!-- 外周ステージ（私たちが運用） -->
     {
       nodes.map((n) => (
-        <g>
-          <rect
-            x={n.x - 88}
-            y={n.y - 34}
-            width="176"
-            height="68"
-            rx="12"
-            fill="var(--color-brand-soft)"
-            stroke="var(--color-brand)"
-            stroke-width="1.5"
-          />
-          <text
-            x={n.x}
-            y={n.y - 4}
-            text-anchor="middle"
-            font-size="18"
-            font-weight="600"
-            fill="var(--color-brand-strong)"
-          >
-            {n.label}
-          </text>
-          <text x={n.x} y={n.y + 18} text-anchor="middle" font-size="12" fill="var(--color-ink-muted)">
-            {n.sub}
-          </text>
-        </g>
+        <div class={`loop__node ${n.place}`} tabindex="0">
+          <span class="loop__label">{n.label}</span>
+          <span class="loop__sub">{n.sub}</span>
+          <span class="loop__detail">{n.detail}</span>
+        </div>
       ))
     }
 
     <!-- 中央：来店・施術（クライアント領域） -->
-    <circle
-      cx="340"
-      cy="310"
-      r="92"
-      fill="var(--color-surface-cream)"
-      stroke="var(--color-accent)"
-      stroke-width="2"></circle>
-    <text x="340" y="300" text-anchor="middle" font-size="20" font-weight="600" fill="var(--color-ink)">
-      {t.centerTitle}
-    </text>
-    <text x="340" y="326" text-anchor="middle" font-size="13" fill="var(--color-accent-strong)">
-      {t.centerSub}
-    </text>
-
-    <!-- レビュー還流の注記 -->
-    <text x="120" y="120" font-size="13" fill="var(--color-ink-muted)">
-      {t.reflow}
-    </text>
-  </svg>
+    <div class="loop__center">
+      <span class="loop__center-title">{t.centerTitle}</span>
+      <span class="loop__center-sub">{t.centerSub}</span>
+    </div>
+  </div>
 
   <!-- 凡例 -->
   <figcaption class="mt-6 border-t border-line pt-4">
@@ -127,3 +70,152 @@ const nodes = t.nodes.map((n, i) => ({ ...n, ...positions[i] }));
     </p>
   </figcaption>
 </figure>
+
+<style>
+  .loop {
+    position: relative;
+    margin-inline: auto;
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 1 / 1;
+  }
+
+  /* 軌道：破線リングをゆっくり回転させて循環を表現 */
+  .loop__orbit {
+    position: absolute;
+    inset: 8%;
+    border-radius: 50%;
+    border: 2px dashed var(--color-line);
+    animation: loop-spin 40s linear infinite;
+  }
+
+  .loop__arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    /* 右向き三角（時計回りの進行方向に回転して配置） */
+    border-width: 5px 0 5px 9px;
+    border-color: transparent transparent transparent var(--color-brand);
+  }
+  /* 円周上の45°位置（破線リング上）に配置し、進行方向（時計回り）へ回転 */
+  .loop__arrow--ne { left: 85.4%; top: 14.6%; transform: translate(-50%, -50%) rotate(45deg); }
+  .loop__arrow--se { left: 85.4%; top: 85.4%; transform: translate(-50%, -50%) rotate(135deg); }
+  .loop__arrow--sw { left: 14.6%; top: 85.4%; transform: translate(-50%, -50%) rotate(225deg); }
+  .loop__arrow--nw { left: 14.6%; top: 14.6%; transform: translate(-50%, -50%) rotate(315deg); }
+
+  .loop__reflow {
+    position: absolute;
+    top: -0.25rem;
+    left: 0;
+    max-width: 30%;
+    font-size: clamp(0.68rem, 2.2vw, 0.78rem);
+    line-height: 1.3;
+    color: var(--color-ink-muted);
+  }
+
+  /* 外周ステージ */
+  .loop__node {
+    position: absolute;
+    width: clamp(8.5rem, 32%, 11rem);
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    padding: 0.7rem 0.6rem;
+    border-radius: 12px;
+    background: var(--color-brand-soft);
+    border: 1.5px solid var(--color-brand);
+    text-align: center;
+    cursor: default;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      background 0.25s ease;
+    outline: none;
+  }
+  .loop__node.is-top { left: 50%; top: 8%; }
+  .loop__node.is-right { left: 92%; top: 50%; }
+  .loop__node.is-bottom { left: 50%; top: 92%; }
+  .loop__node.is-left { left: 8%; top: 50%; }
+
+  .loop__label {
+    font-size: clamp(0.95rem, 3.2vw, 1.125rem);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--color-brand-strong);
+  }
+  .loop__sub {
+    font-size: clamp(0.7rem, 2.4vw, 0.78rem);
+    line-height: 1.25;
+    color: var(--color-ink-muted);
+  }
+
+  /* ホバー／フォーカスで開く詳細 */
+  .loop__detail {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    margin-top: 0;
+    font-size: clamp(0.72rem, 2.4vw, 0.8rem);
+    line-height: 1.4;
+    color: var(--color-ink);
+    transition:
+      max-height 0.3s ease,
+      opacity 0.25s ease,
+      margin-top 0.3s ease;
+  }
+
+  .loop__node:hover,
+  .loop__node:focus-visible {
+    transform: translate(-50%, -50%) scale(1.04);
+    background: var(--color-surface);
+    box-shadow: 0 10px 28px -12px rgb(0 0 0 / 0.35);
+    z-index: 5;
+  }
+  .loop__node:hover .loop__detail,
+  .loop__node:focus-visible .loop__detail {
+    max-height: 8rem;
+    opacity: 1;
+    margin-top: 0.45rem;
+  }
+
+  /* 中央：クライアント領域 */
+  .loop__center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    padding: 0.5rem;
+    background: var(--color-surface-cream);
+    border: 2px solid var(--color-accent);
+    text-align: center;
+  }
+  .loop__center-title {
+    font-size: clamp(0.95rem, 3.4vw, 1.25rem);
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .loop__center-sub {
+    font-size: clamp(0.7rem, 2.4vw, 0.82rem);
+    color: var(--color-accent-strong);
+  }
+
+  @keyframes loop-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .loop__orbit { animation: none; }
+  }
+</style>

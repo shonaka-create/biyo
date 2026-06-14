@@ -74,16 +74,15 @@ export const copy: Record<Lang, Copy> = {
       heading: 'ゴールドコーストでは、お店の“探され方”が日本と違います。',
       lead: '日本のホットペッパーのような一強プラットフォームがなく、お店の入口は分散しています。そして分散した入口は、最終的に Instagram という1点に集まります。',
       points: [
-        'Googleやレビューで1次選別されたあと、Instagramで施術・雰囲気・人柄が確認されます。',
-        'つまり Instagram は「投稿の場」ではなく、認知→信頼→予約を貫く“信頼のハブ”です。',
-        'LINEは使われません。再来のご案内は SMS・メール・Freshaの自動通知・Instagram DM が主流です。',
+        'Googleやレビューで気になるお店を絞り込んだあと、Instagramで施術・雰囲気・人柄を確認して予約を決めます。',
+        'だから Instagram は単なる「投稿の場」ではなく、認知から予約までを貫く“信頼のハブ”になります。',
       ],
     },
     loop: {
       label: 'Solution',
-      heading: '点（投稿）ではなく、輪（仕組み）を回します。',
-      lead: '集客は、入口から予約まで一直線に進む一方通行ではなく、ぐるぐると回り続ける“輪”です。中心にある「来店・施術」だけがオーナー様の領分。残りの輪は、すべて私たちが回します。',
-      note: '輪の軸はレビューです。良い施術がレビューを生み、レビューが検索順位と信頼を押し上げ、新しいお客様を連れてきます。',
+      heading: 'お客様が、次のお客様を連れてくる。',
+      lead: '集客は、入口から予約までの一方通行ではありません。来店 → 満足 → レビュー・紹介 → 新しいお客様、とぐるぐる回り続ける“輪”です。中心の「来店・施術」だけに集中していただき、外側の輪はすべて私たちが回します。',
+      note: '輪を回す軸はレビューです。良い施術がレビューを生み、レビューが検索順位と信頼を高め、次の新しいお客様につながります。',
     },
     strengths: {
       label: 'Why us',
@@ -176,16 +175,15 @@ export const copy: Record<Lang, Copy> = {
       heading: 'On the Gold Coast, salons get found differently.',
       lead: 'There’s no single dominant platform like Japan’s Hot Pepper — the ways people find you are scattered. And those scattered entry points all converge on one place: Instagram.',
       points: [
-        'After a first filter on Google or review sites, people open Instagram to check the work, the vibe and the person behind the salon.',
+        'After shortlisting on Google or review sites, people open Instagram to check the work, the vibe and the person — then decide to book.',
         'So Instagram isn’t just a place to post — it’s the trust hub that carries someone from discovery to confidence to booking.',
-        'LINE isn’t used here. Rebooking reminders run on SMS, email, Fresha’s automated notifications and Instagram DM.',
       ],
     },
     loop: {
       label: 'Solution',
-      heading: 'We run the loop, not just the posts.',
-      lead: 'Growth isn’t a one-way funnel — it’s a loop that keeps turning. Only the centre, the treatment itself, is yours. We run everything else around it.',
-      note: 'Reviews are the axle. Great work earns reviews; reviews lift your search ranking and trust; that brings in new clients — and the loop turns again.',
+      heading: 'Every client brings the next one.',
+      lead: 'Growth isn’t a one-way funnel. It’s a loop that keeps turning: visit → happy client → reviews & referrals → new clients. You focus on the treatment at the centre; we run the whole loop around it.',
+      note: 'Reviews are the axle. Great work earns reviews; reviews lift your search ranking and trust; that brings in the next new client — and the loop turns again.',
     },
     strengths: {
       label: 'Why us',
