@@ -29,6 +29,7 @@ export type Copy = {
     heading: string;
     lead: string;
     items: { title: string; body: string }[];
+    close: string;
   };
   discovery: { label: string; heading: string; lead: string; points: string[] };
   loop: { label: string; heading: string; lead: string; note: string };
@@ -72,7 +73,7 @@ export const copy: Record<Lang, Copy> = {
     comparison: {
       label: 'Why us',
       heading: '5つ全部に「できます」と言える相手は、ほとんどいません。',
-      lead: '「日本語で相談できる」「ゴールドコーストに実際にいる」「日本と同じ品質でつくる」「Webから口コミまでまとめて見る」「小さなサロンに専属でつく」。どれか1つは見つかっても、5つ全部そろう相手はめったにいません。',
+      lead: '下に挙げる5つ。どれか1つは見つかっても、全部そろう相手はめったにいません。',
       conditions: [
         '日本語で相談できる',
         'ゴールドコーストに実際にいる',
@@ -101,6 +102,7 @@ export const copy: Record<Lang, Copy> = {
         { title: '日本品質が英語圏に届かない', body: 'せっかくの日本水準の技術が、英語圏のお客様の目に触れる形になっていません。' },
         { title: '“待ち”の運用', body: 'リールやストーリーを使った能動的な集客ができず、フォロワー任せになっています。' },
       ],
+      close: 'ひとつでも当てはまれば、それは伸びしろ。届け方を変えるだけで、予約は動きはじめます。',
     },
     discovery: {
       label: 'Market',
@@ -225,6 +227,7 @@ export const copy: Record<Lang, Copy> = {
         { title: 'Japanese quality that doesn’t land', body: 'Your Japan-level skill isn’t reaching English-speaking clients in a form they actually see.' },
         { title: 'A “wait and see” account', body: 'Without intentional use of Reels and Stories, growth is left to chance.' },
       ],
+      close: 'If even one sounds familiar, that’s room to grow. Change how the work is shown, and the bookings start to move.',
     },
     discovery: {
       label: 'Market',
