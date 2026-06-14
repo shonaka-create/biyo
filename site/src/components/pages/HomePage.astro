@@ -6,6 +6,7 @@ import SectionHeading from '../SectionHeading.astro';
 import ImagePlaceholder from '../ImagePlaceholder.astro';
 import DiscoveryFigure from '../DiscoveryFigure.astro';
 import LoopFigure from '../LoopFigure.astro';
+import FunnelFigure from '../FunnelFigure.astro';
 import PlanCard from '../PlanCard.astro';
 import Stepper from '../Stepper.astro';
 import Accordion from '../Accordion.astro';
@@ -310,23 +311,8 @@ const markStyles = {
   <section id="service" class="px-5 py-20 md:py-28 lg:px-8">
     <div class="mx-auto max-w-[1200px]">
       <SectionHeading label={c.services.label} heading={c.services.heading} lead={c.services.lead} />
-      <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {
-          c.services.stages.map((stage) => (
-            <div class="reveal rounded-lg border border-line bg-surface p-7">
-              <p class="text-sm font-medium tracking-widest text-brand">{stage.stage}</p>
-              <h3 class="mt-1 font-sans text-lg font-semibold">{stage.summary}</h3>
-              <ul class="mt-4 space-y-2">
-                {stage.items.map((item) => (
-                  <li class="flex items-start gap-2 text-sm text-ink-muted">
-                    <span class="mt-2.5 inline-block h-1 w-1 shrink-0 rounded-full bg-brand" aria-hidden="true" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))
-        }
+      <div class="reveal mt-12">
+        <FunnelFigure lang={lang} />
       </div>
       <p class="reveal mt-8 rounded-lg bg-surface-cream px-6 py-5 text-sm text-ink-muted">{c.services.note}</p>
       <div class="reveal mt-8 text-center">
