@@ -72,7 +72,7 @@ export const copy: Record<Lang, Copy> = {
     },
     comparison: {
       label: 'Why us',
-      heading: '5つ全部に「できます」と言える相手は、ほとんどいません。',
+      heading: 'ほかとの違い',
       lead: '下に挙げる5つ。どれか1つは見つかっても、全部そろう相手はめったにいません。',
       conditions: [
         '日本語で相談できる',
@@ -94,7 +94,7 @@ export const copy: Record<Lang, Copy> = {
     },
     problem: {
       label: 'Problem',
-      heading: '“投稿するだけ”では、予約は増えません。',
+      heading: 'よくあるお悩み',
       lead: '技術力の高いサロンほど、その実力がSNSで伝わりきっていないことがあります。心当たりはありませんか。',
       items: [
         { title: '写真を並べるだけの投稿', body: '施術写真をただ載せるだけでは、世界観も技術の高さも伝わりません。' },
@@ -106,7 +106,7 @@ export const copy: Record<Lang, Copy> = {
     },
     discovery: {
       label: 'Market',
-      heading: 'ゴールドコーストでは、お店の“探され方”が日本と違います。',
+      heading: 'お店の探され方',
       lead: '日本のホットペッパーのような一強プラットフォームがなく、お店の入口は分散しています。そして分散した入口は、最終的に Instagram という1点に集まります。',
       points: [
         'Googleやレビューで気になるお店を絞り込んだあと、Instagramで施術・雰囲気・人柄を確認して予約を決めます。',
@@ -115,7 +115,7 @@ export const copy: Record<Lang, Copy> = {
     },
     loop: {
       label: 'Solution',
-      heading: 'お客様が、次のお客様を連れてくる。',
+      heading: '集客の輪',
       lead: '集客は、入口から予約までの一方通行ではありません。来店 → 満足 → レビュー・紹介 → 新しいお客様、とぐるぐる回り続ける“輪”です。中心の「来店・施術」だけに集中していただき、外側の輪はすべて私たちが回します。',
       note: '輪を回す軸はレビューです。良い施術がレビューを生み、レビューが検索順位と信頼を高め、次の新しいお客様につながります。',
     },
@@ -131,7 +131,7 @@ export const copy: Record<Lang, Copy> = {
     },
     services: {
       label: 'Service',
-      heading: '集客の輪——どの段階で、何をするか。',
+      heading: 'サービス内容',
       lead: '輪の段階ごとに、担当範囲と主な施策をはっきりさせています。',
       stages: [
         { stage: '認知', summary: 'まず見つけてもらう', items: ['Instagram運用（フィード・リール・ストーリー）', 'Googleビジネス / MEO最適化', 'レビューの見せ方設計', '在豪日本人メディアへの展開（必要に応じて）'] },
@@ -144,7 +144,7 @@ export const copy: Record<Lang, Copy> = {
     },
     steps: {
       label: 'Flow',
-      heading: 'ご相談から運用開始まで、5つのステップ。',
+      heading: '導入の流れ',
       items: [
         { title: '無料ヒアリング', body: '30分・オンラインまたは対面で、現状と目標をお聞きします。' },
         { title: 'プラン確定・ご契約', body: '最適なプランをご提案し、業務委託契約を結びます。' },
@@ -169,7 +169,7 @@ export const copy: Record<Lang, Copy> = {
     },
     team: {
       label: 'Team',
-      heading: '顔の見える、2人のチームです。',
+      heading: '私たちのチーム',
       lead: '信頼が何より大切な市場だからこそ、私たち自身のことをお見せします。',
       members: [
         { name: '[お名前]', role: 'ゴールドコースト担当（営業・お客様サポート）', location: 'ゴールドコースト在住7年', message: '現地で築いてきた信頼関係を大切に、オーナー様の一番近くで伴走します。', slot: 'team-portrait-au' },
@@ -197,7 +197,7 @@ export const copy: Record<Lang, Copy> = {
     },
     comparison: {
       label: 'Why us',
-      heading: 'Why salons choose us: the gap in the middle.',
+      heading: 'How we compare',
       lead: 'Japanese-language ease, local face-to-face trust, Japanese-quality execution, the whole growth loop end-to-end, and dedication to a small salon — almost no one covers all five at once.',
       conditions: [
         'Japanese & bicultural',
@@ -219,7 +219,7 @@ export const copy: Record<Lang, Copy> = {
     },
     problem: {
       label: 'Problem',
-      heading: 'Just posting won’t fill your booking calendar.',
+      heading: 'Common challenges',
       lead: 'The more skilled the salon, the more is often left on the table. Sound familiar?',
       items: [
         { title: 'Posts that are just photos', body: 'A feed of treatment photos alone doesn’t convey your atmosphere or the level of your craft.' },
@@ -231,7 +231,7 @@ export const copy: Record<Lang, Copy> = {
     },
     discovery: {
       label: 'Market',
-      heading: 'On the Gold Coast, salons get found differently.',
+      heading: 'How salons get found',
       lead: 'There’s no single dominant platform like Japan’s Hot Pepper — the ways people find you are scattered. And those scattered entry points all converge on one place: Instagram.',
       points: [
         'After shortlisting on Google or review sites, people open Instagram to check the work, the vibe and the person — then decide to book.',
@@ -240,7 +240,7 @@ export const copy: Record<Lang, Copy> = {
     },
     loop: {
       label: 'Solution',
-      heading: 'Every client brings the next one.',
+      heading: 'The growth loop',
       lead: 'Growth isn’t a one-way funnel. It’s a loop that keeps turning: visit → happy client → reviews & referrals → new clients. You focus on the treatment at the centre; we run the whole loop around it.',
       note: 'Reviews are the axle. Great work earns reviews; reviews lift your search ranking and trust; that brings in the next new client — and the loop turns again.',
     },
@@ -256,7 +256,7 @@ export const copy: Record<Lang, Copy> = {
     },
     services: {
       label: 'Service',
-      heading: 'What we do at each stage of the loop.',
+      heading: 'What we do',
       lead: 'For every stage, we make the scope and the key activities clear.',
       stages: [
         { stage: 'Discovery', summary: 'Get found first', items: ['Instagram management (feed, Reels, Stories)', 'Google Business / MEO optimisation', 'Review presentation & display', 'Japanese-community media in Australia (as needed)'] },
@@ -269,7 +269,7 @@ export const copy: Record<Lang, Copy> = {
     },
     steps: {
       label: 'Flow',
-      heading: 'From first chat to launch, in five steps.',
+      heading: 'How we start',
       items: [
         { title: 'Free consult', body: 'A 30-minute call (online or in person) to understand where you are and where you want to go.' },
         { title: 'Plan & agreement', body: 'We recommend the right plan and put a simple service agreement in place.' },
@@ -294,7 +294,7 @@ export const copy: Record<Lang, Copy> = {
     },
     team: {
       label: 'Team',
-      heading: 'A two-person team you can put a face to.',
+      heading: 'Our team',
       lead: 'In a market built on trust, we’d rather show you exactly who we are.',
       members: [
         { name: '[Name]', role: 'Sales · local liaison · client success', location: 'Gold Coast (7 years)', message: 'I draw on the trust I’ve built locally to stay right alongside each owner.', slot: 'team-portrait-au' },

@@ -108,7 +108,7 @@ export const ui = {
     },
     home: {
       pricingLabel: 'Pricing',
-      pricingHeading: '料金は、わかりやすい三層。隠れた費用はありません。',
+      pricingHeading: '料金',
       pricingLead: '〈初期構築（最初に一回）＋ 月額（毎月の運用）＋ オプション（必要なときだけ）〉。追加でかかる費用も、契約前にすべてお伝えします。',
       pricingMore: 'オプション・料金の詳細を見る →',
       serviceFunnelLoop: '紹介・レビューが、次の「認知」へ還流して輪が回り続ける',
@@ -128,15 +128,15 @@ export const ui = {
       portraitLabel: (role: string) => `${role} ポートレート`,
     },
     service: {
-      heading: '点（投稿）ではなく、輪（仕組み）を回す。',
+      heading: 'サービスについて',
       lead: '単発のSNS代行やWeb制作ではありません。サロンの集客の輪全体を、外部パートナーとして継続的に回し続けるサービスです。',
       scopeLabel: 'Scope',
-      scopeHeading: '輪のどの段階で、何をするか。',
+      scopeHeading: '段階ごとの担当範囲',
       scopeLead: '段階ごとに担当範囲と主な施策をはっきりさせています。',
       navLabel: 'サービス',
     },
     pricing: {
-      heading: '料金の考え方は、シンプルな三層です。',
+      heading: '料金',
       lead: '〈初期構築（一回）＋ 月額（継続）＋ オプション(都度)〉。最初に土台を作り、毎月の運用で輪を回し、必要なときだけオプションを足す——分かりやすさを大切にしています。',
       optionsLabel: 'Options',
       optionsHeading: 'オプション（共通・都度）',
@@ -145,7 +145,7 @@ export const ui = {
       tablePrice: '料金',
       tableNote: '備考',
       faqLabel: 'FAQ',
-      faqHeading: '料金についてよくある質問',
+      faqHeading: 'よくある質問',
       bandHeading: 'どのプランが合うか、一緒に考えます。',
       bandSub: '現状をお聞きして、最適なプランを率直にご提案します。梅で十分な場合は、そうお伝えします。',
       navLabel: '料金',
@@ -162,7 +162,7 @@ export const ui = {
       detailBandHeading: 'あなたのサロンでも、同じ仕組みを。',
     },
     about: {
-      heading: '日本の品質を、現地の信頼で届ける。',
+      heading: '私たちについて',
       lead: '私たちは、日本とオーストラリア・ゴールドコーストにまたがる2人組のチームです。',
       story: [
         '日本側は、Web制作・Instagram運用・集客の仕組み化・分析改善を担当。日本で磨いてきたマーケティングと制作のノウハウを、そのままゴールドコーストの美容サロン様にお届けします。',
@@ -314,7 +314,7 @@ export const ui = {
     },
     home: {
       pricingLabel: 'Pricing',
-      pricingHeading: 'Transparent pricing, so you can decide with confidence.',
+      pricingHeading: 'Pricing',
       pricingLead: 'Every plan is three layers: a one-off setup, an ongoing monthly fee, and optional add-ons.',
       pricingMore: 'See add-ons & full pricing →',
       serviceFunnelLoop: 'Referrals & reviews feed back into the next round of discovery',
@@ -334,15 +334,15 @@ export const ui = {
       portraitLabel: (role: string) => `${role} portrait`,
     },
     service: {
-      heading: 'We run the loop, not just the posts.',
+      heading: 'What we do',
       lead: 'This isn’t one-off social media or a single website build. It’s an external partner running your salon’s entire growth loop, continuously.',
       scopeLabel: 'Scope',
-      scopeHeading: 'What we do at each stage of the loop.',
+      scopeHeading: 'Scope by stage',
       scopeLead: 'For every stage, the scope and key activities are clear.',
       navLabel: 'Services',
     },
     pricing: {
-      heading: 'Pricing is a simple three layers.',
+      heading: 'Pricing',
       lead: 'A one-off setup, an ongoing monthly fee, and add-ons only when needed. Build the foundation first, turn the loop each month, add extras as required — clarity above all.',
       optionsLabel: 'Options',
       optionsHeading: 'Add-ons (shared, as needed)',
@@ -351,7 +351,7 @@ export const ui = {
       tablePrice: 'Price',
       tableNote: 'Notes',
       faqLabel: 'FAQ',
-      faqHeading: 'Pricing questions',
+      faqHeading: 'Common questions',
       bandHeading: 'Let’s work out which plan fits.',
       bandSub: 'We’ll listen to where you are and recommend honestly. If Starter is enough, we’ll say so.',
       navLabel: 'Pricing',
@@ -368,7 +368,7 @@ export const ui = {
       detailBandHeading: 'The same system, for your salon.',
     },
     about: {
-      heading: 'Japanese quality, delivered through local trust.',
+      heading: 'About us',
       lead: 'We’re a two-person team spanning Japan and the Gold Coast, Australia.',
       story: [
         'On the Japan side: web production, Instagram management, growth systems and analytics. We bring the marketing and production know-how honed in Japan straight to your salon.',
