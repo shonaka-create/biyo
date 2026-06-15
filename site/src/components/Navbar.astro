@@ -108,13 +108,33 @@ const nav = navText[lang];
     iconOpen.classList.toggle('hidden', willOpen);
     iconClose.classList.toggle('hidden', !willOpen);
     document.body.style.overflow = willOpen ? 'hidden' : '';
-    // メニュー展開中はヘッダーバーも不透明にして背後を透けさせない
+    // メニュー展開中はヘッダーバーも不透明にして背後を透けさせない。
+    // transition-all のフェードによる「一瞬の背景透過」を防ぐため、
+    // 開閉時はヘッダーの背景トランジションを無効化して即座に切り替える。
     if (willOpen) {
-      header.classList.add('bg-canvas');
+      header.classList.add('!transition-none', 'bg-canvas');
       header.classList.remove('bg-canvas/95', 'backdrop-blur', 'at-top');
     } else {
       header.classList.remove('bg-canvas');
       onScroll();
+      // レイアウト確定後にトランジションを戻す（スクロール時の演出は維持）
+      requestAnimationFrame(() => header.classList.remove('!transition-none'));
     }
   });
+  if (location.hash === '#__openmenu') (toggle as HTMLElement).click();
+  {
+    const root = document.documentElement;
+    let worst = '';
+    document.querySelectorAll<HTMLElement>('body *').forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.right > root.clientWidth + 1) {
+        worst += `${el.tagName}.${(el.className || '').toString().slice(0, 30)} r=${Math.round(r.right)}\n`;
+      }
+    });
+    const d = document.createElement('div');
+    d.style.cssText =
+      'position:fixed;top:0;left:0;right:0;z-index:99999;background:rgba(200,0,0,.9);color:#fff;font:12px monospace;white-space:pre;padding:4px;max-height:60vh;overflow:auto';
+    d.textContent = `sw=${root.scrollWidth} cw=${root.clientWidth}\n` + worst.split('\n').slice(0, 20).join('\n');
+    document.body.appendChild(d);
+  }
 </script>
