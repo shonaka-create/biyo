@@ -12,17 +12,28 @@ import LanguageSwitcher from './LanguageSwitcher.astro';
 
 interface Props {
   lang: Lang;
+  /** 透過ヘッダー（ダークなヒーロー画像の上に重ねるページのみ true）。
+   *  下層ページなど明るい背景のページで true にすると、最上部で白文字になり
+   *  ヘッダーが背景に溶けて見えなくなるため、既定は false（常に背景付き）。 */
+  transparentHeader?: boolean;
 }
-const { lang } = Astro.props;
+const { lang, transparentHeader = false } = Astro.props;
 const nav = navText[lang];
 ---
 
 <header
   id="site-header"
-  class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
+  data-transparent={transparentHeader ? 'true' : 'false'}
+  class:list={[
+    'fixed inset-x-0 top-0 z-50 transition-all duration-300',
+    !transparentHeader && 'bg-canvas/95 backdrop-blur border-b border-line',
+  ]}
 >
   <div
-    class="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between px-5 transition-all duration-300 lg:px-8"
+    class:list={[
+      'mx-auto flex max-w-[1200px] items-center justify-between px-5 transition-all duration-300 lg:px-8',
+      transparentHeader ? 'h-[72px]' : 'h-[64px]',
+    ]}
     id="header-inner"
   >
     <a href={localizePath('/', lang)} class="font-display text-xl tracking-wide text-ink">
@@ -101,19 +112,23 @@ const nav = navText[lang];
 <script>
   const header = document.getElementById('site-header')!;
   const inner = document.getElementById('header-inner')!;
-  const onScroll = () => {
-    const scrolled = window.scrollY > 24;
-    header.classList.toggle('bg-canvas/95', scrolled);
-    header.classList.toggle('backdrop-blur', scrolled);
-    header.classList.toggle('border-b', scrolled);
-    header.classList.toggle('border-line', scrolled);
-    inner.classList.toggle('h-[64px]', scrolled);
-    inner.classList.toggle('h-[72px]', !scrolled);
-    // 最上部（透過）ではヒーロー画像の上に重なるため文字・アイコンを白に
-    header.classList.toggle('at-top', !scrolled);
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  // 透過ヘッダーのページ（トップ）のみ、スクロール量で透過⇄背景付きを切り替える。
+  // それ以外のページは常に背景付き（マークアップ側で適用済み）なので何もしない。
+  if (header.dataset.transparent === 'true') {
+    const onScroll = () => {
+      const scrolled = window.scrollY > 24;
+      header.classList.toggle('bg-canvas/95', scrolled);
+      header.classList.toggle('backdrop-blur', scrolled);
+      header.classList.toggle('border-b', scrolled);
+      header.classList.toggle('border-line', scrolled);
+      inner.classList.toggle('h-[64px]', scrolled);
+      inner.classList.toggle('h-[72px]', !scrolled);
+      // 最上部（透過）ではヒーロー画像の上に重なるため文字・アイコンを白に
+      header.classList.toggle('at-top', !scrolled);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
 
   const toggle = document.getElementById('menu-toggle')!;
   const menu = document.getElementById('mobile-menu')!;
