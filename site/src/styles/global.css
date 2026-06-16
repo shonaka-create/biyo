@@ -20,7 +20,7 @@
   --color-success: #2f5d4f;
 
   /* タイポグラフィ */
-  --font-display: "Fraunces", "Shippori Mincho", serif;
+  --font-display: "Playfair Display", "Shippori Mincho", serif;
   --font-sans: "Inter", "Noto Sans JP", system-ui, sans-serif;
 
   /* 角丸 */
