@@ -56,9 +56,9 @@ export const copy: Record<Lang, Copy> = {
   ja: {
     hero: {
       eyebrow: 'ゴールドコースト × 日本品質の集客パートナー',
-      heading: { lead: 'ゴールドコーストの美容サロンに、', accent: '日本品質の集客を。' },
+      heading: { lead: 'ゴールドコーストの\n美容サロンに、', accent: '日本品質の集客を。' },
       sub: 'ゴールドコーストで、ネイル・まつげ・眉・ヘア・エステを手がける日本人オーナーの美容サロンへ。Web・Instagram・Googleレビューまで、集客の“仕組み”を一貫してお任せいただけます。',
-      micro: ['日豪2か国体制', '日英対応', '成果は月次でご報告'],
+      micro: ['初月Instagram運用 無料', '日豪2か国体制', '日英対応', '成果は月次でご報告'],
       ctaPrimary: { label: 'Instagramで相談する', href: siteCommon.instagramUrl },
       ctaSecondary: { label: 'サービスを見る', href: '#service' },
     },
@@ -66,7 +66,7 @@ export const copy: Record<Lang, Copy> = {
       items: [
         { label: '対応エリア', value: 'ゴールドコースト（市内・近郊）' },
         { label: '対応領域', value: 'Web / Instagram / Google・MEO / Fresha' },
-        { label: 'サポート実績', value: '[N]店舗' }, // TODO: 実績件数確定後に差し替え
+        { label: '創業キャンペーン', value: 'サイト制作で初月Instagram運用 無料' },
         { label: '体制', value: '日豪2拠点・日英バイリンガル' },
       ],
     },
@@ -183,7 +183,7 @@ export const copy: Record<Lang, Copy> = {
       eyebrow: 'Gold Coast × Japanese-quality growth',
       heading: { lead: 'Japanese-quality marketing', accent: 'for Gold Coast beauty salons.' },
       sub: 'For Japanese-owned beauty salons on the Gold Coast — nails, lashes, brows, hair and skin. From your website and Instagram to Google reviews, we run the whole growth engine as one connected system.',
-      micro: ['Japan + Australia team', 'Bilingual (JP / EN)', 'Monthly results reporting'],
+      micro: ['First month of Instagram free', 'Japan + Australia team', 'Bilingual (JP / EN)', 'Monthly results reporting'],
       ctaPrimary: { label: 'Contact us on Instagram', href: siteCommon.instagramUrl },
       ctaSecondary: { label: 'See our services', href: '#service' },
     },
@@ -191,7 +191,7 @@ export const copy: Record<Lang, Copy> = {
       items: [
         { label: 'Areas served', value: 'Gold Coast (city & surrounds)' },
         { label: 'What we cover', value: 'Web / Instagram / Google & MEO / Fresha' },
-        { label: 'Salons supported', value: '[N] salons' }, // TODO: 実績件数確定後に差し替え
+        { label: 'Launch offer', value: 'First month of Instagram free with a website build' },
         { label: 'Team', value: 'Two countries, fully bilingual' },
       ],
     },

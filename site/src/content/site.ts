@@ -3,8 +3,7 @@ import type { Lang } from '../i18n/config';
 
 // 言語に依存しない共通情報
 export const siteCommon = {
-  // TODO: ブランド名確定後に差し替え（§18）
-  brandName: '[ブランド名]',
+  brandName: 'Akane Web Studio',
   // TODO: 連絡先メール確定後に差し替え
   email: 'hello@example.com',
   // TODO: InstagramアカウントURL確定後に差し替え

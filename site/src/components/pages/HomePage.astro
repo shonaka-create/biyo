@@ -97,7 +97,7 @@ const markStyles = {
         </span>
 
         <h1 class="mt-6 text-[34px] leading-[1.22] text-white drop-shadow-sm md:text-[48px] lg:text-[56px]">
-          <span class="block">{c.hero.heading.lead}</span>
+          <span class="block" set:html={c.hero.heading.lead.replace(/\n/g, '<br />')} />
           <span class="mt-1 block w-fit underline decoration-accent decoration-[3px] underline-offset-[10px]">
             {c.hero.heading.accent}
           </span>
@@ -206,7 +206,7 @@ const markStyles = {
         {
           c.problem.items.map((item, i) => (
             <div class="reveal group relative overflow-hidden rounded-xl border border-line bg-surface p-6 transition duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-sm">
-              <span aria-hidden="true" class="pointer-events-none absolute -right-1 top-1 select-none font-display text-5xl font-semibold leading-none text-line/80">
+              <span aria-hidden="true" class="pointer-events-none absolute right-3 top-3 select-none font-display text-5xl font-semibold leading-none text-ink-muted/40">
                 {String(i + 1).padStart(2, '0')}
               </span>
               <h3 class="relative font-sans text-base font-semibold leading-snug">{item.title}</h3>

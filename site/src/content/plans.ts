@@ -121,10 +121,12 @@ export const plans: Record<Lang, Plan[]> = {
 
 export const planNotes: Record<Lang, string[]> = {
   ja: [
+    '【創業キャンペーン】Webサイト制作をご依頼の方は、初月のInstagram運用を無料でご提供します。さらにサロンをご紹介いただくと、もう1か月分を無料に。',
     '料金はすべて〈初期構築（一回）＋ 月額（継続）＋ オプション（都度）〉の三層です。',
     '表示はオーストラリアドル（A$）・税別です。', // TODO: 税・通貨の扱い確定後に文言調整
   ],
   en: [
+    'Launch offer: build your website with us and your first month of Instagram management is free. Refer another salon and we add a second free month.',
     'Every plan is three layers: a one-off setup, an ongoing monthly fee, and optional add-ons as needed.',
     'Prices shown are in AUD, excluding GST. Billing in Japanese yen is also available.', // TODO: 税・通貨の扱い確定後に文言調整
   ],
@@ -132,12 +134,14 @@ export const planNotes: Record<Lang, string[]> = {
 
 export const options: Record<Lang, { name: string; price: string; note: string }[]> = {
   ja: [
+    { name: 'ご紹介特典', price: '1か月無料', note: '別のサロン様をご紹介いただくと、Instagram運用を1か月分無料で追加します。' },
     { name: '撮影同行（ゴールドコースト）', price: '都度お見積もり', note: '別途交通費。施術・店内・人物の撮影に同行します。' },
     { name: '広告予算', price: '実費', note: 'Meta / Google 広告の媒体費はクライアント負担（実費）です。' },
     { name: '追加LP・Web改修', price: '都度お見積もり', note: 'キャンペーンLPの追加や既存サイトの改修。' },
     { name: '単発キャンペーン制作', price: '都度お見積もり', note: '季節キャンペーンのバナー・投稿セットなど。' },
   ],
   en: [
+    { name: 'Referral bonus', price: '1 month free', note: 'Introduce another salon and we add a free month of Instagram management.' },
     { name: 'On-site shoot (Gold Coast)', price: 'Quoted per job', note: 'Travel billed separately. We join you to shoot treatments, the space and people.' },
     { name: 'Ad budget', price: 'At cost', note: 'Meta / Google media spend is paid by the client (at cost).' },
     { name: 'Extra landing pages / web changes', price: 'Quoted per job', note: 'Additional campaign landing pages or changes to your existing site.' },
