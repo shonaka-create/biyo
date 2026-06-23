@@ -14,6 +14,7 @@ export type Copy = {
     ctaPrimary: LinkRef;
     ctaSecondary: LinkRef;
   };
+  concerns: { label: string; heading: string; items: string[]; closing: string };
   trustBar: { items: { label: string; value: string }[] };
   strengths: { label: string; heading: string; items: { title: string; body: string }[] };
   services: {
@@ -37,12 +38,25 @@ export type Copy = {
 export const copy: Record<Lang, Copy> = {
   ja: {
     hero: {
-      eyebrow: 'ゴールドコースト × 日本品質の SNS運用・Web制作',
-      heading: { lead: 'ゴールドコーストの\nビジネスに、', accent: '日本品質のSNSとWebを。' },
-      sub: 'ゴールドコーストで事業を営むオーナーへ。Instagramを中心としたSNS運用と、Webサイトの制作・運用を、日本品質で一貫してお任せいただけます。業種は問いません。',
-      micro: ['SNS運用 × Web制作', '日豪2か国体制', '日英対応', '成果は月次でご報告'],
+      eyebrow: 'ゴールドコースト × 日本品質のInstagram集客',
+      heading: { lead: '腕は一流。', accent: 'あとは、伝え方だけ。' },
+      sub: '美容サロンをはじめ、ゴールドコーストで腕一本でやってきたオーナーへ。技術で差がつきにくいいま、選ばれるかどうかはInstagramで決まります。「投稿しても伸びない」を、日本品質の運用でまるごと解決します。',
+      micro: ['初月Instagram運用 無料', '日豪2か国体制', '日英対応', '成果は月次でご報告'],
       ctaPrimary: { label: 'Instagramで相談する', href: siteCommon.instagramUrl },
       ctaSecondary: { label: 'サービスを見る', href: '#service' },
+    },
+    concerns: {
+      label: 'Concerns',
+      heading: 'こんなお悩み、ありませんか？',
+      items: [
+        'Instagram、やった方がいいのは分かっているけど、手が回らない',
+        '投稿しているのに、フォロワーも問い合わせも増えない',
+        '周りに同業のお店が増えて、埋もれている気がする',
+        '現地で伸びているお店と比べると、発信が見劣りする',
+        '英語での発信や、ローカルのお客様への届け方が分からない',
+        '誰に任せれば安心なのか分からない。外注は少し不安',
+      ],
+      closing: 'ひとつでも当てはまったら、InstagramとWebで解決できます。',
     },
     trustBar: {
       items: [
@@ -128,12 +142,25 @@ export const copy: Record<Lang, Copy> = {
 
   en: {
     hero: {
-      eyebrow: 'Gold Coast × Japanese-quality social & web',
-      heading: { lead: 'Japanese-quality social & websites', accent: 'for Gold Coast businesses.' },
-      sub: 'For owners running a business on the Gold Coast. We handle your Instagram-led social media and your website — built and run end to end, to a Japanese standard. Any industry.',
-      micro: ['Social + web build', 'Japan + Australia team', 'Bilingual (JP / EN)', 'Monthly results reporting'],
+      eyebrow: 'Gold Coast × Japanese-quality Instagram growth',
+      heading: { lead: 'Your craft is world-class —', accent: 'your Instagram should be too.' },
+      sub: 'For Gold Coast owners who’ve built their business on craft — beauty salons and beyond. When skill alone no longer sets you apart, Instagram decides who gets chosen. We turn “posting but not growing” into real results — managed to a Japanese standard.',
+      micro: ['First month of Instagram free', 'Japan + Australia team', 'Bilingual (JP / EN)', 'Monthly results reporting'],
       ctaPrimary: { label: 'Contact us on Instagram', href: siteCommon.instagramUrl },
       ctaSecondary: { label: 'See our services', href: '#service' },
+    },
+    concerns: {
+      label: 'Concerns',
+      heading: 'Does any of this sound familiar?',
+      items: [
+        'You know Instagram matters, but there’s never time for it',
+        'You keep posting, yet followers and enquiries don’t grow',
+        'More competitors keep opening and you feel like you’re blending in',
+        'Next to the local accounts that are thriving, your posts fall flat',
+        'You’re not sure how to post in English or reach local customers',
+        'You don’t know who to trust — outsourcing feels risky',
+      ],
+      closing: 'If even one rings true, Instagram and your website can fix it.',
     },
     trustBar: {
       items: [

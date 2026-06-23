@@ -129,6 +129,33 @@ const heroSlides = [
     </div>
   </section>
 
+  <!-- S1.5 お悩み（課題提起） -->
+  <section class="bg-surface-cream px-5 py-20 md:py-28 lg:px-8">
+    <div class="mx-auto max-w-[1000px]">
+      <SectionHeading label={c.concerns.label} heading={c.concerns.heading} align="center" />
+      <ul class="mt-12 grid gap-5 sm:grid-cols-2">
+        {
+          c.concerns.items.map((item) => (
+            <li class="reveal flex items-start gap-3 rounded-lg border border-line bg-canvas px-6 py-5">
+              <svg
+                class="mt-0.5 h-5 w-5 shrink-0 text-accent"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path d="m5 13 4 4L19 7" />
+              </svg>
+              <span class="text-[15px] leading-relaxed text-ink">{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="reveal mt-10 text-center text-lg font-medium text-ink">{c.concerns.closing}</p>
+    </div>
+  </section>
+
   <!-- S2. 信頼バー（実績サマリー＋雰囲気ギャラリー） -->
   <section class="relative overflow-hidden border-y border-line bg-gradient-to-b from-surface to-canvas px-5 py-16 md:py-20 lg:px-8">
     <!-- 上端の装飾アクセントライン -->

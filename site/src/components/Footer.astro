@@ -46,6 +46,16 @@ const text = siteText[lang];
       <a href={`mailto:${siteCommon.email}`} class="mt-2 inline-block text-sm opacity-80 transition hover:opacity-100">
         {siteCommon.email}
       </a>
+      <a
+        href={`mailto:${siteCommon.email}`}
+        class="mt-4 inline-flex items-center gap-2 rounded-md border border-white/30 px-4 py-2.5 text-sm transition hover:bg-white/10"
+      >
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+          <path d="m3 7 9 6 9-6"></path>
+        </svg>
+        {ui[lang].common.emailCta}
+      </a>
     </div>
 
     <div>

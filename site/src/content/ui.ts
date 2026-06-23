@@ -7,6 +7,7 @@ export const ui = {
       skipToContent: '本文へスキップ',
       breadcrumbHome: 'ホーム',
       langLabel: '言語',
+      emailCta: 'メールで問い合わせ',
     },
     plan: {
       recommendedBadge: '推奨プラン',
@@ -223,6 +224,7 @@ export const ui = {
       skipToContent: 'Skip to content',
       breadcrumbHome: 'Home',
       langLabel: 'Language',
+      emailCta: 'Email us',
     },
     plan: {
       recommendedBadge: 'Recommended',

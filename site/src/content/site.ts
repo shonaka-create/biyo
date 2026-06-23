@@ -4,8 +4,7 @@ import type { Lang } from '../i18n/config';
 // 言語に依存しない共通情報
 export const siteCommon = {
   brandName: 'AKANE WEB STUDIO',
-  // TODO: 連絡先メール確定後に差し替え
-  email: 'hello@example.com',
+  email: 'akane.webstudio@gmail.com',
   instagramUrl: 'https://www.instagram.com/akane.webstudio/',
   // TODO: 予約ツール（Calendly / TimeRex / Spir）のURL確定後に差し替え
   bookingUrl: '',
