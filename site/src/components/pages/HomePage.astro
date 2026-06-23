@@ -221,11 +221,11 @@ const heroSlides = [
   <section class="px-5 py-20 md:py-28 lg:px-8">
     <div class="mx-auto max-w-[1200px]">
       <SectionHeading label={c.testimonials.label} heading={c.testimonials.heading} align="center" />
-      <div class="mt-12 grid gap-6 md:grid-cols-2">
+      <div class="voice-scroll reveal -mx-5 mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-4 lg:-mx-2 lg:px-2">
         {
-          c.testimonials.items.map((t, i) => (
-            <figure class="reveal rounded-lg border border-line bg-surface p-7">
-              <blockquote class="text-[15px] text-ink-muted">{t.comment}</blockquote>
+          c.testimonials.items.map((t) => (
+            <figure class="flex shrink-0 basis-[85%] snap-start flex-col rounded-lg border border-line bg-surface p-7 sm:basis-[380px]">
+              <blockquote class="text-[15px] leading-relaxed text-ink-muted">{t.comment}</blockquote>
               <figcaption class="mt-5 border-t border-line pt-4">
                 <p class="text-sm font-medium">{t.name}</p>
                 <p class="text-xs text-ink-muted">{t.shop}</p>
@@ -294,6 +294,19 @@ const heroSlides = [
     .hero-slide {
       transition: none;
     }
+  }
+
+  /* お客様の声：横スクロール（控えめなスクロールバー＋慣性スクロール） */
+  .voice-scroll {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  .voice-scroll::-webkit-scrollbar {
+    height: 6px;
+  }
+  .voice-scroll::-webkit-scrollbar-thumb {
+    background: var(--color-line);
+    border-radius: 9999px;
   }
 </style>
 
