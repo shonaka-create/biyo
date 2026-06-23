@@ -39,9 +39,8 @@ const t = ui[lang].plan;
       {plan.monthly}<span class="ml-1 text-base text-ink-muted">{t.perMonth}</span>
     </p>
     {plan.monthlySub && (
-      <p class="mt-2 text-sm text-ink-muted">
-        {plan.monthlySub}
-        {t.perMonth}
+      <p class="mt-2 font-display text-xl text-ink">
+        {plan.monthlySub}<span class="ml-1 text-sm text-ink-muted">{t.perMonth}</span>
       </p>
     )}
   </div>

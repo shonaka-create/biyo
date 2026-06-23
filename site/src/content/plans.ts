@@ -23,7 +23,7 @@ export const plans: Record<Lang, Plan[]> = {
       name: 'Plan A',
       position: 'まずは続ける土台を',
       target: '無理なく投稿を継続したい方',
-      monthly: '30,000円',
+      monthly: '50,000円',
       monthlySub: 'A$500',
       recommended: false,
       features: [
@@ -37,7 +37,7 @@ export const plans: Record<Lang, Plan[]> = {
       name: 'Plan B',
       position: '投稿量を増やして伸ばす',
       target: '発信を強化して新規をしっかり増やしたい方',
-      monthly: '50,000円',
+      monthly: '70,000円',
       monthlySub: 'A$750',
       recommended: true,
       features: [
