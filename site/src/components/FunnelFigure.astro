@@ -1,9 +1,10 @@
 ---
-// figure-funnel（§6.1 S7）：集客ファネル図。
-// 「どの段階で何を支援するか」を、上から下へ narrowing するファネルで可視化する。
+// figure-funnel（§6.1 S7）：集客ステージ図。
+// 「どの段階で何を支援するか」を、上から下への流れで可視化する。
 // 上4段＝お客様の旅（認知→検討・予約→リピート・再来→紹介・レビュー）、
 // 最下部に「横断（全段階を回し続ける運用）」を全幅バンドで配置。
 // 紹介・レビューが次の認知へ還流する＝輪、という当サイトの基本メッセージも明記する。
+// 各段は同じ幅で左揃え。進行は段の色の深まり（淡→濃い緑）と矢印で表す。
 import { copy } from '../content/copy';
 import type { Lang } from '../i18n/config';
 
@@ -14,12 +15,11 @@ const { lang } = Astro.props;
 
 const stages = copy[lang].services.stages;
 
-// 旅の4段（ファネル本体）と、横断の運用（全幅バンド）を分ける。
+// 旅の4段（本体）と、横断の運用（全幅バンド）を分ける。
 const journey = stages.slice(0, 4);
 const span = stages[4];
 
-// 段ごとの幅と色（上＝広く淡い緑 → 下＝狭く濃い緑）。
-const widths = ['100%', '90%', '80%', '70%'];
+// 段ごとの色（上＝淡い緑 → 下＝濃い緑）。幅は全段そろえる。
 const tones = ['#6f9385', '#52806f', '#3d6a5a', '#2f5d4f'];
 ---
 
@@ -27,7 +27,7 @@ const tones = ['#6f9385', '#52806f', '#3d6a5a', '#2f5d4f'];
   {
     journey.map((s, i) => (
       <>
-        <div class="funnel__tier" style={`--w:${widths[i]}; --c:${tones[i]}`}>
+        <div class="funnel__tier" style={`--c:${tones[i]}`}>
           <div class="funnel__stage">
             <span class="funnel__stage-label">{s.stage}</span>
             <span class="funnel__stage-summary">{s.summary}</span>
@@ -193,7 +193,6 @@ const tones = ['#6f9385', '#52806f', '#3d6a5a', '#2f5d4f'];
 
   @media (min-width: 768px) {
     .funnel__tier {
-      width: var(--w);
       flex-direction: row;
       align-items: stretch;
     }
