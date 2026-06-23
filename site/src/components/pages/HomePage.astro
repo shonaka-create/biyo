@@ -11,7 +11,7 @@ import Accordion from '../Accordion.astro';
 import CTABand from '../CTABand.astro';
 import { siteCommon } from '../../content/site';
 import { copy } from '../../content/copy';
-import { plans, planNotes } from '../../content/plans';
+import { plans, sitePlans, planNotes } from '../../content/plans';
 import { faqCategories } from '../../content/faq';
 import { works } from '../../content/works';
 import { ui } from '../../content/ui';
@@ -24,6 +24,7 @@ interface Props {
 const { lang } = Astro.props;
 const c = copy[lang];
 const u = ui[lang].home;
+const pricingUi = ui[lang].pricing;
 
 const meta = {
   ja: {
@@ -200,10 +201,28 @@ const heroSlides = [
   <section class="bg-surface-cream px-5 py-20 md:py-28 lg:px-8">
     <div class="mx-auto max-w-[1200px]">
       <SectionHeading label={u.pricingLabel} heading={u.pricingHeading} lead={u.pricingLead} align="center" />
-      <div class="mt-14 grid gap-8 lg:grid-cols-3 lg:gap-6">
+      <h3 class="reveal mt-12 text-center font-display text-xl text-ink md:text-2xl">{pricingUi.snsHeading}</h3>
+      <div class="mt-8 grid gap-8 lg:grid-cols-3 lg:gap-6">
         {plans[lang].map((plan) => <PlanCard plan={plan} lang={lang} />)}
       </div>
-      <div class="reveal mt-8 space-y-1 text-center text-sm text-ink-muted">
+
+      <div class="reveal mx-auto mt-14 max-w-[760px]">
+        <h3 class="text-center font-display text-xl text-ink md:text-2xl">{pricingUi.siteHeading}</h3>
+        <p class="mt-2 text-center text-sm text-ink-muted">{pricingUi.siteLead}</p>
+        <div class="mt-6 grid gap-4 sm:grid-cols-2">
+          {
+            sitePlans[lang].map((s) => (
+              <div class="rounded-lg border border-line bg-canvas px-6 py-5">
+                <p class="font-medium text-ink">{s.scope}</p>
+                <p class="mt-1 font-display text-2xl text-ink">{s.price}</p>
+                <p class="mt-2 text-sm text-ink-muted">{s.note}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="reveal mt-10 space-y-1 text-center text-sm text-ink-muted">
         {planNotes[lang].map((n) => <p>{n}</p>)}
       </div>
       <div class="reveal mt-6 text-center">
