@@ -4,8 +4,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import CTAButton from '../CTAButton.astro';
 import SectionHeading from '../SectionHeading.astro';
 import ImagePlaceholder from '../ImagePlaceholder.astro';
-import DiscoveryFigure from '../DiscoveryFigure.astro';
-import LoopFigure from '../LoopFigure.astro';
 import FunnelFigure from '../FunnelFigure.astro';
 import PlanCard from '../PlanCard.astro';
 import Stepper from '../Stepper.astro';
@@ -51,13 +49,6 @@ const heroSlides = [
   'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1800&q=80&fit=crop',
   'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1800&q=80&fit=crop',
 ];
-
-// 比較表のマーク表示設定
-const markStyles = {
-  yes: { glyph: '●', cls: 'text-brand', sr: c.comparison.legend.yes },
-  partial: { glyph: '△', cls: 'text-accent', sr: c.comparison.legend.partial },
-  no: { glyph: '×', cls: 'text-ink-muted/40', sr: c.comparison.legend.no },
-} as const;
 ---
 
 <BaseLayout lang={lang} title={meta.title} description={meta.description} transparentHeader>
@@ -195,156 +186,6 @@ const markStyles = {
           ))
         }
       </div>
-    </div>
-  </section>
-
-  <!-- S3. 課題提起 -->
-  <section class="px-5 py-20 md:py-28 lg:px-8">
-    <div class="mx-auto max-w-[1200px]">
-      <SectionHeading label={c.problem.label} heading={c.problem.heading} lead={c.problem.lead} />
-      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {
-          c.problem.items.map((item, i) => (
-            <div class="reveal group relative overflow-hidden rounded-xl border border-line bg-surface p-6 transition duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-sm">
-              <span aria-hidden="true" class="pointer-events-none absolute right-3 top-3 select-none font-display text-5xl font-semibold leading-none text-ink-muted/40">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <h3 class="relative font-sans text-base font-semibold leading-snug">{item.title}</h3>
-              <p class="relative mt-2.5 text-sm leading-relaxed text-ink-muted">{item.body}</p>
-            </div>
-          ))
-        }
-      </div>
-      <div class="reveal mt-3 flex flex-col items-center" aria-hidden="true">
-        <span class="block h-8 w-px bg-gradient-to-b from-transparent to-line"></span>
-        <span class="flex h-7 w-7 items-center justify-center rounded-full border border-line bg-surface text-brand shadow-sm">
-          <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 5v14M6 13l6 6 6-6" />
-          </svg>
-        </span>
-        <span class="block h-8 w-px bg-gradient-to-b from-line to-brand-soft"></span>
-      </div>
-      <div class="reveal mx-auto -mt-px max-w-[760px] rounded-2xl bg-brand-soft px-8 py-7 text-center shadow-sm">
-        <p class="text-[15px] font-medium leading-relaxed text-brand md:text-base">
-          {c.problem.close}
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- S4. 豪州での「探され方」 -->
-  <section class="bg-surface-cream px-5 py-20 md:py-28 lg:px-8">
-    <div class="mx-auto max-w-[1200px]">
-      <SectionHeading label={c.discovery.label} heading={c.discovery.heading} lead={c.discovery.lead} />
-      <div class="reveal mt-12">
-        <DiscoveryFigure lang={lang} />
-      </div>
-      <ul class="reveal mx-auto mt-10 max-w-[760px] space-y-3">
-        {
-          c.discovery.points.map((p) => (
-            <li class="flex items-start gap-3 text-[15px] text-ink-muted">
-              <svg class="mt-1.5 h-4 w-4 shrink-0 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="m5 13 4 4L19 7" />
-              </svg>
-              {p}
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
-
-  <!-- S5. 解決策＝「輪」を回す -->
-  <section class="px-5 py-20 md:py-28 lg:px-8">
-    <div class="mx-auto max-w-[1200px]">
-      <SectionHeading label={c.loop.label} heading={c.loop.heading} lead={c.loop.lead} />
-      <div class="reveal mt-12">
-        <LoopFigure lang={lang} />
-      </div>
-      <p class="reveal mx-auto mt-8 max-w-[760px] text-center text-[15px] text-ink-muted">{c.loop.note}</p>
-    </div>
-  </section>
-
-  <!-- S6. 選ばれる理由（比較表） -->
-  <section class="bg-brand-soft px-5 py-20 md:py-28 lg:px-8">
-    <div class="mx-auto max-w-[1200px]">
-      <SectionHeading
-        label={c.comparison.label}
-        heading={c.comparison.heading}
-        lead={c.comparison.lead}
-        align="center"
-      />
-
-      <!-- 比較表（横スクロール対応） -->
-      <div class="reveal mt-12 overflow-x-auto rounded-2xl ring-1 ring-line/70">
-        <table class="w-full min-w-[680px] border-collapse bg-surface text-left">
-          <thead>
-            <tr class="border-b border-line">
-              <th scope="col" class="sticky left-0 z-10 bg-surface px-5 py-4 text-sm font-semibold text-ink">
-                {c.comparison.label}
-              </th>
-              {
-                c.comparison.conditions.map((cond) => (
-                  <th scope="col" class="px-3 py-4 text-center align-bottom text-xs font-medium leading-snug text-ink-muted">
-                    {cond}
-                  </th>
-                ))
-              }
-            </tr>
-          </thead>
-          <tbody>
-            {
-              c.comparison.rows.map((row) => (
-                <tr
-                  class:list={[
-                    'border-b border-line/70 last:border-0',
-                    row.us ? 'bg-brand text-white' : 'hover:bg-surface-cream/60',
-                  ]}
-                >
-                  <th
-                    scope="row"
-                    class:list={[
-                      'sticky left-0 z-10 px-5 py-4 text-sm font-medium',
-                      row.us ? 'bg-brand text-white' : 'bg-surface text-ink',
-                    ]}
-                  >
-                    {row.us && (
-                      <span class="mr-1.5 inline-block rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold tracking-wide text-white align-middle">
-                        US
-                      </span>
-                    )}
-                    {row.name}
-                  </th>
-                  {
-                    row.marks.map((mark) => {
-                      const m = markStyles[mark];
-                      return (
-                        <td class="px-3 py-4 text-center">
-                          <span class:list={['text-lg leading-none', row.us ? 'text-white' : m.cls]}>
-                            {m.glyph}
-                          </span>
-                          <span class="sr-only">{m.sr}</span>
-                        </td>
-                      );
-                    })
-                  }
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
-      </div>
-
-      <!-- 凡例 -->
-      <div class="reveal mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-ink-muted">
-        <span class="inline-flex items-center gap-1.5"><span class="text-brand">●</span>{c.comparison.legend.yes}</span>
-        <span class="inline-flex items-center gap-1.5"><span class="text-accent">△</span>{c.comparison.legend.partial}</span>
-        <span class="inline-flex items-center gap-1.5"><span class="text-ink-muted/40">×</span>{c.comparison.legend.no}</span>
-      </div>
-
-      <p class="reveal mx-auto mt-8 max-w-[760px] text-center text-[15px] leading-relaxed text-ink-muted">
-        {c.comparison.note}
-      </p>
     </div>
   </section>
 

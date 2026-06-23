@@ -5,7 +5,6 @@
 // 最下部に「横断（全段階を回し続ける運用）」を全幅バンドで配置。
 // 紹介・レビューが次の認知へ還流する＝輪、という当サイトの基本メッセージも明記する。
 import { copy } from '../content/copy';
-import { ui } from '../content/ui';
 import type { Lang } from '../i18n/config';
 
 interface Props {
@@ -14,7 +13,6 @@ interface Props {
 const { lang } = Astro.props;
 
 const stages = copy[lang].services.stages;
-const loopback = ui[lang].home.serviceFunnelLoop;
 
 // 旅の4段（ファネル本体）と、横断の運用（全幅バンド）を分ける。
 const journey = stages.slice(0, 4);
@@ -46,8 +44,6 @@ const tones = ['#6f9385', '#52806f', '#3d6a5a', '#2f5d4f'];
       </>
     ))
   }
-
-  <p class="funnel__loop"><span aria-hidden="true">↻</span>{loopback}</p>
 
   <div class="funnel__span">
     <span class="funnel__span-label">{span.stage}</span>
@@ -141,25 +137,6 @@ const tones = ['#6f9385', '#52806f', '#3d6a5a', '#2f5d4f'];
     border-right: 8px solid transparent;
     border-top: 9px solid var(--color-brand);
     opacity: 0.55;
-  }
-
-  .funnel__loop {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 1.25rem;
-    padding: 0.55rem 1.1rem;
-    border-radius: 9999px;
-    background: var(--color-brand-soft);
-    color: var(--color-brand-strong);
-    font-size: 0.8125rem;
-    font-weight: 600;
-    text-align: center;
-  }
-
-  .funnel__loop span {
-    font-size: 1.05rem;
-    line-height: 1;
   }
 
   /* 横断：全幅で全段階を支える運用バンド */
