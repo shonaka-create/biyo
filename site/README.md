@@ -47,7 +47,7 @@ npm run preview  # ビルド結果をローカルで確認
 - 文言を追加するときは、必ず `ja` と `en` の両方に同じキーで追記する（型 `Record<Lang, …>` が欠落をビルド時に検出）。
 - 英語の料金は豪ローカル向けに A$ 表記（TODO: 確定レートで要見直し）。
 - **画像はすべてプレースホルダー**：`ImagePlaceholder` コンポーネントで実装し `data-image-slot` を付与（§8.7）。実画像差し替え時はこの属性を目印に置換する。
-- **図解はコード生成**：`DiscoveryFigure`（分散入口→Instagramハブ→予約）／`LoopFigure`（フライホイール）はSVG/HTMLで描画。テーマカラー連動・レスポンシブ・`role="img"`対応。
+- **サービスは2軸提示**：`ServicePillars`（SNS（Instagram）運用／Web制作・運用）の2カードで支援範囲を示す。トップ（S7）とサービス詳細ページで共用。
 - **セクション順序**：トップは §6.1 の S1〜S15 をコンバージョン論理順で厳守。
 - **計測フック**：`data-cta` / `data-plan` / scroll深度 / faq_open などを GA4 イベントとして発火（§13）。Cookie同意後のみGA4ロード（§15）。
 
@@ -56,7 +56,7 @@ npm run preview  # ビルド結果をローカルで確認
 ```
 src/
   components/        共通UI（Navbar, Footer, CTAButton, LanguageSwitcher, PlanCard,
-                     Stepper, Accordion, DiscoveryFigure, LoopFigure, ContactForm, ...）
+                     Stepper, Accordion, ServicePillars, ContactForm, ...）
     pages/           各ページ本体（lang を受ける）HomePage, ServicePage, PricingPage,
                      WorksPage, WorkDetailPage, AboutPage, FaqPage, ContactPage, ...
   layouts/           BaseLayout.astro（SEO/OGP/hreflang/JSON-LD/フォント/計測/リビール）

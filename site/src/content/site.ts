@@ -3,11 +3,10 @@ import type { Lang } from '../i18n/config';
 
 // 言語に依存しない共通情報
 export const siteCommon = {
-  brandName: 'Akane Web Studio',
+  brandName: 'AKANE WEB STUDIO',
   // TODO: 連絡先メール確定後に差し替え
   email: 'hello@example.com',
-  // TODO: InstagramアカウントURL確定後に差し替え
-  instagramUrl: 'https://www.instagram.com/',
+  instagramUrl: 'https://www.instagram.com/akane.webstudio/',
   // TODO: 予約ツール（Calendly / TimeRex / Spir）のURL確定後に差し替え
   bookingUrl: '',
   // TODO: 独自ドメイン確定後に差し替え（astro.config.mjs の site と必ず一致させる）
@@ -23,12 +22,12 @@ export const siteText: Record<Lang, {
   copyright: string;
 }> = {
   ja: {
-    tagline: 'ゴールドコーストの美容サロンに、日本品質の集客を。',
-    areas: 'ゴールドコースト（市内・近郊の美容サロン）',
+    tagline: 'ゴールドコーストのビジネスに、日本品質のSNS運用とWebを。',
+    areas: 'ゴールドコースト（市内・近郊）',
     copyright: `© ${year} ${siteCommon.brandName}. All rights reserved.`,
   },
   en: {
-    tagline: 'Japanese-quality marketing for Gold Coast beauty salons.',
+    tagline: 'Japanese-quality social media & websites for Gold Coast businesses.',
     areas: 'Gold Coast (city & surrounds)',
     copyright: `© ${year} ${siteCommon.brandName}. All rights reserved.`,
   },

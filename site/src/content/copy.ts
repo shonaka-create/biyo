@@ -15,30 +15,12 @@ export type Copy = {
     ctaSecondary: LinkRef;
   };
   trustBar: { items: { label: string; value: string }[] };
-  comparison: {
-    label: string;
-    heading: string;
-    lead: string;
-    conditions: string[];
-    rows: { name: string; us?: boolean; marks: ('yes' | 'partial' | 'no')[] }[];
-    legend: { yes: string; partial: string; no: string };
-    note: string;
-  };
-  problem: {
-    label: string;
-    heading: string;
-    lead: string;
-    items: { title: string; body: string }[];
-    close: string;
-  };
-  discovery: { label: string; heading: string; lead: string; points: string[] };
-  loop: { label: string; heading: string; lead: string; note: string };
   strengths: { label: string; heading: string; items: { title: string; body: string }[] };
   services: {
     label: string;
     heading: string;
     lead: string;
-    stages: { stage: string; summary: string; items: string[] }[];
+    pillars: { title: string; summary: string; items: string[] }[];
     note: string;
   };
   steps: { label: string; heading: string; items: { title: string; body: string }[] };
@@ -55,92 +37,58 @@ export type Copy = {
 export const copy: Record<Lang, Copy> = {
   ja: {
     hero: {
-      eyebrow: 'ゴールドコースト × 日本品質の集客パートナー',
-      heading: { lead: 'ゴールドコーストの\n美容サロンに、', accent: '日本品質の集客を。' },
-      sub: 'ゴールドコーストで、ネイル・まつげ・眉・ヘア・エステを手がける日本人オーナーの美容サロンへ。Web・Instagram・Googleレビューまで、集客の“仕組み”を一貫してお任せいただけます。',
-      micro: ['初月Instagram運用 無料', '日豪2か国体制', '日英対応', '成果は月次でご報告'],
+      eyebrow: 'ゴールドコースト × 日本品質の SNS運用・Web制作',
+      heading: { lead: 'ゴールドコーストの\nビジネスに、', accent: '日本品質のSNSとWebを。' },
+      sub: 'ゴールドコーストで事業を営むオーナーへ。Instagramを中心としたSNS運用と、Webサイトの制作・運用を、日本品質で一貫してお任せいただけます。業種は問いません。',
+      micro: ['SNS運用 × Web制作', '日豪2か国体制', '日英対応', '成果は月次でご報告'],
       ctaPrimary: { label: 'Instagramで相談する', href: siteCommon.instagramUrl },
       ctaSecondary: { label: 'サービスを見る', href: '#service' },
     },
     trustBar: {
       items: [
         { label: '対応エリア', value: 'ゴールドコースト（市内・近郊）' },
-        { label: '対応領域', value: 'Web / Instagram / Google・MEO / Fresha' },
-        { label: '創業キャンペーン', value: 'サイト制作で初月Instagram運用 無料' },
+        { label: 'サービス', value: 'Webサイト制作 / Instagram' },
+        { label: '対応業種', value: '業種は問いません' },
         { label: '体制', value: '日豪2拠点・日英バイリンガル' },
       ],
-    },
-    comparison: {
-      label: 'Why us',
-      heading: 'ほかとの違い',
-      lead: '下に挙げる5つ。どれか1つは見つかっても、全部そろう相手はめったにいません。',
-      conditions: [
-        '日本語で相談できる',
-        'ゴールドコーストに実際にいる',
-        '日本と同じ品質でつくる',
-        'Webから口コミまでまとめて見る',
-        '小さなサロンに専属でつく',
-      ],
-      rows: [
-        { name: '現地の英語マーケ代理店', marks: ['no', 'yes', 'partial', 'yes', 'partial'] },
-        { name: '在豪の日本人フリーランス', marks: ['yes', 'yes', 'partial', 'no', 'partial'] },
-        { name: '日系メディア（JAMS等）', marks: ['yes', 'partial', 'yes', 'partial', 'no'] },
-        { name: '日本のリモート代行', marks: ['yes', 'no', 'yes', 'partial', 'partial'] },
-        { name: 'DIY・自力運用', marks: ['yes', 'yes', 'no', 'no', 'no'] },
-        { name: '私たち', us: true, marks: ['yes', 'yes', 'yes', 'yes', 'yes'] },
-      ],
-      legend: { yes: '対応できる', partial: '部分的・条件つき', no: '対応が難しい' },
-      note: '上のどの選択肢も、5つ全部にはマルがつきません。だからこそ、私たちが選ばれています。',
-    },
-    problem: {
-      label: 'Problem',
-      heading: 'よくあるお悩み',
-      lead: '技術力の高いサロンほど、その実力がSNSで伝わりきっていないことがあります。心当たりはありませんか。',
-      items: [
-        { title: '写真を並べるだけの投稿', body: '施術写真をただ載せるだけでは、世界観も技術の高さも伝わりません。' },
-        { title: 'メニューごとにバラバラの発信', body: 'ネイルとマツエクが別々の発信になっていて、「両方通えるサロン」と認知されていません。' },
-        { title: '日本品質が英語圏に届かない', body: 'せっかくの日本水準の技術が、英語圏のお客様の目に触れる形になっていません。' },
-        { title: '“待ち”の運用', body: 'リールやストーリーを使った能動的な集客ができず、フォロワー任せになっています。' },
-      ],
-      close: 'ひとつでも当てはまれば、それは伸びしろ。届け方を変えるだけで、予約は動きはじめます。',
-    },
-    discovery: {
-      label: 'Market',
-      heading: 'お店の探され方',
-      lead: '日本のホットペッパーのような一強プラットフォームがなく、お店の入口は分散しています。そして分散した入口は、最終的に Instagram という1点に集まります。',
-      points: [
-        'Googleやレビューで気になるお店を絞り込んだあと、Instagramで施術・雰囲気・人柄を確認して予約を決めます。',
-        'だから Instagram は単なる「投稿の場」ではなく、認知から予約までを貫く“信頼のハブ”になります。',
-      ],
-    },
-    loop: {
-      label: 'Solution',
-      heading: '集客の輪',
-      lead: '集客は、入口から予約までの一方通行ではありません。来店 → 満足 → レビュー・紹介 → 新しいお客様、とぐるぐる回り続ける“輪”です。中心の「来店・施術」だけに集中していただき、外側の輪はすべて私たちが回します。',
-      note: '輪を回す軸はレビューです。良い施術がレビューを生み、レビューが検索順位と信頼を高め、次の新しいお客様につながります。',
     },
     strengths: {
       label: 'Why us',
       heading: '日本の品質を、現地の信頼で届ける。',
       items: [
         { title: '日豪2か国体制', body: 'ゴールドコーストに現地担当、日本に制作・運用チーム。現地に足があり、日本に実行力があります。' },
-        { title: '日英バイリンガル対応', body: '在豪日本人のお客様にも、ローカルのお客様にも届く発信を設計します。' },
-        { title: '日本水準のデザインと運用品質', body: '日本のマーケティング・制作ノウハウをそのまま持ち込み、細部まで丁寧に仕上げます。' },
-        { title: '続けるほど磨かれる仕組み', body: '案件を重ねるごとにノウハウが積み上がり、改善のスピードと精度が上がっていきます。' },
+        { title: '日英バイリンガル対応', body: '在豪日本人のお客様にも、ローカルのお客様にも届く発信とサイトを設計します。' },
+        { title: '日本水準のデザインと運用品質', body: '日本で磨いた制作・運用ノウハウをそのまま持ち込み、細部まで丁寧に仕上げます。' },
+        { title: 'SNSとWebを一気通貫', body: '発信からサイト・問い合わせ導線まで、バラバラにせず1つの流れとして設計します。' },
       ],
     },
     services: {
       label: 'Service',
       heading: 'サービス内容',
-      lead: '輪の段階ごとに、担当範囲と主な施策をはっきりさせています。',
-      stages: [
-        { stage: '認知', summary: 'まず見つけてもらう', items: ['Instagram運用（フィード・リール・ストーリー）', 'Googleビジネス / MEO最適化', 'レビューの見せ方設計', '在豪日本人メディアへの展開（必要に応じて）'] },
-        { stage: '検討・予約', summary: '「ここにしよう」を後押しする', items: ['Webサイト制作・保守', '予約導線設計（Instagram DM / Fresha）'] },
-        { stage: 'リピート・再来', summary: 'もう一度来てもらう', items: ['SMS・メール・Fresha自動リマインドの設計', 'ギフト・紹介導線の設計'] },
-        { stage: '紹介・レビュー', summary: '次のお客様を連れてくる', items: ['レビュー獲得の仕組みづくり', 'UGC（お客様の投稿）の活用', '紹介プログラムの設計'] },
-        { stage: '横断', summary: '輪全体を回し続ける', items: ['月次の分析・改善・レポート（成長パートナーの本体）'] },
+      lead: '私たちのサービスは大きく2つ。SNS運用と、Web制作・運用です。',
+      pillars: [
+        {
+          title: 'SNS（Instagram）運用',
+          summary: '発信を、成果につながる形に',
+          items: [
+            'アカウント設計・プロフィール最適化',
+            'フィード／リール／ストーリーの企画・制作・投稿',
+            '写真・動画素材のディレクション',
+            '月次の分析レポートと改善',
+          ],
+        },
+        {
+          title: 'Web制作・運用',
+          summary: '“見られて選ばれる”サイトを',
+          items: [
+            'Webサイトの企画・デザイン・制作',
+            '問い合わせ・予約導線の設計',
+            '公開後の更新・保守・改善',
+            'スマホ最適化・表示速度・基本的なSEO',
+          ],
+        },
       ],
-      note: '輪の中心「来店・施術（接客・技術）」は、オーナー様にお任せする部分です。素材のご提供・広告予算・撮影同行など、共同で進める範囲やオプションになる範囲は、事前にはっきりお伝えします。',
+      note: '撮影同行や広告運用など、共同で進める範囲・オプションになる範囲は、事前にはっきりお伝えします。',
     },
     steps: {
       label: 'Flow',
@@ -148,8 +96,8 @@ export const copy: Record<Lang, Copy> = {
       items: [
         { title: '無料ヒアリング', body: '30分・オンラインまたは対面で、現状と目標をお聞きします。' },
         { title: 'プラン確定・ご契約', body: '最適なプランをご提案し、業務委託契約を結びます。' },
-        { title: '初期構築', body: 'ハッシュタグ設計・投稿テンプレート・予約導線などの土台を整えます。' },
-        { title: '運用開始・月末レポート', body: '運用をスタートし、毎月末に成果をご報告します。' },
+        { title: '初期構築', body: 'SNSの設計やサイトの土台など、運用に必要な準備を整えます。' },
+        { title: '運用開始・月末レポート', body: '運用・制作をスタートし、毎月末に成果をご報告します。' },
         { title: '月次ミーティング＆改善', body: '数字をもとに翌月の打ち手を一緒に決めていきます。' },
       ],
     },
@@ -163,109 +111,75 @@ export const copy: Record<Lang, Copy> = {
       heading: 'お客様の声',
       items: [
         // TODO: 掲載許可の取れた実際の声に差し替え（現在はサンプル）
-        { name: 'Mai', shop: 'まつげサロン経営・サザンポート', comment: 'Instagramをお任せしてから、DMでのご予約が目に見えて増えました。投稿の世界観が整い、「写真を見て来ました」というお客様がほとんどです。毎月数字で見せてもらえるので、安心して続けられています。' },
-        { name: 'Mimu', shop: 'ネイルサロン経営・サーファーズパラダイス', comment: '英語での発信に自信がなく後回しにしていましたが、日本人にもローカルのお客様にも届く内容にしてもらえました。Googleのレビューも自然に増え、新規のご予約が安定してきています。' },
+        { name: 'K.T.', shop: 'カフェ経営・ゴールドコースト', comment: 'Instagramをお任せしてから投稿の世界観が整い、「投稿を見て来ました」というお客様が増えました。毎月数字で見せてもらえるので、安心して続けられています。' },
+        { name: 'M.S.', shop: '小売店経営・ゴールドコースト', comment: '古くなっていたサイトを作り直してもらい、問い合わせが目に見えて増えました。公開後も気軽に更新を頼めるのが助かっています。' },
       ],
     },
     team: {
       label: 'Team',
       heading: '私たちのチーム',
-      lead: '信頼が何より大切な市場だからこそ、私たち自身のことをお見せします。',
+      lead: '信頼が何より大切だからこそ、私たち自身のことをお見せします。',
       members: [
         { name: '[お名前]', role: 'ゴールドコースト担当（営業・お客様サポート）', location: 'ゴールドコースト在住7年', message: '現地で築いてきた信頼関係を大切に、オーナー様の一番近くで伴走します。', slot: 'team-portrait-au' },
-        { name: '[お名前]', role: '日本担当（Web制作・Instagram運用・分析改善）', location: '日本', message: '日本で磨いたマーケティングと制作の品質を、そのままお届けします。', slot: 'team-portrait-jp' },
+        { name: '[お名前]', role: '日本担当（Web制作・SNS運用・分析改善）', location: '日本', message: '日本で磨いた制作と運用の品質を、そのままお届けします。', slot: 'team-portrait-jp' },
       ],
     },
   },
 
   en: {
     hero: {
-      eyebrow: 'Gold Coast × Japanese-quality growth',
-      heading: { lead: 'Japanese-quality marketing', accent: 'for Gold Coast beauty salons.' },
-      sub: 'For Japanese-owned beauty salons on the Gold Coast — nails, lashes, brows, hair and skin. From your website and Instagram to Google reviews, we run the whole growth engine as one connected system.',
-      micro: ['First month of Instagram free', 'Japan + Australia team', 'Bilingual (JP / EN)', 'Monthly results reporting'],
+      eyebrow: 'Gold Coast × Japanese-quality social & web',
+      heading: { lead: 'Japanese-quality social & websites', accent: 'for Gold Coast businesses.' },
+      sub: 'For owners running a business on the Gold Coast. We handle your Instagram-led social media and your website — built and run end to end, to a Japanese standard. Any industry.',
+      micro: ['Social + web build', 'Japan + Australia team', 'Bilingual (JP / EN)', 'Monthly results reporting'],
       ctaPrimary: { label: 'Contact us on Instagram', href: siteCommon.instagramUrl },
       ctaSecondary: { label: 'See our services', href: '#service' },
     },
     trustBar: {
       items: [
         { label: 'Areas served', value: 'Gold Coast (city & surrounds)' },
-        { label: 'What we cover', value: 'Web / Instagram / Google & MEO / Fresha' },
-        { label: 'Launch offer', value: 'First month of Instagram free with a website build' },
+        { label: 'Services', value: 'Social media / web build & operations' },
+        { label: 'Industries', value: 'Any industry' },
         { label: 'Team', value: 'Two countries, fully bilingual' },
       ],
-    },
-    comparison: {
-      label: 'Why us',
-      heading: 'How we compare',
-      lead: 'Japanese-language ease, local face-to-face trust, Japanese-quality execution, the whole growth loop end-to-end, and dedication to a small salon — almost no one covers all five at once.',
-      conditions: [
-        'Japanese & bicultural',
-        'Local, face-to-face QLD trust',
-        'Japanese-quality execution',
-        'The whole loop, end-to-end',
-        'Dedicated to small salons',
-      ],
-      rows: [
-        { name: 'Local English agencies', marks: ['no', 'yes', 'partial', 'yes', 'partial'] },
-        { name: 'Japanese freelancers in AU', marks: ['yes', 'yes', 'partial', 'no', 'partial'] },
-        { name: 'Japanese-community media (e.g. JAMS)', marks: ['yes', 'partial', 'yes', 'partial', 'no'] },
-        { name: 'Remote agencies in Japan', marks: ['yes', 'no', 'yes', 'partial', 'partial'] },
-        { name: 'DIY / self-managed', marks: ['yes', 'yes', 'no', 'no', 'no'] },
-        { name: 'Us', us: true, marks: ['yes', 'yes', 'yes', 'yes', 'yes'] },
-      ],
-      legend: { yes: 'Covered', partial: 'Partial / conditional', no: 'Hard to cover' },
-      note: 'No one above checks all five at once. That gap in the middle is exactly where we sit.',
-    },
-    problem: {
-      label: 'Problem',
-      heading: 'Common challenges',
-      lead: 'The more skilled the salon, the more is often left on the table. Sound familiar?',
-      items: [
-        { title: 'Posts that are just photos', body: 'A feed of treatment photos alone doesn’t convey your atmosphere or the level of your craft.' },
-        { title: 'Each service marketed on its own', body: 'When nails and lashes are posted in isolation, no one realises they can book both with you.' },
-        { title: 'Japanese quality that doesn’t land', body: 'Your Japan-level skill isn’t reaching English-speaking clients in a form they actually see.' },
-        { title: 'A “wait and see” account', body: 'Without intentional use of Reels and Stories, growth is left to chance.' },
-      ],
-      close: 'If even one sounds familiar, that’s room to grow. Change how the work is shown, and the bookings start to move.',
-    },
-    discovery: {
-      label: 'Market',
-      heading: 'How salons get found',
-      lead: 'There’s no single dominant platform like Japan’s Hot Pepper — the ways people find you are scattered. And those scattered entry points all converge on one place: Instagram.',
-      points: [
-        'After shortlisting on Google or review sites, people open Instagram to check the work, the vibe and the person — then decide to book.',
-        'So Instagram isn’t just a place to post — it’s the trust hub that carries someone from discovery to confidence to booking.',
-      ],
-    },
-    loop: {
-      label: 'Solution',
-      heading: 'The growth loop',
-      lead: 'Growth isn’t a one-way funnel. It’s a loop that keeps turning: visit → happy client → reviews & referrals → new clients. You focus on the treatment at the centre; we run the whole loop around it.',
-      note: 'Reviews are the axle. Great work earns reviews; reviews lift your search ranking and trust; that brings in the next new client — and the loop turns again.',
     },
     strengths: {
       label: 'Why us',
       heading: 'Japanese quality, delivered through local trust.',
       items: [
         { title: 'A team across two countries', body: 'A partner on the ground on the Gold Coast, a production and operations team in Japan. Local presence, Japanese execution.' },
-        { title: 'Truly bilingual (JP / EN)', body: 'We craft content that reaches both Japanese expats and local Australian clients.' },
-        { title: 'Japan-standard design & operations', body: 'We bring Japanese marketing and production know-how directly to your salon, finished down to the last detail.' },
-        { title: 'A system that compounds', body: 'Every engagement adds to our playbook, so improvements get faster and sharper over time.' },
+        { title: 'Truly bilingual (JP / EN)', body: 'We craft content and websites that reach both Japanese expats and local Australian customers.' },
+        { title: 'Japan-standard design & operations', body: 'We bring Japanese production and operations know-how directly to you, finished down to the last detail.' },
+        { title: 'Social and web, end to end', body: 'From posts to your website and enquiry flow, we design it all as one connected journey — not separate pieces.' },
       ],
     },
     services: {
       label: 'Service',
       heading: 'What we do',
-      lead: 'For every stage, we make the scope and the key activities clear.',
-      stages: [
-        { stage: 'Discovery', summary: 'Get found first', items: ['Instagram management (feed, Reels, Stories)', 'Google Business / MEO optimisation', 'Review presentation & display', 'Japanese-community media in Australia (as needed)'] },
-        { stage: 'Consider & book', summary: 'Turn interest into “let’s go here”', items: ['Website build & maintenance', 'Booking flow design (Instagram DM / Fresha)'] },
-        { stage: 'Repeat & rebook', summary: 'Bring them back', items: ['SMS, email & Fresha automated reminder design', 'Gift & referral pathways'] },
-        { stage: 'Referrals & reviews', summary: 'Bring the next client in', items: ['Systems to earn reviews', 'Using client content (UGC)', 'Referral program design'] },
-        { stage: 'Across it all', summary: 'Keep the whole loop turning', items: ['Monthly analysis, improvement & reporting (the heart of a growth partner)'] },
+      lead: 'Our work comes down to two things: social media management, and building and running your website.',
+      pillars: [
+        {
+          title: 'Social media (Instagram)',
+          summary: 'Turn posting into real results',
+          items: [
+            'Account strategy & profile optimisation',
+            'Feed / Reels / Stories — planned, produced and posted',
+            'Direction for photo and video assets',
+            'Monthly analytics report and improvement',
+          ],
+        },
+        {
+          title: 'Web build & operations',
+          summary: 'A site that gets seen and chosen',
+          items: [
+            'Website planning, design and build',
+            'Enquiry & booking flow design',
+            'Post-launch updates, maintenance and improvement',
+            'Mobile optimisation, performance and core SEO',
+          ],
+        },
       ],
-      note: 'The centre of the loop — the treatment and client care — is yours. Anything shared or optional, such as supplying photos, ad budget, or on-site shoots, we make clear up front.',
+      note: 'Anything shared or optional — such as on-site shoots or paid ad management — we make clear up front.',
     },
     steps: {
       label: 'Flow',
@@ -273,7 +187,7 @@ export const copy: Record<Lang, Copy> = {
       items: [
         { title: 'Free consult', body: 'A 30-minute call (online or in person) to understand where you are and where you want to go.' },
         { title: 'Plan & agreement', body: 'We recommend the right plan and put a simple service agreement in place.' },
-        { title: 'Initial setup', body: 'We build the foundations — hashtag strategy, post templates, booking flow.' },
+        { title: 'Initial setup', body: 'We get the foundations ready — social strategy, the website base, whatever the work needs.' },
         { title: 'Launch & monthly report', body: 'We go live and report on results at the end of each month.' },
         { title: 'Monthly review & improve', body: 'We decide next month’s moves together, based on the numbers.' },
       ],
@@ -288,17 +202,17 @@ export const copy: Record<Lang, Copy> = {
       heading: 'What clients say',
       items: [
         // TODO: 掲載許可の取れた実際の声に差し替え（現在はサンプル）
-        { name: 'Mai', shop: 'Lash salon owner · Southport', comment: 'Since handing over our Instagram, DM bookings have clearly gone up. The feed finally looks like us, and most new clients say they came after seeing the photos. Getting the numbers each month makes it easy to keep going.' },
-        { name: 'Mimu', shop: 'Nail salon owner · Surfers Paradise', comment: 'I kept putting off posting in English, but they made content that reaches both Japanese and local clients. Our Google reviews grew naturally and new-client bookings have become much steadier.' },
+        { name: 'K.T.', shop: 'Café owner · Gold Coast', comment: 'Since handing over our Instagram, the feed finally looks like us and more customers say they came after seeing a post. Getting the numbers each month makes it easy to keep going.' },
+        { name: 'M.S.', shop: 'Retail owner · Gold Coast', comment: 'They rebuilt our dated website and enquiries clearly went up. It helps that I can ask for updates easily even after launch.' },
       ],
     },
     team: {
       label: 'Team',
       heading: 'Our team',
-      lead: 'In a market built on trust, we’d rather show you exactly who we are.',
+      lead: 'Because trust matters most, we’d rather show you exactly who we are.',
       members: [
         { name: '[Name]', role: 'Sales · local liaison · client success', location: 'Gold Coast (7 years)', message: 'I draw on the trust I’ve built locally to stay right alongside each owner.', slot: 'team-portrait-au' },
-        { name: '[Name]', role: 'Web · Instagram · analytics', location: 'Japan', message: 'I bring the marketing and production quality I’ve honed in Japan, unchanged.', slot: 'team-portrait-jp' },
+        { name: '[Name]', role: 'Web · social media · analytics', location: 'Japan', message: 'I bring the production and operations quality I’ve honed in Japan, unchanged.', slot: 'team-portrait-jp' },
       ],
     },
   },

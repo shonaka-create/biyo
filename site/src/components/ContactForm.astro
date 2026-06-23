@@ -97,9 +97,10 @@ const FORM_ENDPOINT = ''; // 例: 'https://formspree.io/f/xxxxxxx'
         class="h-12 w-full rounded-md border border-line bg-surface px-4 text-base focus:border-brand"
       >
         <option value="">{t.planUndecided}</option>
-        <option value="ume">{t.planUme}</option>
-        <option value="take">{t.planTake}</option>
-        <option value="matsu">{t.planMatsu}</option>
+        <option value="sns-a">{t.planA}</option>
+        <option value="sns-b">{t.planB}</option>
+        <option value="sns-c">{t.planC}</option>
+        <option value="site">{t.planSite}</option>
       </select>
     </div>
   </div>
@@ -149,7 +150,7 @@ const FORM_ENDPOINT = ''; // 例: 'https://formspree.io/f/xxxxxxx'
   const submitBtn = document.getElementById('form-submit') as HTMLButtonElement;
   const errorEl = document.getElementById('form-error')!;
 
-  // 料金カードからの遷移（?plan=take 等）でプランを自動選択（§6.1 S8）
+  // 料金カードからの遷移（?plan=sns-b 等）でプランを自動選択（§6.1 S8）
   const planParam = new URLSearchParams(location.search).get('plan');
   if (planParam) {
     const select = document.getElementById('plan') as HTMLSelectElement;

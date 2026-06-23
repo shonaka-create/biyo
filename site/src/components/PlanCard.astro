@@ -1,5 +1,5 @@
 ---
-// 料金プランカード（§6.1 S8 / §8.5）。竹（recommended）は2pxアクセント枠＋推奨バッジ。
+// 料金プランカード（§6.1 S8 / §8.5）。recommended プランは2pxアクセント枠＋推奨バッジ。
 import type { Plan } from '../content/plans';
 import { ui } from '../content/ui';
 import { siteCommon } from '../content/site';
@@ -38,7 +38,12 @@ const t = ui[lang].plan;
     <p class="font-display text-4xl text-ink">
       {plan.monthly}<span class="ml-1 text-base text-ink-muted">{t.perMonth}</span>
     </p>
-    <p class="mt-2 text-sm text-ink-muted">{t.setup(plan.setup)}</p>
+    {plan.monthlySub && (
+      <p class="mt-2 text-sm text-ink-muted">
+        {plan.monthlySub}
+        {t.perMonth}
+      </p>
+    )}
   </div>
 
   <ul class="mt-6 flex-1 space-y-3">

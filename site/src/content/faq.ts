@@ -9,38 +9,32 @@ export const faqCategories: Record<Lang, FaqCategory[]> = {
     {
       category: '料金・契約',
       items: [
-        { q: '料金体系を教えてください。', a: 'すべてのプランが〈初期構築（一回）＋ 月額（継続）＋ オプション（都度）〉の三層です。詳しくは料金ページをご覧ください。', featured: true },
-        { q: '最低契約期間はありますか？', a: '集客の仕組みは積み上げ型のため、まずは6か月のご継続を推奨しています。状況に応じて柔軟にご相談に応じます。' }, // TODO: 契約条件確定後に修正
+        { q: '料金体系を教えてください。', a: 'SNS運用は月額プラン（Plan A/B/C）、Webサイト制作は別料金です。必要なときだけ追加できるオプションも含め、追加費用は契約前にすべてお伝えします。詳しくは料金ページをご覧ください。', featured: true },
+        { q: '最低契約期間はありますか？', a: '成果は積み上げ型のため、まずは6か月のご継続を推奨しています。状況に応じて柔軟にご相談に応じます。' }, // TODO: 契約条件確定後に修正
         { q: '途中でプランを変更できますか？', a: 'はい。月次ミーティングで成果を見ながら、翌月からのプラン変更が可能です。' },
       ],
     },
     {
       category: '作業範囲',
       items: [
-        { q: 'どこまでお任せできますか？', a: '集客の輪のうち「来店・施術（接客・技術）」以外——Web・Instagram・Google/MEO・予約導線・再来導線・レビュー獲得・月次の分析改善——を一貫してお任せいただけます。', featured: true },
-        { q: '写真や動画は自分で撮る必要がありますか？', a: '日々の施術写真はオーナー様にお願いしていますが、撮り方の型とチェックリストをご用意します。ゴールドコーストでは撮影同行（オプション）も可能です。', featured: true },
-      ],
-    },
-    {
-      category: 'オーストラリア特有のこと',
-      items: [
-        { q: '日本のホットペッパーのようなサービスはありますか？', a: '一強のプラットフォームはありません。Googleマップ・Fresha・Instagram・口コミ・在豪日本人メディアと入口が分散しており、だからこそ全体を設計する“仕組み”が重要になります。', featured: true },
-        { q: 'Freshaとは何ですか？', a: '豪州で広く使われている美容系の予約プラットフォームです。予約管理・自動リマインド・レビュー機能があり、集客導線の重要な一部として設計に組み込みます。', featured: true },
-        { q: '再来のご案内（リマインド）はどう行いますか？', a: 'SMS・メール・Freshaの自動通知・Instagram DMを組み合わせて、再来導線を設計します。豪州の利用実態に合わせた方法でご案内します。' },
+        { q: 'どこまでお任せできますか？', a: 'SNS（Instagram）運用——アカウント設計・投稿の企画／制作／投稿・分析改善——と、Webサイトの制作・運用——制作・問い合わせ導線・公開後の更新／保守——を一貫してお任せいただけます。業種は問いません。', featured: true },
+        { q: 'SNS運用とサイト制作は別々に頼めますか？', a: 'はい。SNS運用は月額プラン、サイト制作は別料金です。どちらか一方だけでも、両方あわせてでもご依頼いただけます。', featured: true },
+        { q: '写真や動画は自分で用意する必要がありますか？', a: '日々の素材はオーナー様にご提供いただきますが、撮り方の型とチェックリストをご用意します。ゴールドコーストでは撮影同行も可能です（Plan Cに含まれるほか、オプションでも承ります）。', featured: true },
       ],
     },
     {
       category: '進め方',
       items: [
         { q: '契約までの流れを教えてください。', a: 'まず30分の無料ヒアリング（オンラインまたは対面）で現状をお聞きし、プランをご提案します。ご納得いただけたら業務委託契約を結び、初期構築から始めます。', featured: true },
-        { q: 'ゴールドコースト以外の美容サロンでも依頼できますか？', a: '私たちはゴールドコーストの美容サロンに専念しています。現地での撮影同行や対面での打ち合わせを強みにしているためです。市内・近郊のサロン様はお気軽にご相談ください。' },
+        { q: '英語が苦手でも大丈夫ですか？', a: 'はい。日英バイリンガル体制なので、やり取りは日本語だけで問題ありません。発信やサイトは、在豪日本人にもローカルのお客様にも届く形で設計します。', featured: true },
+        { q: 'ゴールドコースト以外でも依頼できますか？', a: '撮影同行や対面での打ち合わせを強みにしているため、基本はゴールドコースト市内・近郊を中心にしています。オンライン中心のご依頼であれば、エリア外でもまずはご相談ください。' },
       ],
     },
     {
       category: '成果の考え方',
       items: [
-        { q: 'どのくらいで成果が出ますか？', a: '土台づくり（1〜2か月）→ 運用の定着（3か月前後）→ レビューと検索順位の積み上がり（半年〜）が目安です。毎月のレポートで進捗を数字でご確認いただけます。' },
-        { q: '成果はどのように報告されますか？', a: 'フォロワー数や「いいね」ではなく、プロフィールアクセス・予約導線のクリック・レビュー数・検索表示など、予約につながる指標を月次レポートでご報告します。' },
+        { q: 'どのくらいで成果が出ますか？', a: '土台づくり（1〜2か月）→ 運用の定着（3か月前後）→ 積み上がり（半年〜）が目安です。毎月のレポートで進捗を数字でご確認いただけます。' },
+        { q: '成果はどのように報告されますか？', a: 'フォロワー数や「いいね」だけでなく、プロフィールアクセス・サイトへの流入・問い合わせなど、ビジネスにつながる指標を月次レポートでご報告します。' },
       ],
     },
   ],
@@ -49,38 +43,32 @@ export const faqCategories: Record<Lang, FaqCategory[]> = {
     {
       category: 'Pricing & contract',
       items: [
-        { q: 'How does pricing work?', a: 'Every plan is three layers: a one-off setup, an ongoing monthly fee, and optional add-ons. See the pricing page for details.', featured: true },
-        { q: 'Is there a minimum commitment?', a: 'Because growth compounds, we recommend starting with six months. We stay flexible and adapt to your situation.' }, // TODO: 契約条件確定後に修正
+        { q: 'How does pricing work?', a: 'Social media management is a monthly plan (Plan A/B/C) and website builds are priced separately. Optional add-ons are available only when needed, and we share every extra cost before you sign. See the pricing page for details.', featured: true },
+        { q: 'Is there a minimum commitment?', a: 'Because results compound, we recommend starting with six months. We stay flexible and adapt to your situation.' }, // TODO: 契約条件確定後に修正
         { q: 'Can I change plans later?', a: 'Yes. We review results in the monthly meeting and you can move plans from the following month.' },
       ],
     },
     {
       category: 'Scope of work',
       items: [
-        { q: 'How much can I hand over?', a: 'Everything in the growth loop except the treatment and client care itself — your website, Instagram, Google/MEO, booking and rebooking flows, earning reviews, and monthly analysis and improvement.', featured: true },
-        { q: 'Do I have to shoot the photos and videos myself?', a: 'Day-to-day treatment photos come from you, but we provide the templates and checklists for shooting them. On the Gold Coast, on-site shoots are available as an add-on.', featured: true },
-      ],
-    },
-    {
-      category: 'How Australia is different',
-      items: [
-        { q: 'Is there something like Japan’s Hot Pepper here?', a: 'There’s no single dominant platform. Discovery is scattered across Google Maps, Fresha, Instagram, word of mouth and Japanese-community media — which is exactly why a designed, end-to-end system matters.', featured: true },
-        { q: 'What is Fresha?', a: 'A booking platform widely used by the beauty industry in Australia. It handles bookings, automated reminders and reviews, and we build it into the growth flow as a key piece.', featured: true },
-        { q: 'How do you handle rebooking reminders?', a: 'We design rebooking flows using SMS, email, Fresha’s automated notifications and Instagram DM — the channels that actually work in Australia.' },
+        { q: 'How much can I hand over?', a: 'Social media (Instagram) — account strategy, planning, production, posting and analysis — and your website — build, enquiry flow, and post-launch updates and maintenance. Any industry.', featured: true },
+        { q: 'Can I order social media and a website separately?', a: 'Yes. Social media is a monthly plan and website builds are priced separately. Take either on its own, or both together.', featured: true },
+        { q: 'Do I have to provide the photos and videos myself?', a: 'Day-to-day assets come from you, but we provide the templates and checklists for shooting them. On the Gold Coast, on-site shoots are included in Plan C, or available as an add-on.', featured: true },
       ],
     },
     {
       category: 'How we work',
       items: [
         { q: 'What does getting started look like?', a: 'First, a 30-minute free consult (online or in person) to understand where you are, then a plan recommendation. Once you’re happy, we put a service agreement in place and begin the initial setup.', featured: true },
-        { q: 'Do you work with beauty salons outside the Gold Coast?', a: 'We focus on beauty salons on the Gold Coast — being local lets us join you for shoots and meet face to face. Salons in the city and surrounding area are very welcome to reach out.' },
+        { q: 'What if my English isn’t strong?', a: 'No problem — we’re fully bilingual, so everything can be handled in Japanese. We design content and websites that reach both Japanese expats and local Australian customers.', featured: true },
+        { q: 'Do you work with businesses outside the Gold Coast?', a: 'Being local lets us join you for shoots and meet face to face, so we focus on the Gold Coast and surrounds. For mostly-online engagements, businesses further afield are welcome to reach out.' },
       ],
     },
     {
       category: 'How we think about results',
       items: [
-        { q: 'How long until I see results?', a: 'A rough guide: foundations (1–2 months) → operations settling in (around 3 months) → reviews and search ranking compounding (six months onward). You’ll see progress in numbers every month.' },
-        { q: 'How are results reported?', a: 'Not follower counts or likes, but the metrics that lead to bookings — profile visits, booking-link clicks, review counts and search visibility — in a monthly report.' },
+        { q: 'How long until I see results?', a: 'A rough guide: foundations (1–2 months) → operations settling in (around 3 months) → compounding (six months onward). You’ll see progress in numbers every month.' },
+        { q: 'How are results reported?', a: 'Not just follower counts or likes, but the metrics that move your business — profile visits, website traffic and enquiries — in a monthly report.' },
       ],
     },
   ],

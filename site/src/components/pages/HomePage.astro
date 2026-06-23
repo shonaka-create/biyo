@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import CTAButton from '../CTAButton.astro';
 import SectionHeading from '../SectionHeading.astro';
 import ImagePlaceholder from '../ImagePlaceholder.astro';
-import FunnelFigure from '../FunnelFigure.astro';
+import ServicePillars from '../ServicePillars.astro';
 import PlanCard from '../PlanCard.astro';
 import Stepper from '../Stepper.astro';
 import Accordion from '../Accordion.astro';
@@ -27,14 +27,14 @@ const u = ui[lang].home;
 
 const meta = {
   ja: {
-    title: `ゴールドコーストの美容サロン集客・Instagram運用｜${siteCommon.brandName}`,
+    title: `ゴールドコーストのSNS運用・Web制作｜${siteCommon.brandName}`,
     description:
-      'ゴールドコーストの日本人オーナー美容サロン（ネイル・まつげ・眉・ヘア・エステ）向けに、Web・Instagram・Google/MEO・レビュー獲得まで集客の仕組みを一貫サポート。日本品質の集客を、現地で信頼される形でお届けします。',
+      'ゴールドコーストで事業を営むオーナー向けに、Instagramを中心としたSNS運用と、Webサイトの制作・運用を、日本品質で一貫サポート。業種は問いません。日豪2拠点・日英バイリンガル体制。',
   },
   en: {
-    title: `Beauty salon marketing & Instagram on the Gold Coast｜${siteCommon.brandName}`,
+    title: `Social media & web for Gold Coast businesses｜${siteCommon.brandName}`,
     description:
-      'Japanese-quality marketing, delivered with local trust. For Japanese-owned beauty salons on the Gold Coast — nails, lashes, brows, hair and skin: web, Instagram, Google/MEO and reviews, run as one connected growth system.',
+      'Japanese-quality social media management and website builds for businesses on the Gold Coast — any industry. Instagram-led content and your website, run end to end. Japan + Australia, fully bilingual.',
   },
 }[lang];
 
@@ -43,11 +43,11 @@ const featuredFaq = faqCategories[lang]
   .filter((i) => i.featured)
   .slice(0, 6);
 
-// S1 ヒーロー背景スライドショー（3枚クロスフェード）：サロン / 美容 / ゴールドコーストの雰囲気
+// S1 ヒーロー背景スライドショー（3枚クロスフェード）：Web集客・マーケティングの雰囲気
 const heroSlides = [
-  'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=1800&q=80&fit=crop',
-  'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1800&q=80&fit=crop',
-  'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1800&q=80&fit=crop',
+  'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1800&q=80&fit=crop',
+  'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1800&q=80&fit=crop',
+  'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1800&q=80&fit=crop',
 ];
 ---
 
@@ -95,19 +95,6 @@ const heroSlides = [
         </h1>
 
         <p class="mt-6 max-w-[560px] text-[17px] leading-relaxed text-white/85">{c.hero.sub}</p>
-
-        <ul class="mt-7 flex flex-wrap gap-2.5">
-          {
-            c.hero.micro.map((m) => (
-              <li class="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-[13px] font-medium text-white backdrop-blur">
-                <svg class="h-3.5 w-3.5 shrink-0 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                  <path d="m5 13 4 4L19 7" />
-                </svg>
-                {m}
-              </li>
-            ))
-          }
-        </ul>
 
         <div class="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
           <CTAButton href={c.hero.ctaPrimary.href} lang={lang} variant="primary" ctaLocation="hero" class="px-8">
@@ -173,7 +160,7 @@ const heroSlides = [
     <div class="mx-auto max-w-[1200px]">
       <SectionHeading label={c.services.label} heading={c.services.heading} lead={c.services.lead} />
       <div class="reveal mt-12">
-        <FunnelFigure lang={lang} />
+        <ServicePillars lang={lang} />
       </div>
       <p class="reveal mt-8 rounded-lg bg-surface-cream px-6 py-5 text-sm text-ink-muted">{c.services.note}</p>
       <div class="reveal mt-8 text-center">
@@ -239,12 +226,9 @@ const heroSlides = [
           c.testimonials.items.map((t, i) => (
             <figure class="reveal rounded-lg border border-line bg-surface p-7">
               <blockquote class="text-[15px] text-ink-muted">{t.comment}</blockquote>
-              <figcaption class="mt-5 flex items-center gap-4">
-                <ImagePlaceholder slot_id={`testimonial-avatar-${i + 1}`} label={u.avatarLabel} ratio="1/1" class="w-14 shrink-0 rounded-full" />
-                <div>
-                  <p class="text-sm font-medium">{t.name}</p>
-                  <p class="text-xs text-ink-muted">{t.shop}</p>
-                </div>
+              <figcaption class="mt-5 border-t border-line pt-4">
+                <p class="text-sm font-medium">{t.name}</p>
+                <p class="text-xs text-ink-muted">{t.shop}</p>
               </figcaption>
             </figure>
           ))

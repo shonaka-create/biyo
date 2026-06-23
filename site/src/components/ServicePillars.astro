@@ -1,0 +1,37 @@
+---
+// サービス2軸（SNS運用 / Web制作・運用）を2枚のカードで提示する。
+// トップ（S7）とサービス詳細ページの両方で使用。
+import { copy } from '../content/copy';
+import type { Lang } from '../i18n/config';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const pillars = copy[lang].services.pillars;
+---
+
+<div class="grid gap-6 md:grid-cols-2">
+  {
+    pillars.map((p, i) => (
+      <div class="flex flex-col rounded-2xl border border-line bg-surface p-7 md:p-8">
+        <span class="font-display text-3xl leading-none text-accent/40">
+          {String(i + 1).padStart(2, '0')}
+        </span>
+        <h3 class="mt-4 font-sans text-xl font-semibold text-ink">{p.title}</h3>
+        <p class="mt-1 text-sm text-brand">{p.summary}</p>
+        <ul class="mt-6 space-y-2.5">
+          {p.items.map((item) => (
+            <li class="flex items-start gap-2.5 text-[15px] text-ink-muted">
+              <svg class="mt-1.5 h-4 w-4 shrink-0 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="m5 13 4 4L19 7" />
+              </svg>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+</div>
