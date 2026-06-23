@@ -135,7 +135,7 @@ export const copy: Record<Lang, Copy> = {
       lead: '信頼が何より大切だからこそ、私たち自身のことをお見せします。',
       members: [
         { name: '[お名前]', role: 'ゴールドコースト担当（営業・お客様サポート）', location: 'ゴールドコースト在住7年', message: '現地で築いてきた信頼関係を大切に、オーナー様の一番近くで伴走します。', slot: 'team-portrait-au' },
-        { name: '[お名前]', role: '日本担当（Web制作・SNS運用・分析改善）', location: '日本', message: '日本で磨いた制作と運用の品質を、そのままお届けします。', slot: 'team-portrait-jp' },
+        { name: 'SHOTARO', role: '日本担当（Web制作・SNS運用・分析改善）', location: '日本', message: '日本で磨いた制作と運用の品質を、そのままお届けします。', slot: 'team-portrait-jp' },
       ],
     },
   },
@@ -239,7 +239,7 @@ export const copy: Record<Lang, Copy> = {
       lead: 'Because trust matters most, we’d rather show you exactly who we are.',
       members: [
         { name: '[Name]', role: 'Sales · local liaison · client success', location: 'Gold Coast (7 years)', message: 'I draw on the trust I’ve built locally to stay right alongside each owner.', slot: 'team-portrait-au' },
-        { name: '[Name]', role: 'Web · social media · analytics', location: 'Japan', message: 'I bring the production and operations quality I’ve honed in Japan, unchanged.', slot: 'team-portrait-jp' },
+        { name: 'SHOTARO', role: 'Web · social media · analytics', location: 'Japan', message: 'I bring the production and operations quality I’ve honed in Japan, unchanged.', slot: 'team-portrait-jp' },
       ],
     },
   },
