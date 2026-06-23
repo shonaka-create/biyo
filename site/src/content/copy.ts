@@ -39,7 +39,7 @@ export const copy: Record<Lang, Copy> = {
   ja: {
     hero: {
       eyebrow: 'ゴールドコースト × 日本品質のInstagram集客',
-      heading: { lead: 'その技術を、', accent: 'もっと多くの人へ。' },
+      heading: { lead: 'その魅力を、', accent: 'もっと多くの人へ。' },
       sub: '美容サロンをはじめ、ゴールドコーストで腕一本でやってきたオーナーへ。技術で差がつきにくいいま、選ばれるかどうかはInstagramで決まります。「投稿しても伸びない」を、日本品質の運用でまるごと解決します。',
       micro: ['初月Instagram運用 無料', '日豪2か国体制', '日英対応', '成果は月次でご報告'],
       ctaPrimary: { label: 'Instagramで相談する', href: siteCommon.instagramUrl },
