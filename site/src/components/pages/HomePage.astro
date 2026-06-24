@@ -104,11 +104,15 @@ const heroSlides = [
           <CTAButton
             href={c.hero.ctaSecondary.href}
             lang={lang}
-            variant="text"
-            ctaLocation="hero-secondary"
-            class="!text-white decoration-white/50 hover:!text-white/80"
+            variant="secondary"
+            ctaLocation="hero-email"
+            class="gap-2 !border-white/70 px-8 !text-white hover:!bg-white/10"
           >
-            {c.hero.ctaSecondary.label} →
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+              <path d="m3 7 9 6 9-6"></path>
+            </svg>
+            {c.hero.ctaSecondary.label}
           </CTAButton>
         </div>
       </div>

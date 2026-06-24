@@ -45,10 +45,10 @@ export const copy: Record<Lang, Copy> = {
     hero: {
       eyebrow: 'ゴールドコースト × 日本品質のInstagram集客',
       heading: { lead: 'その魅力を、', accent: 'もっと多くの人へ。' },
-      sub: '美容サロンをはじめ、ゴールドコーストで腕一本でやってきたオーナーへ。技術で差がつきにくいいま、選ばれるかどうかはInstagramで決まります。「投稿しても伸びない」を、日本品質の運用でまるごと解決します。',
+      sub: 'ゴールドコーストで事業を展開されているオーナー様へ。自身の店舗やサービスが選ばれる理由を、SNSやWebサイトでさらに強化しませんか。「投稿しても伸びない」を、日本品質の運用でまるごと解決します。',
       micro: ['初月Instagram運用 無料', '日豪2か国体制', '日英対応', '成果は月次でご報告'],
       ctaPrimary: { label: 'Instagramで相談する', href: siteCommon.instagramUrl },
-      ctaSecondary: { label: 'サービスを見る', href: '#service' },
+      ctaSecondary: { label: 'メールで問い合わせ', href: `mailto:${siteCommon.email}` },
     },
     concerns: {
       label: 'Concerns',
@@ -158,10 +158,10 @@ export const copy: Record<Lang, Copy> = {
     hero: {
       eyebrow: 'Gold Coast × Japanese-quality Instagram growth',
       heading: { lead: 'Your craft is world-class —', accent: 'your Instagram should be too.' },
-      sub: 'For Gold Coast owners who’ve built their business on craft — beauty salons and beyond. When skill alone no longer sets you apart, Instagram decides who gets chosen. We turn “posting but not growing” into real results — managed to a Japanese standard.',
+      sub: 'For owners running a business on the Gold Coast. Make the reasons customers choose your shop or service even stronger — through social media and your website. We turn “posting but not growing” into real results, managed to a Japanese standard.',
       micro: ['First month of Instagram free', 'Japan + Australia team', 'Bilingual (JP / EN)', 'Monthly results reporting'],
       ctaPrimary: { label: 'Contact us on Instagram', href: siteCommon.instagramUrl },
-      ctaSecondary: { label: 'See our services', href: '#service' },
+      ctaSecondary: { label: 'Email us', href: `mailto:${siteCommon.email}` },
     },
     concerns: {
       label: 'Concerns',

@@ -49,7 +49,7 @@ const u = ui[lang].common;
       />
     </a>
 
-    <nav class="hidden items-center gap-8 lg:flex" aria-label="Global">
+    <nav class="hidden items-center gap-6 lg:flex" aria-label="Global">
       {
         nav.links.map((link) => (
           <a
@@ -62,14 +62,15 @@ const u = ui[lang].common;
       }
       <a
         href={`mailto:${siteCommon.email}`}
-        class="flex h-10 w-10 items-center justify-center rounded-full text-ink transition hover:text-brand"
+        class="inline-flex h-10 items-center gap-2 rounded-full border border-current px-4 text-[14px] text-ink transition hover:text-brand"
         aria-label={u.emailCta}
         title={u.emailCta}
       >
-        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
           <rect x="3" y="5" width="18" height="14" rx="2"></rect>
           <path d="m3 7 9 6 9-6"></path>
         </svg>
+        <span>{u.emailCta}</span>
       </a>
       <LanguageSwitcher lang={lang} />
       <CTAButton href={nav.cta.path} lang={lang} variant="primary" ctaLocation="header" class="h-11 px-5 text-[15px]">
