@@ -9,7 +9,7 @@ export const siteCommon = {
   // TODO: 予約ツール（Calendly / TimeRex / Spir）のURL確定後に差し替え
   bookingUrl: '',
   // TODO: 独自ドメイン確定後に差し替え（astro.config.mjs の site と必ず一致させる）
-  siteUrl: 'https://biyo-puce.vercel.app',
+  siteUrl: 'https://akane-web-studio.vercel.app',
 } as const;
 
 // 言語別テキスト

@@ -26,7 +26,12 @@ export type Copy = {
   };
   steps: { label: string; heading: string; items: { title: string; body: string }[] };
   finalCta: { heading: string; sub: string; cta: LinkRef };
-  testimonials: { label: string; heading: string; items: { name: string; shop: string; comment: string }[] };
+  testimonials: {
+    label: string;
+    heading: string;
+    filters: { id: 'all' | 'sns' | 'web'; label: string }[];
+    items: { name: string; shop: string; comment: string; category: 'sns' | 'web' }[];
+  };
   team: {
     label: string;
     heading: string;
@@ -123,10 +128,19 @@ export const copy: Record<Lang, Copy> = {
     testimonials: {
       label: 'Voice',
       heading: 'お客様の声',
+      filters: [
+        { id: 'all', label: 'すべて' },
+        { id: 'sns', label: 'SNS運用' },
+        { id: 'web', label: 'サイト制作' },
+      ],
       items: [
         // TODO: 掲載許可の取れた実際の声に差し替え（現在はサンプル）
-        { name: 'K.T.', shop: 'カフェ経営・ゴールドコースト', comment: 'Instagramをお任せしてから投稿の世界観が整い、「投稿を見て来ました」というお客様が増えました。毎月数字で見せてもらえるので、安心して続けられています。' },
-        { name: 'M.S.', shop: '小売店経営・ゴールドコースト', comment: '古くなっていたサイトを作り直してもらい、問い合わせが目に見えて増えました。公開後も気軽に更新を頼めるのが助かっています。' },
+        { name: 'K.T.', shop: 'カフェ経営・ゴールドコースト', category: 'sns', comment: 'Instagramをお任せしてから投稿の世界観が整い、「投稿を見て来ました」というお客様が増えました。毎月数字で見せてもらえるので、安心して続けられています。' },
+        { name: 'Y.N.', shop: 'ヨガスタジオ経営・ゴールドコースト', category: 'sns', comment: 'リールの企画から投稿までお任せしたら、保存数と問い合わせが増えました。「何を出すか」を毎回悩んでいたのが嘘のようです。' },
+        { name: 'R.A.', shop: 'パーソナルジム経営・ゴールドコースト', category: 'sns', comment: '英語での発信に自信がありませんでしたが、日英どちらのお客様にも届く内容にしてもらえました。新規のお問い合わせが安定しています。' },
+        { name: 'M.S.', shop: '小売店経営・ゴールドコースト', category: 'web', comment: '古くなっていたサイトを作り直してもらい、問い合わせが目に見えて増えました。公開後も気軽に更新を頼めるのが助かっています。' },
+        { name: 'T.K.', shop: '飲食店経営・ゴールドコースト', category: 'web', comment: 'スマホで見やすいサイトに作り替えてもらい、地図やメニューへの導線が分かりやすくなりました。来店前の問い合わせ対応がぐっと楽になりました。' },
+        { name: 'H.I.', shop: '士業事務所・ゴールドコースト', category: 'web', comment: '日本語と英語の両対応サイトのおかげで、在豪日本人だけでなくローカルのお客様からも連絡が来るようになりました。' },
       ],
     },
     team: {
@@ -227,10 +241,19 @@ export const copy: Record<Lang, Copy> = {
     testimonials: {
       label: 'Voice',
       heading: 'What clients say',
+      filters: [
+        { id: 'all', label: 'All' },
+        { id: 'sns', label: 'Social media' },
+        { id: 'web', label: 'Web design' },
+      ],
       items: [
         // TODO: 掲載許可の取れた実際の声に差し替え（現在はサンプル）
-        { name: 'K.T.', shop: 'Café owner · Gold Coast', comment: 'Since handing over our Instagram, the feed finally looks like us and more customers say they came after seeing a post. Getting the numbers each month makes it easy to keep going.' },
-        { name: 'M.S.', shop: 'Retail owner · Gold Coast', comment: 'They rebuilt our dated website and enquiries clearly went up. It helps that I can ask for updates easily even after launch.' },
+        { name: 'K.T.', shop: 'Café owner · Gold Coast', category: 'sns', comment: 'Since handing over our Instagram, the feed finally looks like us and more customers say they came after seeing a post. Getting the numbers each month makes it easy to keep going.' },
+        { name: 'Y.N.', shop: 'Yoga studio owner · Gold Coast', category: 'sns', comment: 'They took our Reels from idea to posting, and saves and enquiries went up. No more agonising over what to post each time.' },
+        { name: 'R.A.', shop: 'Personal trainer · Gold Coast', category: 'sns', comment: 'I wasn’t confident posting in English, but they made content that reaches both Japanese and local clients. New enquiries have become steady.' },
+        { name: 'M.S.', shop: 'Retail owner · Gold Coast', category: 'web', comment: 'They rebuilt our dated website and enquiries clearly went up. It helps that I can ask for updates easily even after launch.' },
+        { name: 'T.K.', shop: 'Restaurant owner · Gold Coast', category: 'web', comment: 'They rebuilt our site to be easy on mobile, with clear paths to the map and menu — far fewer pre-visit questions now.' },
+        { name: 'H.I.', shop: 'Professional services · Gold Coast', category: 'web', comment: 'With a bilingual JP/EN site, we now hear from local Australian clients too, not just Japanese expats.' },
       ],
     },
     team: {

@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // TODO: 独自ドメイン確定後に site を差し替え
 export default defineConfig({
-  site: 'https://biyo-puce.vercel.app',
+  site: 'https://akane-web-studio.vercel.app',
   // 日本語＝デフォルト（プレフィックスなし `/`）、英語＝`/en/`（§10）
   i18n: {
     defaultLocale: 'ja',

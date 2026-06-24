@@ -263,22 +263,69 @@ const heroSlides = [
     </div>
   </section>
 
-  <!-- S11. お客様の声 -->
+  <!-- S11. お客様の声（SNS運用／サイト制作でフィルター × 横スライダー） -->
   <section class="px-5 py-20 md:py-28 lg:px-8">
-    <div class="mx-auto max-w-[1200px]">
+    <div class="mx-auto max-w-[1200px]" data-voice-root>
       <SectionHeading label={c.testimonials.label} heading={c.testimonials.heading} align="center" />
-      <div class="voice-scroll reveal -mx-5 mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-4 lg:-mx-2 lg:px-2">
+
+      <!-- フィルター -->
+      <div class="reveal mt-8 flex flex-wrap justify-center gap-2" role="group" aria-label={c.testimonials.heading}>
         {
-          c.testimonials.items.map((t) => (
-            <figure class="flex shrink-0 basis-[85%] snap-start flex-col rounded-lg border border-line bg-surface p-7 sm:basis-[380px]">
-              <blockquote class="text-[15px] leading-relaxed text-ink-muted">{t.comment}</blockquote>
-              <figcaption class="mt-5 border-t border-line pt-4">
-                <p class="text-sm font-medium">{t.name}</p>
-                <p class="text-xs text-ink-muted">{t.shop}</p>
-              </figcaption>
-            </figure>
+          c.testimonials.filters.map((f, i) => (
+            <button
+              type="button"
+              data-voice-filter={f.id}
+              aria-pressed={i === 0 ? 'true' : 'false'}
+              class:list={[
+                'voice-tab rounded-full border px-5 py-2 text-sm font-medium transition',
+                i === 0
+                  ? 'border-brand bg-brand text-white'
+                  : 'border-line bg-surface text-ink-muted hover:border-brand hover:text-brand',
+              ]}
+            >
+              {f.label}
+            </button>
           ))
         }
+      </div>
+
+      <!-- スライダー -->
+      <div class="relative mt-10">
+        <div class="voice-scroll reveal -mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-4 lg:mx-0 lg:px-0" data-voice-track>
+          {
+            c.testimonials.items.map((t) => (
+              <figure
+                data-voice-card
+                data-category={t.category}
+                class="flex shrink-0 basis-[85%] snap-start flex-col rounded-lg border border-line bg-surface p-7 sm:basis-[360px]"
+              >
+                <blockquote class="text-[15px] leading-relaxed text-ink-muted">{t.comment}</blockquote>
+                <figcaption class="mt-5 border-t border-line pt-4">
+                  <p class="text-sm font-medium">{t.name}</p>
+                  <p class="text-xs text-ink-muted">{t.shop}</p>
+                </figcaption>
+              </figure>
+            ))
+          }
+        </div>
+
+        <!-- 矢印（PCのみ・スクロール可能なときだけ表示） -->
+        <button
+          type="button"
+          data-voice-prev
+          aria-label="前へ"
+          class="absolute -left-4 top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-canvas text-ink shadow-sm transition hover:border-brand hover:text-brand disabled:pointer-events-none disabled:opacity-0 lg:flex"
+        >
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+        </button>
+        <button
+          type="button"
+          data-voice-next
+          aria-label="次へ"
+          class="absolute -right-4 top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-canvas text-ink shadow-sm transition hover:border-brand hover:text-brand disabled:pointer-events-none disabled:opacity-0 lg:flex"
+        >
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+        </button>
       </div>
     </div>
   </section>
@@ -383,4 +430,62 @@ const heroSlides = [
 
   initHeroSlideshow();
   document.addEventListener('astro:page-load', initHeroSlideshow);
+
+  // S11 お客様の声：カテゴリーフィルター × 横スライダー
+  function initVoice() {
+    const root = document.querySelector<HTMLElement>('[data-voice-root]');
+    if (!root) return;
+    const track = root.querySelector<HTMLElement>('[data-voice-track]');
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-voice-filter]'));
+    const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-voice-card]'));
+    const prev = root.querySelector<HTMLButtonElement>('[data-voice-prev]');
+    const next = root.querySelector<HTMLButtonElement>('[data-voice-next]');
+    if (!track) return;
+
+    const activeCls = ['border-brand', 'bg-brand', 'text-white'];
+    const idleCls = ['border-line', 'bg-surface', 'text-ink-muted'];
+
+    const updateArrows = () => {
+      if (!prev || !next) return;
+      const max = track.scrollWidth - track.clientWidth - 1;
+      prev.disabled = track.scrollLeft <= 0;
+      next.disabled = track.scrollLeft >= max;
+    };
+
+    const applyFilter = (id: string) => {
+      cards.forEach((card) => {
+        const show = id === 'all' || card.dataset.category === id;
+        card.classList.toggle('hidden', !show);
+      });
+      track.scrollTo({ left: 0 });
+      requestAnimationFrame(updateArrows);
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        tabs.forEach((t) => {
+          const on = t === tab;
+          t.setAttribute('aria-pressed', String(on));
+          t.classList.toggle(activeCls[0], on);
+          t.classList.toggle(activeCls[1], on);
+          t.classList.toggle(activeCls[2], on);
+          idleCls.forEach((c) => t.classList.toggle(c, !on));
+        });
+        applyFilter(tab.dataset.voiceFilter || 'all');
+      });
+    });
+
+    const step = () => {
+      const card = cards.find((c) => !c.classList.contains('hidden'));
+      return card ? card.getBoundingClientRect().width + 20 : track.clientWidth * 0.8;
+    };
+    prev?.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+    next?.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+    track.addEventListener('scroll', updateArrows, { passive: true });
+    window.addEventListener('resize', updateArrows, { passive: true });
+    updateArrows();
+  }
+
+  initVoice();
+  document.addEventListener('astro:page-load', initVoice);
 </script>
