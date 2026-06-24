@@ -60,6 +60,10 @@ const u = ui[lang].common;
           </a>
         ))
       }
+      <LanguageSwitcher lang={lang} />
+      <CTAButton href={nav.cta.path} lang={lang} variant="primary" ctaLocation="header" class="h-11 px-5 text-[15px]">
+        {nav.cta.label}
+      </CTAButton>
       <a
         href={`mailto:${siteCommon.email}`}
         class="inline-flex h-10 items-center gap-2 rounded-full border border-current px-4 text-[14px] text-ink transition hover:text-brand"
@@ -72,10 +76,6 @@ const u = ui[lang].common;
         </svg>
         <span>{u.emailCta}</span>
       </a>
-      <LanguageSwitcher lang={lang} />
-      <CTAButton href={nav.cta.path} lang={lang} variant="primary" ctaLocation="header" class="h-11 px-5 text-[15px]">
-        {nav.cta.label}
-      </CTAButton>
     </nav>
 
     <button
