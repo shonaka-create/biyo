@@ -77,33 +77,6 @@ const title = lang === 'ja' ? `${work.name}の事例｜${siteCommon.brandName}` 
           <h2 class="border-b border-line pb-3 text-2xl">{u.result}</h2>
           <p class="mt-5 text-[15px] leading-loose text-ink-muted">{work.result}</p>
         </section>
-
-        <section class="reveal">
-          <h2 class="border-b border-line pb-3 text-2xl">{u.deliverables}</h2>
-          <div class="mt-6 grid gap-8 sm:grid-cols-2">
-            {
-              work.detailSlots.map((d) => (
-                <div class="flex flex-col overflow-hidden rounded-xl border border-line bg-canvas shadow-sm">
-                  <ImagePlaceholder slot_id={d.id} label={d.label} ratio={d.ratio.replace(':', '/')} class="!rounded-none" />
-                  <div class="flex flex-1 flex-col gap-4 p-5">
-                    <p class="text-sm leading-relaxed text-ink-muted">{d.label}</p>
-                    <a
-                      href="https://www.notion.so/Portfolio-1e9705da1db280f2ac49db037f552fa0"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="mt-auto inline-flex items-center justify-center gap-2 rounded-lg border border-brand px-4 py-2.5 text-sm font-medium text-brand transition hover:bg-brand hover:text-white"
-                    >
-                      {lang === 'ja' ? '詳細を見る' : 'View details'}
-                      <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M7 17 17 7M17 7H7M17 7v10" />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-        </section>
       </div>
     </div>
   </article>
