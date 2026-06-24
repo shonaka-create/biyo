@@ -1,7 +1,7 @@
 // 料金（§1.5 / §6.1 S8 / §6.2）
 // SNS運用（月額プラン）と サイト制作（別料金）を分けて提示する。
-// 表示通貨：日本語は円（A$を併記）、英語は A$（豪ローカル向け §10）。
-// TODO: 料金・為替レート・税の確定後にここを更新（数値は現行案）。
+// 表示通貨はオーストラリアドル（A$）で統一（§10）。
+// TODO: 料金・税の確定後にここを更新（数値は現行案）。
 import type { Lang } from '../i18n/config';
 
 // --- SNS運用プラン（月額） ---
@@ -10,8 +10,7 @@ export type Plan = {
   name: string;
   position: string;
   target: string;
-  monthly: string; // 主表示
-  monthlySub?: string; // 副表示（別通貨）
+  monthly: string;
   recommended: boolean;
   features: string[];
 };
@@ -23,8 +22,7 @@ export const plans: Record<Lang, Plan[]> = {
       name: 'Plan A',
       position: 'まずは続ける土台を',
       target: '無理なく投稿を継続したい方',
-      monthly: '50,000円',
-      monthlySub: 'A$500',
+      monthly: 'A$500',
       recommended: false,
       features: [
         '投稿の企画（必要に応じてチャット／ミーティングでご相談）',
@@ -37,8 +35,7 @@ export const plans: Record<Lang, Plan[]> = {
       name: 'Plan B',
       position: '投稿量を増やして伸ばす',
       target: '発信を強化して新規をしっかり増やしたい方',
-      monthly: '70,000円',
-      monthlySub: 'A$750',
+      monthly: 'A$750',
       recommended: true,
       features: [
         '投稿の企画（必要に応じてチャット／ミーティングでご相談）',
@@ -51,8 +48,7 @@ export const plans: Record<Lang, Plan[]> = {
       name: 'Plan C',
       position: '撮影から運用までフルで',
       target: '撮影込みで本格的に運用したい方',
-      monthly: '120,000円',
-      monthlySub: 'A$1,500',
+      monthly: 'A$1,500',
       recommended: false,
       features: [
         '素材撮影・同行（別途交通費をご請求）',
@@ -109,8 +105,8 @@ export type SitePlan = { scope: string; price: string; note: string };
 
 export const sitePlans: Record<Lang, SitePlan[]> = {
   ja: [
-    { scope: '6〜10ページ', price: '10万円〜', note: '小規模サイトの新規制作・リニューアル。' },
-    { scope: '10ページ以上', price: '18万円〜', note: 'ページ数の多いサイトや機能追加を含む制作。' },
+    { scope: '6〜10ページ', price: 'A$1,000〜', note: '小規模サイトの新規制作・リニューアル。' },
+    { scope: '10ページ以上', price: 'A$1,800〜', note: 'ページ数の多いサイトや機能追加を含む制作。' },
   ],
   en: [
     { scope: '6–10 pages', price: 'A$1,000+', note: 'New build or renewal for a smaller site.' },
@@ -120,12 +116,12 @@ export const sitePlans: Record<Lang, SitePlan[]> = {
 
 export const planNotes: Record<Lang, string[]> = {
   ja: [
-    '【創業キャンペーン】Webサイト制作をご依頼の方は、初月のInstagram運用を無料でご提供します。さらに別の事業者様をご紹介いただくと、もう1か月分を無料に。',
-    '表示はすべて税別です。円建て・オーストラリアドル（A$）のどちらでもご請求可能です。', // TODO: 税・通貨の扱い確定後に文言調整
+    '【創業キャンペーン】Webサイト制作をご依頼の方は、初月のInstagram運用を無料でご提供します。\nさらに別の事業者様をご紹介いただくと、もう1か月分を無料に。',
+    '表示はすべてオーストラリアドル（A$）・税別です。', // TODO: 税・通貨の扱い確定後に文言調整
   ],
   en: [
     'Launch offer: build your website with us and your first month of Instagram management is free. Refer another business and we add a second free month.',
-    'Prices shown exclude tax. Billing in Australian dollars (AUD) or Japanese yen is available.', // TODO: 税・通貨の扱い確定後に文言調整
+    'All prices are in Australian dollars (AUD), excluding tax.', // TODO: 税・通貨の扱い確定後に文言調整
   ],
 };
 
@@ -153,7 +149,7 @@ export const pricingFaq: Record<Lang, { q: string; a: string }[]> = {
     { q: 'SNS運用とサイト制作は別々に頼めますか？', a: 'はい。SNS運用は月額プラン、サイト制作は別料金として承っています。どちらか一方だけでも、両方あわせてでもご依頼いただけます。' },
     { q: '写真や動画の素材はどちらが用意しますか？', a: '日々のお仕事の写真などの素材はオーナー様にご提供いただきます。撮影の型・チェックリストはこちらでご用意し、Plan Cまたはオプションで撮影同行も承ります。' },
     { q: '広告費はどうなりますか？', a: '広告の媒体費（Meta / Google に支払う費用）は実費でクライアント様のご負担です。運用・改善はオプションで承ります。' },
-    { q: '料金はどの通貨ですか？', a: '料金は円建て・オーストラリアドル（A$）のどちらでもご請求可能です。詳しくはご相談時にお伝えします。' },
+    { q: '料金はどの通貨ですか？', a: '料金はすべてオーストラリアドル（A$）建て・税別です。詳しくはご相談時にお伝えします。' },
   ],
   en: [
     { q: 'Is there a minimum commitment?', a: 'Because growth compounds over time, we recommend starting with six months. We’re flexible and happy to discuss what fits your situation.' }, // TODO: 契約条件確定後に修正
@@ -161,6 +157,6 @@ export const pricingFaq: Record<Lang, { q: string; a: string }[]> = {
     { q: 'Can I order social media and a website separately?', a: 'Yes. Social media management is a monthly plan and website builds are priced separately. Take either on its own, or both together.' },
     { q: 'Who provides the photos and videos?', a: 'Day-to-day photos come from you. We provide the shooting templates and checklists, and on-site shoots are available in Plan C or as an add-on.' },
     { q: 'How does ad spend work?', a: 'Media costs paid to Meta / Google are billed at cost to you. Management and optimisation are available as an add-on.' },
-    { q: 'What currency are prices in?', a: 'We can bill in Australian dollars (AUD) or Japanese yen. We’ll confirm the details during the consult.' },
+    { q: 'What currency are prices in?', a: 'All prices are in Australian dollars (AUD), excluding tax. We’ll confirm the details during the consult.' },
   ],
 };

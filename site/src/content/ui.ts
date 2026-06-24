@@ -111,7 +111,7 @@ export const ui = {
     home: {
       pricingLabel: 'Pricing',
       pricingHeading: '料金',
-      pricingLead: 'SNS運用は月額プラン、サイト制作は別料金。必要なときだけのオプションも含め、追加でかかる費用は契約前にすべてお伝えします。',
+      pricingLead: 'SNS運用は月額プラン、サイト制作は別料金。\n必要なときだけのオプションも含め、追加でかかる費用は契約前にすべてお伝えします。',
       pricingMore: 'サイト制作の料金・詳細を見る →',
       serviceFunnelLoop: '紹介・レビューが、次の「認知」へ還流して輪が回り続ける',
       worksLabel: 'Works',
@@ -145,7 +145,7 @@ export const ui = {
       snsLead: 'InstagramなどのSNS運用は月額制。投稿の頻度で3つのプランからお選びいただけます。',
       siteLabel: 'Website',
       siteHeading: 'サイト制作・リニューアル（別料金）',
-      siteLead: 'SNS運用とは別料金。ページ数を目安にお見積もりし、ご依頼前に金額を確定してお伝えします。お見積もりは無料です。',
+      siteLead: 'SNS運用とは別料金。ページ数を目安にお見積もりし、ご依頼前に金額を確定してお伝えします。\nお見積もりは無料です。',
       siteTableScope: '内容',
       siteTablePrice: '料金（目安）',
       siteTableNote: '備考',

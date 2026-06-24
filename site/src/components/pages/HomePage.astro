@@ -208,7 +208,7 @@ const heroSlides = [
 
       <div class="reveal mx-auto mt-14 max-w-[760px]">
         <h3 class="text-center font-display text-xl text-ink md:text-2xl">{pricingUi.siteHeading}</h3>
-        <p class="mt-2 text-center text-sm text-ink-muted">{pricingUi.siteLead}</p>
+        <p class="mt-2 whitespace-pre-line text-center text-sm text-ink-muted">{pricingUi.siteLead}</p>
         <div class="mt-6 grid gap-4 sm:grid-cols-2">
           {
             sitePlans[lang].map((s) => (
@@ -222,8 +222,8 @@ const heroSlides = [
         </div>
       </div>
 
-      <div class="reveal mt-10 space-y-1 text-center text-sm text-ink-muted">
-        {planNotes[lang].map((n) => <p>{n}</p>)}
+      <div class="reveal mt-10 space-y-2 text-center text-sm text-ink-muted">
+        {planNotes[lang].map((n) => <p class="whitespace-pre-line">{n}</p>)}
       </div>
       <div class="reveal mt-6 text-center">
         <CTAButton href="/pricing" lang={lang} variant="text" ctaLocation="pricing-more">{u.pricingMore}</CTAButton>
