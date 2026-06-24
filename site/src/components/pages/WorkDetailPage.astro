@@ -47,8 +47,8 @@ const title = lang === 'ja' ? `${work.name}の事例｜${siteCommon.brandName}` 
         {work.services.map((s) => <li class="rounded-full bg-brand-soft px-3 py-1 text-xs text-brand-strong">{s}</li>)}
       </ul>
 
-      <div class="reveal mt-10">
-        <ImagePlaceholder slot_id={work.thumbSlot} label={u.mainVisual(work.name)} ratio="16/9" />
+      <div class="reveal mx-auto mt-10 max-w-[460px]">
+        <ImagePlaceholder slot_id={work.thumbSlot} label={u.mainVisual(work.name)} ratio="4/5" />
       </div>
 
       <div class="mt-14 space-y-12">
