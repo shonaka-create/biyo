@@ -157,7 +157,7 @@ export const copy: Record<Lang, Copy> = {
   en: {
     hero: {
       eyebrow: 'Gold Coast × Japanese-quality Instagram growth',
-      heading: { lead: 'Your craft is world-class —', accent: 'your Instagram should be too.' },
+      heading: { lead: 'Your appeal —', accent: 'shared with far more people.' },
       sub: 'For owners running a business on the Gold Coast. Make the reasons customers choose your shop or service even stronger — through social media and your website. We turn “posting but not growing” into real results, managed to a Japanese standard.',
       micro: ['First month of Instagram free', 'Japan + Australia team', 'Bilingual (JP / EN)', 'Monthly results reporting'],
       ctaPrimary: { label: 'Contact us on Instagram', href: siteCommon.instagramUrl },
