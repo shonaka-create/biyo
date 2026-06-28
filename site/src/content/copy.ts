@@ -148,7 +148,7 @@ export const copy: Record<Lang, Copy> = {
       heading: '私たちのチーム',
       lead: '信頼が何より大切だからこそ、私たち自身のことをお見せします。',
       members: [
-        { name: '[お名前]', role: 'ゴールドコースト担当（営業・お客様サポート）', location: 'ゴールドコースト在住7年', message: '現地で築いてきた信頼関係を大切に、オーナー様の一番近くで伴走します。', slot: 'team-portrait-au' },
+        { name: 'Akane', role: 'ゴールドコースト担当（営業・お客様サポート）', location: 'ゴールドコースト在住', message: '現地で築いてきた信頼関係を大切に、オーナー様の一番近くで伴走します。', slot: 'team-portrait-au' },
         { name: 'SHOTARO', role: '日本担当（Web制作・SNS運用・分析改善）', location: '日本', message: '日本で磨いた制作と運用の品質を、そのままお届けします。', slot: 'team-portrait-jp' },
       ],
     },

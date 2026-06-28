@@ -105,12 +105,12 @@ export type SitePlan = { scope: string; price: string; note: string };
 
 export const sitePlans: Record<Lang, SitePlan[]> = {
   ja: [
-    { scope: '6〜10ページ', price: 'A$1,000〜', note: '小規模サイトの新規制作・リニューアル。' },
-    { scope: '10ページ以上', price: 'A$1,800〜', note: 'ページ数の多いサイトや機能追加を含む制作。' },
+    { scope: '6〜10ページ', price: 'A$1,200〜', note: '小規模サイトの新規制作・リニューアル。' },
+    { scope: '10ページ以上', price: 'A$2,000〜', note: 'ページ数の多いサイトや機能追加を含む制作。' },
   ],
   en: [
-    { scope: '6–10 pages', price: 'A$1,000+', note: 'New build or renewal for a smaller site.' },
-    { scope: '10+ pages', price: 'A$1,800+', note: 'Larger sites, or builds with added functionality.' },
+    { scope: '6–10 pages', price: 'A$1,200+', note: 'New build or renewal for a smaller site.' },
+    { scope: '10+ pages', price: 'A$2,000+', note: 'Larger sites, or builds with added functionality.' },
   ],
 };
 
