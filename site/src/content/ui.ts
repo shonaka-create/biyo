@@ -394,7 +394,7 @@ export const ui = {
       lead: 'We’re a two-person team spanning Japan and the Gold Coast, Australia.',
       story: [
         'On the Japan side: web production, Instagram management and analytics. We bring the production and marketing know-how honed in Japan straight to clients on the Gold Coast.',
-        'On the Australia side: seven years living on the Gold Coast. Sales, local liaison, coordinating shoots, and above all building trusted relationships and client success.',
+        'On the Australia side: living on the Gold Coast. Sales, local liaison, coordinating shoots, and above all building trusted relationships and client success.',
         'We’ve seen first-hand how many business owners get stuck at the wall of digital — the language, understanding the local market, and the worry of not knowing who to trust.',
         'So we built this as “Japanese execution × local trust.” Any industry. Through social media management and web build & operations, we grow how you reach people and where they land — together.',
       ],

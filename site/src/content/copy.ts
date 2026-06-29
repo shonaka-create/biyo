@@ -261,7 +261,7 @@ export const copy: Record<Lang, Copy> = {
       heading: 'Our team',
       lead: 'Because trust matters most, we’d rather show you exactly who we are.',
       members: [
-        { name: '[Name]', role: 'Sales · local liaison · client success', location: 'Gold Coast (7 years)', message: 'I draw on the trust I’ve built locally to stay right alongside each owner.', slot: 'team-portrait-au' },
+        { name: 'Akane', role: 'Sales · local liaison · client success', location: 'Gold Coast', message: 'I draw on the trust I’ve built locally to stay right alongside each owner.', slot: 'team-portrait-au' },
         { name: 'SHOTARO', role: 'Web · social media · analytics', location: 'Japan', message: 'I bring the production and operations quality I’ve honed in Japan, unchanged.', slot: 'team-portrait-jp' },
       ],
     },
