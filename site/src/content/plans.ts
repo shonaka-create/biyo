@@ -100,27 +100,58 @@ export const plans: Record<Lang, Plan[]> = {
   ],
 };
 
-// --- サイト制作・リニューアル（別料金） ---
-export type SitePlan = { scope: string; price: string; note: string };
+// --- サイト制作・運用（パッケージプラン） ---
+// 初期費用＋月額をまとめた1つのパッケージとして提供。下記の機能をすべて含む。
+export type SitePackage = {
+  name: string;
+  tagline: string;
+  setup: string; // 初期費用
+  monthly: string; // 月額
+  features: string[];
+};
 
-export const sitePlans: Record<Lang, SitePlan[]> = {
-  ja: [
-    { scope: '単発', price: 'A$600', note: '一度の制作・納品でサイトをお渡しする買い切りプラン。月額はかかりません。' },
-    { scope: '継続（月額）', price: '初月 A$200', note: '毎月の更新・保守込みの月額プラン。最低3か月のご契約が必須です。' },
-  ],
-  en: [
-    { scope: 'One-off', price: 'A$600', note: 'A one-time build and handover — yours to keep, with no monthly fee.' },
-    { scope: 'Ongoing (monthly)', price: 'A$200 first month', note: 'Monthly plan including updates and maintenance. Minimum 3-month commitment.' },
-  ],
+export const sitePackage: Record<Lang, SitePackage> = {
+  ja: {
+    name: 'Webサイト制作・運用パッケージ',
+    tagline: '制作から保守・運用まで、ぜんぶ込み',
+    setup: 'A$600',
+    monthly: 'A$200',
+    features: [
+      'レスポンシブ対応のWebサイト制作',
+      'お問い合わせフォーム設置',
+      'SEO基本設定（meta、OGP）',
+      'SSL証明書',
+      'お問い合わせ管理画面（CRM）',
+      'アナリティクスダッシュボード',
+      'ホスティング・サーバー管理',
+      '稼働監視',
+    ],
+  },
+  en: {
+    name: 'Website build & management package',
+    tagline: 'From build to hosting and monitoring — all in one',
+    setup: 'A$600',
+    monthly: 'A$200',
+    features: [
+      'Responsive website build',
+      'Contact form setup',
+      'Basic SEO (meta, OGP)',
+      'SSL certificate',
+      'Enquiry management dashboard (CRM)',
+      'Analytics dashboard',
+      'Hosting & server management',
+      'Uptime monitoring',
+    ],
+  },
 };
 
 export const planNotes: Record<Lang, string[]> = {
   ja: [
-    '【創業キャンペーン】Webサイト制作をご依頼の方は、初月のInstagram運用を無料でご提供します（対象はPlan A「まずは続ける土台を」）。\nさらに別の事業者様をご紹介いただくと、もう1か月分を無料に。',
+    '【創業キャンペーン】Webサイト制作をご依頼の方は、初月のInstagram運用（Plan A）を無料でご提供します。\nさらに別の事業者様をご紹介いただくと、もう1か月分を無料に。',
     '表示はすべてオーストラリアドル（A$）・税別です。', // TODO: 税・通貨の扱い確定後に文言調整
   ],
   en: [
-    'Launch offer: build your website with us and your first month of Instagram management is free (on Plan A, “Build a steady base”). Refer another business and we add a second free month.',
+    'Launch offer: build your website with us and your first month of Instagram management (Plan A) is free. Refer another business and we add a second free month.',
     'All prices are in Australian dollars (AUD), excluding tax.', // TODO: 税・通貨の扱い確定後に文言調整
   ],
 };

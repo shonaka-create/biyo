@@ -6,12 +6,13 @@ import SectionHeading from '../SectionHeading.astro';
 import ImagePlaceholder from '../ImagePlaceholder.astro';
 import ServicePillars from '../ServicePillars.astro';
 import PlanCard from '../PlanCard.astro';
+import SitePackageCard from '../SitePackageCard.astro';
 import Stepper from '../Stepper.astro';
 import Accordion from '../Accordion.astro';
 import CTABand from '../CTABand.astro';
 import { siteCommon } from '../../content/site';
 import { copy } from '../../content/copy';
-import { plans, sitePlans, planNotes } from '../../content/plans';
+import { plans, planNotes } from '../../content/plans';
 import { faqCategories } from '../../content/faq';
 import { works } from '../../content/works';
 import { ui } from '../../content/ui';
@@ -213,16 +214,8 @@ const heroSlides = [
       <div class="reveal mx-auto mt-14 max-w-[760px]">
         <h3 class="text-center font-display text-xl text-ink md:text-2xl">{pricingUi.siteHeading}</h3>
         <p class="mt-2 whitespace-pre-line text-center text-sm text-ink-muted">{pricingUi.siteLead}</p>
-        <div class="mt-6 grid gap-4 sm:grid-cols-2">
-          {
-            sitePlans[lang].map((s) => (
-              <div class="rounded-lg border border-line bg-canvas px-6 py-5">
-                <p class="font-medium text-ink">{s.scope}</p>
-                <p class="mt-1 font-display text-2xl text-ink">{s.price}</p>
-                <p class="mt-2 text-sm text-ink-muted">{s.note}</p>
-              </div>
-            ))
-          }
+        <div class="mt-6">
+          <SitePackageCard lang={lang} />
         </div>
       </div>
 

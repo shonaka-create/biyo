@@ -1,0 +1,69 @@
+---
+// サイト制作・運用パッケージカード（§6.1 S8 / §6.2）。
+// 初期費用＋月額を1つのパッケージとして提示し、含まれる機能を一覧で示す。
+import { sitePackage } from '../content/plans';
+import { ui } from '../content/ui';
+import { siteCommon } from '../content/site';
+import type { Lang } from '../i18n/config';
+import CTAButton from './CTAButton.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const p = sitePackage[lang];
+const u = ui[lang].pricing;
+const t = ui[lang].plan;
+---
+
+<div class="reveal mx-auto flex max-w-[520px] flex-col rounded-lg border border-line bg-surface p-7 md:p-9">
+  <div class="text-center">
+    <h3 class="text-2xl">{p.name}</h3>
+    <p class="mt-2 text-sm font-medium tracking-widest text-brand">{p.tagline}</p>
+  </div>
+
+  <div class="mt-6 flex flex-col items-center gap-4 border-y border-line py-6 sm:flex-row sm:justify-center sm:gap-10">
+    <div class="text-center">
+      <p class="text-sm text-ink-muted">{u.siteSetupLabel}</p>
+      <p class="font-display text-4xl text-ink">{p.setup}</p>
+    </div>
+    <div class="hidden h-12 w-px bg-line sm:block"></div>
+    <div class="text-center">
+      <p class="text-sm text-ink-muted">{u.siteMonthlyLabel}</p>
+      <p class="font-display text-4xl text-ink">
+        {p.monthly}<span class="ml-1 text-base text-ink-muted">{t.perMonth}</span>
+      </p>
+    </div>
+  </div>
+
+  <ul class="mt-7 flex-1 space-y-3">
+    {
+      p.features.map((f) => (
+        <li class="flex items-start gap-2.5 text-sm">
+          <svg
+            class="mt-0.5 h-4 w-4 shrink-0 text-success"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path d="m5 13 4 4L19 7" />
+          </svg>
+          <span>{f}</span>
+        </li>
+      ))
+    }
+  </ul>
+
+  <CTAButton
+    href={siteCommon.instagramUrl}
+    lang={lang}
+    variant="primary"
+    ctaLocation="site-package"
+    class="mt-8 w-full"
+  >
+    {u.siteCardCta}
+  </CTAButton>
+</div>

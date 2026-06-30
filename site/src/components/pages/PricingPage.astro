@@ -3,9 +3,10 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionHeading from '../SectionHeading.astro';
 import PlanCard from '../PlanCard.astro';
+import SitePackageCard from '../SitePackageCard.astro';
 import Accordion from '../Accordion.astro';
 import CTABand from '../CTABand.astro';
-import { plans, sitePlans, planNotes, options, pricingFaq } from '../../content/plans';
+import { plans, planNotes, options, pricingFaq } from '../../content/plans';
 import { copy } from '../../content/copy';
 import { ui } from '../../content/ui';
 import { siteCommon } from '../../content/site';
@@ -61,27 +62,8 @@ const breadcrumbLd = {
   <section class="bg-surface px-5 py-20 md:py-28 lg:px-8">
     <div class="mx-auto max-w-[880px]">
       <SectionHeading label={u.siteLabel} heading={u.siteHeading} lead={u.siteLead} />
-      <div class="reveal mt-10 overflow-hidden rounded-lg border border-line">
-        <table class="w-full text-left text-sm">
-          <thead>
-            <tr class="border-b border-line bg-surface-cream">
-              <th scope="col" class="px-5 py-3.5 font-medium">{u.siteTableScope}</th>
-              <th scope="col" class="px-5 py-3.5 font-medium">{u.siteTablePrice}</th>
-              <th scope="col" class="hidden px-5 py-3.5 font-medium md:table-cell">{u.siteTableNote}</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-line bg-canvas">
-            {
-              sitePlans[lang].map((s) => (
-                <tr>
-                  <td class="px-5 py-4 font-medium">{s.scope}</td>
-                  <td class="px-5 py-4 text-ink-muted">{s.price}</td>
-                  <td class="hidden px-5 py-4 text-ink-muted md:table-cell">{s.note}</td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
+      <div class="mt-10">
+        <SitePackageCard lang={lang} />
       </div>
       <div class="reveal mt-8 space-y-2 text-center text-sm text-ink-muted">
         {planNotes[lang].map((n) => <p class="whitespace-pre-line">{n}</p>)}
