@@ -107,6 +107,7 @@ export type SitePackage = {
   tagline: string;
   setup: string; // 初期費用
   monthly: string; // 月額
+  contractNote: string; // 契約期間の補足
   features: string[];
 };
 
@@ -116,6 +117,7 @@ export const sitePackage: Record<Lang, SitePackage> = {
     tagline: '制作から保守・運用まで、ぜんぶ込み',
     setup: 'A$600',
     monthly: 'A$200',
+    contractNote: '※ このプランは3か月契約が必須となります。',
     features: [
       'レスポンシブ対応のWebサイト制作',
       'お問い合わせフォーム設置',
@@ -132,6 +134,7 @@ export const sitePackage: Record<Lang, SitePackage> = {
     tagline: 'From build to hosting and monitoring — all in one',
     setup: 'A$600',
     monthly: 'A$200',
+    contractNote: '* This plan requires a minimum 3-month contract.',
     features: [
       'Responsive website build',
       'Contact form setup',

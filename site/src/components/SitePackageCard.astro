@@ -23,18 +23,15 @@ const t = ui[lang].plan;
     <p class="mt-2 text-sm font-medium tracking-widest text-brand">{p.tagline}</p>
   </div>
 
-  <div class="mt-6 flex flex-col items-center gap-4 border-y border-line py-6 sm:flex-row sm:justify-center sm:gap-10">
-    <div class="text-center">
-      <p class="text-sm text-ink-muted">{u.siteSetupLabel}</p>
-      <p class="font-display text-4xl text-ink">{p.setup}</p>
-    </div>
-    <div class="hidden h-12 w-px bg-line sm:block"></div>
-    <div class="text-center">
-      <p class="text-sm text-ink-muted">{u.siteMonthlyLabel}</p>
-      <p class="font-display text-4xl text-ink">
-        {p.monthly}<span class="ml-1 text-base text-ink-muted">{t.perMonth}</span>
-      </p>
-    </div>
+  <div class="mt-6 flex flex-col items-center border-y border-line py-6 text-center">
+    <p class="text-sm text-ink-muted">{u.siteMonthlyLabel}</p>
+    <p class="font-display text-6xl leading-none text-ink">
+      {p.monthly}<span class="ml-1 text-xl text-ink-muted">{t.perMonth}</span>
+    </p>
+    <p class="mt-3 text-sm text-ink-muted">
+      {u.siteSetupLabel} <span class="font-medium text-ink">{p.setup}</span>
+    </p>
+    <p class="mt-2 text-xs text-ink-muted">{p.contractNote}</p>
   </div>
 
   <ul class="mt-7 flex-1 space-y-3">
