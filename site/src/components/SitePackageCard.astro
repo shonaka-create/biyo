@@ -17,7 +17,7 @@ const u = ui[lang].pricing;
 const t = ui[lang].plan;
 ---
 
-<div class="reveal mx-auto flex max-w-[520px] flex-col rounded-lg border border-line bg-surface p-7 md:p-9">
+<div class="reveal mx-auto flex max-w-[760px] flex-col rounded-lg border border-line bg-surface p-7 md:p-9">
   <div class="text-center">
     <h3 class="text-2xl">{p.name}</h3>
     <p class="mt-2 text-sm font-medium tracking-widest text-brand">{p.tagline}</p>
@@ -34,7 +34,7 @@ const t = ui[lang].plan;
     <p class="mt-2 text-xs text-ink-muted">{p.contractNote}</p>
   </div>
 
-  <ul class="mt-7 flex-1 space-y-3">
+  <ul class="mt-7 grid flex-1 grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-x-8">
     {
       p.features.map((f) => (
         <li class="flex items-start gap-2.5 text-sm">
