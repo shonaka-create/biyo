@@ -105,22 +105,22 @@ export type SitePlan = { scope: string; price: string; note: string };
 
 export const sitePlans: Record<Lang, SitePlan[]> = {
   ja: [
-    { scope: '6〜10ページ', price: 'A$1,200〜', note: '小規模サイトの新規制作・リニューアル。' },
-    { scope: '10ページ以上', price: 'A$2,000〜', note: 'ページ数の多いサイトや機能追加を含む制作。' },
+    { scope: '単発', price: 'A$600', note: '一度の制作・納品でサイトをお渡しする買い切りプラン。月額はかかりません。' },
+    { scope: '継続（月額）', price: '初月 A$200', note: '毎月の更新・保守込みの月額プラン。最低3か月のご契約が必須です。' },
   ],
   en: [
-    { scope: '6–10 pages', price: 'A$1,200+', note: 'New build or renewal for a smaller site.' },
-    { scope: '10+ pages', price: 'A$2,000+', note: 'Larger sites, or builds with added functionality.' },
+    { scope: 'One-off', price: 'A$600', note: 'A one-time build and handover — yours to keep, with no monthly fee.' },
+    { scope: 'Ongoing (monthly)', price: 'A$200 first month', note: 'Monthly plan including updates and maintenance. Minimum 3-month commitment.' },
   ],
 };
 
 export const planNotes: Record<Lang, string[]> = {
   ja: [
-    '【創業キャンペーン】Webサイト制作をご依頼の方は、初月のInstagram運用を無料でご提供します。\nさらに別の事業者様をご紹介いただくと、もう1か月分を無料に。',
+    '【創業キャンペーン】Webサイト制作をご依頼の方は、初月のInstagram運用を無料でご提供します（対象はPlan A「まずは続ける土台を」）。\nさらに別の事業者様をご紹介いただくと、もう1か月分を無料に。',
     '表示はすべてオーストラリアドル（A$）・税別です。', // TODO: 税・通貨の扱い確定後に文言調整
   ],
   en: [
-    'Launch offer: build your website with us and your first month of Instagram management is free. Refer another business and we add a second free month.',
+    'Launch offer: build your website with us and your first month of Instagram management is free (on Plan A, “Build a steady base”). Refer another business and we add a second free month.',
     'All prices are in Australian dollars (AUD), excluding tax.', // TODO: 税・通貨の扱い確定後に文言調整
   ],
 };
