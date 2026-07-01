@@ -139,7 +139,7 @@ export const ui = {
     },
     pricing: {
       heading: '料金',
-      lead: '〈初期構築（最初に一回）＋ 月額（毎月の運用）＋ オプション（必要なときだけ）〉。追加でかかる費用も、契約前にすべてお伝えします。',
+      lead: 'SNS運用は、月額のみのシンプルなプラン。\nWeb制作は、初期費用＋月額をまとめた1つのパッケージ。\nどちらもオプションは必要なときだけ。追加でかかる費用は、契約前にすべてお伝えします。',
       snsLabel: 'Social',
       snsHeading: 'SNS運用プラン（月額）',
       snsLead: 'InstagramなどのSNS運用は月額制。投稿の頻度で3つのプランからお選びいただけます。',
@@ -356,7 +356,7 @@ export const ui = {
     },
     pricing: {
       heading: 'Pricing',
-      lead: 'A one-off setup, an ongoing monthly fee, and add-ons only when needed. We tell you about any extra costs before you sign — nothing hidden.',
+      lead: 'Social media is a simple monthly-only plan.\nWebsite builds come as one package: a setup fee plus a monthly fee.\nEither way, add-ons only when needed — and we tell you about any extra costs before you sign.',
       snsLabel: 'Social',
       snsHeading: 'Social media plans (monthly)',
       snsLead: 'Social media management is a monthly plan. Choose from three plans based on how often you post.',
