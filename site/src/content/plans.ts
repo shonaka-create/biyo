@@ -22,7 +22,7 @@ export const plans: Record<Lang, Plan[]> = {
       name: 'Plan A',
       position: 'まずは続ける土台を',
       target: '無理なく投稿を継続したい方',
-      monthly: 'A$500',
+      monthly: 'A$650',
       recommended: false,
       features: [
         '投稿の企画（必要に応じてチャット／ミーティングでご相談）',
@@ -35,7 +35,7 @@ export const plans: Record<Lang, Plan[]> = {
       name: 'Plan B',
       position: '投稿量を増やして伸ばす',
       target: '発信を強化して新規をしっかり増やしたい方',
-      monthly: 'A$750',
+      monthly: 'A$900',
       recommended: true,
       features: [
         '投稿の企画（必要に応じてチャット／ミーティングでご相談）',
@@ -63,7 +63,7 @@ export const plans: Record<Lang, Plan[]> = {
       name: 'Plan A',
       position: 'Build a steady base',
       target: 'For posting consistently, without the strain',
-      monthly: 'A$500',
+      monthly: 'A$650',
       recommended: false,
       features: [
         'Post planning (chat / meeting consults as needed)',
@@ -76,7 +76,7 @@ export const plans: Record<Lang, Plan[]> = {
       name: 'Plan B',
       position: 'Post more, grow faster',
       target: 'For stepping up output to win new clients in earnest',
-      monthly: 'A$750',
+      monthly: 'A$900',
       recommended: true,
       features: [
         'Post planning (chat / meeting consults as needed)',
